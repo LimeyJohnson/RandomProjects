@@ -1,0 +1,9 @@
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\bin\Debug\RelationShipCalculator.exe
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\bin\Debug\RelationShipCalculator.pdb
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\RelationShipCalculator.Form1.resources
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\RelationShipCalculator.Properties.Resources.resources
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\RelationShipCalculator.exe
+C:\Development\RandomProjects\RelationShipCalculator\RelationShipCalculator\obj\x86\Debug\RelationShipCalculator.pdb
