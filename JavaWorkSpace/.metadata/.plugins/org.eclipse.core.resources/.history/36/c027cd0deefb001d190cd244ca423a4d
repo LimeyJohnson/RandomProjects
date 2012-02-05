@@ -1,0 +1,212 @@
+/*
+File: my_allocator.c
+
+Author: <your name>
+Department of Computer Science
+Texas A&M University
+Date  : <date>
+
+Modified:
+
+This file contains the implementation of the module "MY_ALLOCATOR".
+
+*/
+
+/*--------------------------------------------------------------------------*/
+/* DEFINES */
+/*--------------------------------------------------------------------------*/
+
+/* -- (none) -- */
+
+/*--------------------------------------------------------------------------*/
+/* INCLUDES */
+/*--------------------------------------------------------------------------*/
+
+#include <stdlib.h>
+
+#include "my_allocator.h"
+
+/*--------------------------------------------------------------------------*/
+/* DATA STRUCTURES */
+/*--------------------------------------------------------------------------*/
+
+/* -- (none) -- */
+struct list
+{
+    Addr item;
+    struct list *next;
+};
+typedef struct list node;
+/*--------------------------------------------------------------------------*/
+/* CONSTANTS */
+/*--------------------------------------------------------------------------*/
+
+/* -- (none) -- */
+
+/*--------------------------------------------------------------------------*/
+/* FORWARDS */
+/*--------------------------------------------------------------------------*/
+
+/* -- (none) -- */
+
+/*--------------------------------------------------------------------------*/
+/* FUNCTIONS FOR MODULE MY_ALLOCATOR */
+/*--------------------------------------------------------------------------*/
+
+/* Don't forget to implement "init_allocator" and "release_allocator"! */
+unsigned int blockSize;
+node* front[20];
+Addr * base;
+
+int reverseFib(int a){ //returns what number fibonacci number it is
+    int current = 1, last = 0, temp, count = 1;
+    while(current<=a){
+        temp = current;
+        current = last + current;
+        last = temp;
+        count ++;
+    }
+    return count;
+}
+
+int getFib(int a){//returns the number of the accosiated fibnumber
+    int current = 1, last = 0, temp, count = 1;
+    while(count< a){
+        temp = current;
+        current = current+last;
+        last = temp;
+        count++;
+    }
+    return current;
+}
+void append(int index, Addr addr){
+
+printf("address that can into append to index %d = %p\n",index,addr);
+    if(front[index] == NULL){//there are no elements at the index
+        printf("append was empty\n");
+    	node n;
+        n.item = addr;
+        printf("node.item = %p\n",n.item);
+        n.next = NULL;
+        front[index] = &n;
+        printf("front[index]->next = %p\n",front[index]->item);
+    }
+    else{
+
+        node n;
+        n.item = addr;
+        n.next = front[index]->next;
+        front[index] = &n;
+
+    }
+    printf("\nDONE Appending\n ");
+
+}
+void remove(int index){
+
+
+    //if(front[index]->next == NULL){//only one element in the list
+        printf("\tfront to be set to null\n");
+        front[index] = NULL;
+
+//    }
+//    else{
+     //   printf("\tfront to be set to pointer\n");
+       // front[index] = front[index]->next;
+//    }
+
+}
+
+int getReturnIndex(int a){//fix to not have to do 3
+    int current = 1, last = 0, temp, count = 1;
+    while(!((current*blockSize)>a)){
+        temp = current;
+        current = last + current;
+        last = temp;
+        count ++;
+    }
+    return count;
+}
+
+int getFib2(int a){
+    int current = 1, last = 0, temp;
+    while((current+last)<=a){
+        temp = current;
+        current = current+last;
+        last = temp;
+    }
+    return current;
+}
+
+extern Addr my_malloc(unsigned int _length) {
+    /* This preliminary implementation simply hands the call over the
+    the C standard library!
+    Of course this needs to be replaced by your implementation.
+    */
+    int index;
+    Addr returnReference;
+    printf("length being assigned = %d\n",_length);
+
+    index = getReturnIndex(_length);
+    printf("started looking in (index) = %d\n",index);
+
+    while(front[index]==NULL){
+
+        int indexTemp = index;
+        //do one split down
+        while(front[indexTemp]==NULL) indexTemp++;
+        if(indexTemp < 2) printf("Memory allocation error (memory too small)");
+        printf("%d = %p %d = %p %d= %p\n",indexTemp,front[indexTemp]->item,indexTemp-1,front[indexTemp-1],indexTemp-2,front[indexTemp-2]);
+
+        //the beginning of the bloc is going to be the smaller of the two sections
+        append((indexTemp-2),(front[indexTemp]->item));
+        printf("Coming out of function front[index]->item\n",front[(indexTemp-2)]->item);
+
+        Addr plus = front[indexTemp-2]->item;
+        int x = 0;
+        for (x = 0; x<getFib(indexTemp - 2)*blockSize;x++)plus ++;
+        //Set the larger of the children the base pointer + the size of the small child
+
+        printf("plus = %p\n",plus);
+
+        append(indexTemp-1,plus);
+
+        remove(indexTemp); //front[indexTemp] = NULL;
+        printf("%d = %p %d = %p %d= %p\n",indexTemp,front[indexTemp],indexTemp-1,front[indexTemp-1]->item,indexTemp-2,front[indexTemp-2]->item);
+
+    }
+    returnReference = front[index];
+    remove(index);//front[index] = NULL;
+
+    printf("Memory found at %d\n",index);
+    //return malloc((size_t)_length);
+    return returnReference;
+}
+
+extern int my_free(Addr _a) {
+    /* Same here! */
+    free(_a);
+    return 0;
+}
+extern unsigned int init_allocator(unsigned int basic_block_size, unsigned int length){
+    int x, fibnum, indexnum;
+    blockSize = basic_block_size;
+
+
+    base = malloc(length);
+
+    indexnum = getReturnIndex(length)-1;
+    node n = {base, NULL};
+    front[indexnum] = &n;
+
+    printf("initiated allocator\n");
+    printf("size of void %d\n", sizeof(Addr));
+    printf("Block Size = %d\n",blockSize);
+    printf("initial position of space = %d\n",indexnum);
+    return length;
+}
+int release_allocator(){
+    printf("Releasing allocator\n");
+    free(base);
+    return 0;
+}

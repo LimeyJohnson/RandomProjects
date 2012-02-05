@@ -1,0 +1,27 @@
+package Where;
+
+import DatabaseObjects.Tuple;
+
+
+public interface WhereClauseObject {
+	
+	/*
+	 * Compare functions the following way:
+	 * 1 is True
+	 * 0 is False
+	 * -1 is Unknown
+	 */
+	
+	/*
+	 * Andrew's Notes:
+	 * I thin this need to be changed to 
+	 * public (int or boolean) evaluate (Tuple T)
+	 * We need this because if the Tuple Object that is going to be compared
+	 * needs to have its value changed to the current tuple.
+	 * 
+	 */
+	public boolean evaluate(Tuple tuple);
+	//public int compare(TupleObject tupleOb);
+	
+	public String toString();
+}

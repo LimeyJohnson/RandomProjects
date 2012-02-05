@@ -1,0 +1,226 @@
+﻿.divLeftPanel
+{
+	position:absolute;
+  display:inline-block;
+  width:150px;
+  background-color:#6699FF;
+  height: 100%;
+  /*margin-top:25px;  
+	opacity:1.0;
+	filter:alpha(opacity=60);*/
+}
+
+.topLinkPanel
+{
+	display:inline-block;
+	width:100%;
+	background-color:#6699FF;
+	height: 20%;
+	
+	text-align:right;
+}
+.headerText
+{
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 40px;
+    color: #0000FF;
+}
+.topLink
+{
+	color:#000000;
+	margin-left:5px;
+	margin-right:5px;
+	text-align:right;
+	font-weight:bold;
+}
+
+.leftPanelLink
+{	
+	display:block;
+	color:#000000;
+	
+	margin-left:10px;
+	margin-right:0px;
+	text-align:left;
+	text-indent:-10px;
+	font-weight:bold;
+	
+	
+}
+
+.ContentPanel
+{
+	display:inline-block;
+	margin-left:155px;	
+    padding-top:5px;    
+}
+
+.Contents
+{
+	width:100%;
+	
+}
+
+.FormTitle
+{
+	text-align:center;
+	color:Maroon;
+	font-size:26px;
+	font-weight:bold;
+	margin: 10px;
+}
+
+.NewsItemHeader
+{
+	border-bottom:2px solid #6688CC;
+	text-align:left;
+	font-size:18px;
+	text-indent:5px;
+	border-width:medium;
+	font-style:italic;
+}
+
+.NewsItemBody
+{
+	margin-left:15px;
+	margin-bottom:15px;	
+}
+
+.CarName
+{
+	font-size:20px;
+	font-weight:bold;
+	font-style:italic;
+	color:Blue;
+}
+
+.CarStatus
+{
+	font-size:18px;
+	font-style:italic;
+	color:Green;
+}
+
+.CarPrice
+{
+	font-size:16px;
+	Color:Black;
+}
+
+.CarInfoItem
+{
+	font-size:17px;
+	font-weight:bold;
+	color:#000099;
+}
+
+.CarInfoItemValue
+{
+	font-size:15px;
+	color:#003322;
+}
+
+.CarInfoTextInsert
+{
+}
+
+.CarInfoTextReadOnly
+{
+	background-color:Gray;
+}
+.BUKIButton
+{
+	
+}
+
+.CustInfoItem
+{
+	font-size:17px;
+	font-weight:bold;
+	color:#660055;
+}
+
+.CustInfoItemValue
+{
+	font-size:20px;
+	color:#997766;
+}
+
+.MessageBoardTitle
+{
+	font-size:18px;
+	font-weight:bold;
+}
+
+.MessageBoardLeft
+{
+	float: left;
+	width: 328px;
+}
+
+.MessageBoardRight
+{
+	margin-left: 328px;
+}
+
+.ImageCentering
+{
+	/*margin-left: 250px;
+	margin-right: auto;*/
+}
+
+.AdvancedSearchLeft
+{
+	float: left;
+	width: 328px;
+	padding-left: 60px;
+}
+
+.AdvancedSearchRight
+{
+	margin-left: 328px;
+	padding-left: 20px;
+}
+
+.AddRemoveLeft
+{
+	float: left;
+	width: 328px;
+	padding-left: 60px;
+}
+
+.AddRemoveRight
+{
+	margin-left: 328px;
+	padding-left: 100px;
+}
+
+.AddRemoveButtonFloat
+{
+	float: left;
+}
+
+.CarInfoTable
+{
+	width:500px;
+}
+
+.PageMoveButton
+{
+	text-align:center;
+}
+
+.DBOperationStatus
+{
+    padding-left: 60px;
+    color:Red;
+    width:600px;
+}
+
+.BuyNowTitle
+{
+	color: Navy;
+	font-size:26px;
+	font-weight:bold;
+}

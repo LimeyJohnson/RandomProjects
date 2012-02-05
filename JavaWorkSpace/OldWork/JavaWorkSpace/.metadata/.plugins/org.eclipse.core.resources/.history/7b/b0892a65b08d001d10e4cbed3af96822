@@ -1,0 +1,163 @@
+module CliteLexer (lexer, newPos) where
+
+import Char (isSpace, isAlpha, isDigit, isUpper, isLower, isAlphaNum)
+-- The above are likely useful in your implementation
+
+--------------------------
+-- Data type for tokens --
+--------------------------
+
+data Token
+    = TokIdent String
+    | TokIntLit Int
+    | TokFloatLit Float
+    | TokCharLit Char
+-- keywords
+    | TokBool | TokChar | TokElse | TokFalse | TokFloat 
+    | TokIf | TokInt | TokMain | TokTrue | TokWhile
+
+-- operators
+    | TokOr | TokAnd | TokEqual | TokNotEqual | TokLessThanOrEqual 
+    | TokGreaterThanOrEqual | TokLessThan | TokGreaterThan 
+    | TokAssign | TokPlus | TokMinus | TokTimes | TokDivides | TokReminder 
+    | TokNot | TokOpenBracket
+    | TokCloseBracket 
+ 
+-- separators
+    | TokSemicolon | TokComma | TokOpenCurly | TokCloseCurly 
+    | TokOpenParen | TokCloseParen 
+
+-- special
+    | TokPos Pos Token |TokFillIn
+      deriving Show
+
+
+-------------------------------------------
+-- Helper functions for detecting tokens --
+-------------------------------------------
+
+-- convert a reserved word or sequence of symbols to a Token
+reserved :: String -> Token
+reserved ")" = TokCloseParen
+reserved "(" = TokOpenParen
+reserved "}" = TokCloseCurly
+reserved "{" = TokOpenCurly
+reserved "," = TokComma
+reserved ";" = TokSemiColon
+reserved "]" = TokCloseBraket
+reserved "[" = TokOpenBraket
+reserved "!" = TokNot
+reserved "%" = TokReminder
+reserved "/" = TokDivides
+reserved "*" = TokTimes
+reserved "-" = TokMinus
+reserved "+" = TokPlus
+reserved "=" = TokAssign
+reserved ">" = TokGreaterThan
+reserved "<" = TokLessThan
+reserved ">=" = TokGreaterThanOrEqual
+reserved "<=" = TokLessThanOrEqual
+reserved "||" = TokOr
+reserved "&&" = TokAnd
+reserved "==" = TokEqual
+reserved "!=" = TokNotEqual
+
+-- isOp1 s is True if x is one of: = < > = + - * / ! [ ] %
+isOp1 :: String -> Bool
+isOp1 (x:xs) = x=='<'||x=='='||x=='>'||x=='+'||x=='-'||x=='*'||x=='/'||x=='!'||x=='['||x==']'||x=='%'
+                    
+
+-- FILL IN
+
+-- isOp2 s is True if x is one of: || && == != <= >= <= >= == !=
+isOp2 :: String -> Bool
+isOp2 (x:y:xs) = (x =='|'&&y=='|')||(x =='&'&&y=='&')||(x =='='&&y=='=')||(x =='!'&&y=='=')||(x =='<'&&y=='=')||(x =='>'&&y=='=') 
+				
+
+-- isSep1 x is True if x is one of: ; , { } ( )
+isSep1 :: String -> Bool 
+isSep1 (x:xs) = x==';' || x==',' || x=='{'||x=='}'||x=='('||x==')' 
+				
+
+-- isKeyword s is True if s is one of: bool char else false float if int main true while
+isKeyword :: String -> Bool
+isKeyword xs = xs=="bool" ||xs=="char" ||xs=="else" ||xs=="false" ||xs=="float" ||xs=="if" ||xs=="int" ||xs=="main" ||xs=="true" ||xs=="while" 
+
+-- isComment s is true if s is "//"
+isComment :: String -> Bool
+isComment xs = xs=="//" 
+
+-- identifiers characters
+isIdentifierChar :: Char -> Bool
+isIdentifierChar x = isAlpha x || isDigit x || elem x "_"
+
+---------------------
+-- Token positions --
+---------------------
+
+-- Data type to represent token positions in source files
+data Pos = Pos FN Row Col
+type FN = String
+type Row = Int
+type Col = Int
+instance Show Pos where show(Pos a b c) = "<"++a++" ("++show b++", "++show c++")>" 
+newPos :: String -> Int -> Int -> Pos
+newPos s a b = Pos s a b
+
+
+--Construct a new position value from filename, row, and column
+newPos :: String -> Int -> Int -> Pos
+newPos s a b = Pos s a b
+
+
+-- Increment source line by n, reset column to zero
+incSourceLine :: Pos -> Int -> Pos
+incSourceLine (Pos a b _) n = Pos a (b+n) 0
+
+-- Increment source column by n
+incSourceCol :: Pos -> Int -> Pos
+incSourceCol (Pos a b c) n = Pos a b (c+n)
+
+--Construct a new Pos value obtained by changing the source line in pos to n
+setSourceLine :: Pos -> Int -> Pos
+setSourceLine (Pos a _ c) n = Pos a n c
+
+-- Construct a new Pos value obtained by changing the source column in pos to n
+setSourceCol :: Pos -> Int -> Pos
+setSourceCol (Pos a b _) n = Pos a b n
+
+-- Update the position pos according to the character c read from the input
+updatePosChar :: Pos -> Char -> Pos 
+updatePosChar (Pos a b c) d = Pos a (digitToInt d) c
+
+-- Update the position pos according to the string S read from the input
+--updatePosString :: String -> Pos -> Pos
+-- FILL IN
+
+-----------
+-- Lexer --
+-----------
+
+lexer :: String -> Pos -> [Token]
+lexer str pos = 
+     case str of
+     x:xs | isSpace x -> lexer xs (updatePosChar pos x)
+     x:xs | isAlpha x -> identifierOrKeyword [x] xs pos
+   --  x:xs | isDigit x -> -- FILL IN
+     x:xs | isSep1 [x] -> TokPos pos (reserved [x]) : lexer xs (incSourceCol pos 1)                                
+   --  x:y:xs | isComment [x, y] ->  TokFillIN FILL IN"
+  --   x:y:xs | isOp2 [x, y] -> -- FILL IN
+  --   x:xs | isOp1 [x] -> -- FILL IN
+     x:_ -> error ("Lexer error: unnknown character " ++ [x]++ " at position: " ++ (show pos)) 
+    where
+       identifierOrKeyword :: String -> String -> Pos -> [Token]
+      	 identifierOrKeyword id str pos = 
+        	  case str of 
+            	 x:xs | isIdentifierChar x -> identifierOrKeyword (id ++ [x]) xs pos
+            	 xs -> let newp = updatePosString id pos
+                           newp = if isKeyword id
+                        	       then reserved id
+                            	   else TokIdent id 
+                  					 in TokPos pos TokFillIn : lexer xs newp
+       -- FILL IN (all other helper unctions, corresponding to states,
+     -- or cases of the main dispatching case expression)

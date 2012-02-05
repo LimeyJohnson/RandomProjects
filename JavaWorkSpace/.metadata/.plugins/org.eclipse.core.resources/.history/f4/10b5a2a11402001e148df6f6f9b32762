@@ -1,0 +1,37 @@
+package Tests;
+
+
+import DatabaseObjects.*;
+import TupleObjects.*;
+import Where.*;
+
+public class SimpleInsertAndQuery {
+	public static void main(String[] args){
+		Database D = new Database("Simple");
+		String[] columnNames = {"First","Last"};
+		D.createTable("Names", columnNames);
+		
+		String[] Andrew = {"Andrew","Johnson"};
+		String[] Drew = {"Drew","Havard"};
+		String[] Tom = {"Tom","Robbins"};
+		
+		D.insertQuery("Names", Andrew);
+		D.insertQuery("Names", Drew);
+		D.insertQuery("Names", Tom);
+		
+		
+		Table T = D.selectQuery(null, "Names", null);
+		for(Tuple tuple: T){
+			for(TupleObject TO: tuple){
+				System.out.print(TO+" ");
+				}
+			System.out.println();
+			
+		}
+		System.out.println("Finished");
+		
+		
+	}
+
+
+}

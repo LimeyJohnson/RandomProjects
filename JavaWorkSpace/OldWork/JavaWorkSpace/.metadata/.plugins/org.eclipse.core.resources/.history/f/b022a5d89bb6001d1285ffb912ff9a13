@@ -1,0 +1,337 @@
+package pokerPackage;
+import java.util.*;
+
+public class Hand {
+	Vector<Integer> ID1;
+	Vector<Integer>ALTID1;
+	int[] B = {100,100,100,100,100};
+	int[] nums = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int[] suits = {0,0,0,0};
+	int size, loop, altSize;
+	public int HandID = 0;
+
+	//  perm default constructer
+	public Hand(){}
+
+	public Hand(Vector<Integer> ID_1){
+		Collections.sort(ID_1);
+
+		ID1 = ID_1;
+	}
+
+	public void calculateHand(){
+		// Set the global variable size
+		size = ID1.size();
+		// set the nums array with the number of cards of each given number
+		for(loop = 0; loop<size; loop++){
+			nums[ID1.get(loop)/4]++;
+		}
+		// set the suits with the number of cards of each suit
+		for(loop = 0; loop<size; loop++){
+			suits[ID1.get(loop)%4]++;
+		}
+		//Create Alternet ID1 with low Aces added
+		ALTID1 = ID1;
+		for(loop = 0;loop<size;loop++){
+			if(ID1.get(loop)>3)break;
+			if(ID1.get(loop)<=3)ALTID1.add(ALTID1.get(loop)+52);
+		}
+		altSize = ALTID1.size();
+		
+		if(isSF()) HandID = 9;
+		else if(isFK()) HandID= 8;
+		else if(isFH()) HandID = 7;
+		else if(isFL())HandID = 6;
+		else if(isST())HandID = 5;
+		else if(isTK())HandID = 4;
+		else if(isTP())HandID = 3;
+		else if(isPR())HandID = 2;
+		else HandID = 1;
+
+	}
+	// Based on numbers in ascending order
+	public boolean isSF(){
+		boolean hasSuit=false;
+		for(loop = 0; loop<4;loop++){
+			// must have five of one suit
+			if(suits[loop]>=5){
+				hasSuit=true;
+				break;
+			}
+
+		}
+		if(hasSuit){
+			int[] Btemp = new int[5];
+			for(int b = 0; b <= altSize-5;b++){
+				int count=0, currentCard = ID1.get(b);
+				for(int c=0; c<=4;c++){
+					int next = ALTID1.indexOf(currentCard+4);
+					if(next>=0){
+						Btemp[c] = checkCard(currentCard);
+						currentCard = ALTID1.get(next);
+
+						count++;
+					}
+					else break;
+				}
+				if(count>=4){
+					Btemp[4] = checkCard(currentCard);
+					B=Btemp;
+					return true;
+				}
+
+			}
+		}
+		return false;
+
+	}
+	public boolean isFK(){
+
+		for(int b = 0; b<=12; b++){
+			if(nums[b]>=4){
+				int insert = 0,card; boolean foundLast=false;
+				// go through cards and find the four of a kind and the extra
+				// card
+				for(int a = 0; a<size; a++){
+					card = ID1.get(a);
+					if(!foundLast&&card/4!=b){
+						B[4]=card; foundLast=true;
+					}
+					if(ID1.get(a)/4==b&&insert<4)B[insert++]=ID1.get(a);
+
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isFH(){
+		boolean three = false;;
+		int two = 0, placement = 0, b=0;
+		for(b = 0; b<=12; b++){
+			if(nums[b]>=3){
+				three = true;
+				placement = 0;
+				for(loop = 0;loop<size;loop++){
+					if(ID1.get(loop)/4==b){
+						B[placement++] = ID1.get(loop);
+					}
+				}
+			}
+			if(nums[b]>=2)two ++;
+		}
+		if(two>=2 && three){
+			b=0;
+			while(placement<5){
+				if(nums[b]>=2&&B[0]/4!=b){
+					for(loop = 0; loop<size;loop++){
+						int tempCard= ID1.get(loop);
+						if(tempCard/4==b){
+							B[placement++]=tempCard;
+						}
+
+					}
+
+				}
+				b++;
+			}
+
+			return true;
+		}
+		else return false;
+	}
+	public boolean isFL(){
+
+		for(int b = 0; b<=3; b++){
+			if(nums[b]>=5){
+				int c = 0,d= 0;
+				while(c<5){
+					if(ID1.get(d)%4==b){
+						B[c++]=ID1.get(d);
+					}
+					d++;
+				}
+
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isST(){
+		int[] bTemp = new int[5];
+		for(int b = 0; b <= altSize-5;b++){
+			int count=1,next, currentCard = ID1.get(b);
+			bTemp[0] = currentCard;
+			for(int c=0; c<=4;c++){
+				if(ALTID1.indexOf(((currentCard/4)+1)*4)>=0){
+					next = ALTID1.get(ALTID1.indexOf(((currentCard/4)+1)*4));
+					bTemp[count++]= checkCard(next);
+					currentCard = next;
+				}
+				else if(ALTID1.indexOf((((currentCard/4)+1)*4)+1)>=0){
+					next = ALTID1.get(ALTID1.indexOf((((currentCard/4)+1)*4)+1));
+					bTemp[count++]= checkCard(next);
+					currentCard = next;
+				}
+				else if(ALTID1.indexOf((((currentCard/4)+1)*4)+2)>=0){
+					next = ALTID1.get(ALTID1.indexOf((((currentCard/4)+1)*4)+2));
+					bTemp[count++]= checkCard(next);
+					currentCard = next;
+				}
+				else if(ALTID1.indexOf((((currentCard/4)+1)*4)+3)>=0){
+					next = ALTID1.get(ALTID1.indexOf((((currentCard/4)+1)*4)+3));
+					bTemp[count++]= checkCard(next);
+					currentCard = next;
+				}
+				else break;
+			}
+
+			if(count>=4){
+				B=bTemp;
+				return true;
+			}
+
+		}
+		return false;
+	}
+	public boolean isTK(){
+
+		for(int b = 0; b<=12; b++){
+			if(nums[b]>=3){
+				int count = 0;
+				for(loop = 0; loop<size; loop++){
+					if(ID1.get(loop)/4 == b){
+						B[count++] = ID1.get(loop);
+					}
+
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isTP(){
+
+
+		int two = 0, count = 0;
+		for(int b = 0; b<=12; b++){
+			if(nums[b]>=2){
+				for(loop = 0; loop<size; loop++){
+					if(ID1.get(loop)/4 == b){
+						B[count++] = ID1.get(loop);
+					}
+
+				}
+				two++;
+
+			}
+		}
+		if(two>=2)return true;
+
+		else return false;
+	}
+	public boolean isPR(){
+
+		for(int b = 0; b<=12; b++){
+			if(nums[b]>=2){
+				int count = 0;
+				for(loop = 0; loop<size; loop++){
+					if(ID1.get(loop)/4 == b){
+						B[count++] = ID1.get(loop);
+					}
+
+				}
+				return true;
+			}
+
+		}
+		return false;
+	}
+	public void printHand(){
+
+		System.out.println("Number of cards: "+ID1.size());
+		String s;
+	
+		for(int x = 0; x<5; x++){
+			if(B[x]>=0)System.out.print(getCard(B[x])+getSuit(B[x])+"("+B[x]+"),");
+		}
+		switch(HandID){
+		case 1: s = "High Card";
+		break;
+		case 2: s = "Pair";
+		break;
+		case 3: s = "Two Pair";
+		break;
+		case 4: s = "Three Of a Kind";
+		break;
+		case 5: s = "Straight";
+		break;
+		case 6: s = "Flush";
+		break;
+		case 7: s = "Full House";
+		break;
+		case 8: s = "Four Of A Kind";
+		break;
+		case 9: s = "Straight Flush";
+		break;
+		default: s = "Undetermined";
+		}
+	}
+	public String getCard(int input){
+		String card;
+		if(input<0||input>52) return"unknown";
+		switch(input/4){
+		case 0: card = "A";
+		break;
+		case 1: card = "K";
+		break;
+		case 2: card = "Q";
+		break;
+		case 3: card = "J";
+		break;
+		case 4: card = "10";
+		break;
+		case 5: card = "9";
+		break;
+		case 6: card = "8";
+		break;
+		case 7: card = "7";
+		break;
+		case 8: card = "6";
+		break;
+		case 9: card = "5";
+		break;
+		case 10: card = "4";
+		break;
+		case 11: card = "3";
+		break;
+		case 12: card = "2";
+		break;
+		default: card = "unknown";
+		break;
+		}
+		return card;
+	}
+	public String getSuit(int input){
+		String suit;
+		if(input<0||input>52) return"unknown";
+		switch(input%4){
+		case 0: suit="S";
+		break;
+		case 1: suit = "H";
+		break;
+		case 2: suit = "D";
+		break;
+		case 3: suit = "C";
+		break;
+
+		default: suit = "unknown";
+		break;
+		}
+		return suit;
+	}
+	private int checkCard(int aa){
+		if(aa<=51) return aa;
+		else return aa-52;
+	}
+}

@@ -1,0 +1,18 @@
+package Where;
+import java.util.*;
+
+
+import DatabaseObjects.*;
+import TupleObjects.*;
+public abstract class WhereClause {
+	// I completely agree Drew.... I think we do not need this object
+
+	public abstract Table spawnTable(Table table1, Table table2);
+	public boolean verifyTuple(Tuple tuple){
+		for(WhereClauseObject w: Clause){
+			if(w instanceof TupleColumn){
+				
+			}
+		}
+	}
+}

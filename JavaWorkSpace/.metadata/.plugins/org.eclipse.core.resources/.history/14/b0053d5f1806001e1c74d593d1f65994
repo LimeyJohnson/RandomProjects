@@ -1,0 +1,68 @@
+package Tests;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+import DatabaseObjects.Database;
+import DatabaseObjects.Table;
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleColumn;
+import TupleObjects.TupleObject;
+import Where.WhereClauseObject;
+import Where.WhereEqual;
+
+public class DuelTableTest {
+	public static void main(String[] args){
+		Database D = new Database("Numbers");
+		
+		//Create First Table
+		String[] columnNames = {"First","Last","Number"};
+		if(!D.createTable("Names", columnNames))System.out.println("Create Table Failed");
+
+		Object[] Andrew = {"Andrew","Johnson",1.0};
+		Object[] Drew = {"Drew","Havard",2.0};
+		Object[] Tom = {"Tom","Robbins",3.0};
+		Object[] SameName ={"John","John",4.0};
+
+		if(!D.insertQuery("Names", Andrew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Drew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Tom))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", SameName))System.out.println("Insert Failed");
+		
+		
+		WhereClauseObject we = new WhereEqual(new TupleColumn("First"), new TupleColumn("FirstName"));
+		
+		//Create Second Table
+		
+		String[] columnNames2 = {"FirstName","Age"};
+		if(!D.createTable("Ages", columnNames2));
+		
+		Object[] Andrew2 = {"Andrew",3.0};
+		Object[] Drew2 = {"Drew",4.0};
+		Object[] Tom2 = {"Tom", 44.0};
+		Object[] SameName2 = {"John", 21.0};
+		
+		if(!D.insertQuery("Ages", Andrew2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", Drew2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", Tom2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", SameName2))System.out.println("Insert Failed");
+		
+		Map<String, String> asMap = new TreeMap<String, String>();
+		asMap.put("First","First");
+		asMap.put("FirstName", "Second First Name");
+
+		Table T = D.selectQuery(asMap, "Names", "Ages", we);
+		
+		for(Tuple tuple: T){
+			for(TupleObject TO: tuple){
+				System.out.print(TO+" ");
+			}
+			System.out.println();
+
+		}
+	D.finalize();
+}
+
+
+}
+

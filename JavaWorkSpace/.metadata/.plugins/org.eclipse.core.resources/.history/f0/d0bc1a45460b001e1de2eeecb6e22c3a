@@ -1,0 +1,45 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+
+
+public class DatabaseTester {
+	private static final String accessDBURLPrefix = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
+	private static final String accessDBURLSuffix = ";DriverID=22;READONLY=false}";
+	int count = 0;
+	static Connection conn;
+	public static void main(String[] args){
+		writeToDB();
+	}
+	public static void writeToDB(){
+
+
+		try {
+			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver").newInstance();
+			conn = getAccessDBConnection("John.mdb");
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Moves VALUES(null,'2009-01-01',3,'H','H','H','H','H')");
+			stmt.execute();
+		} catch(ClassNotFoundException e) {
+			System.err.println("JdbcOdbc Bridge Driver not found!");
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+	/** Creates a Connection to a Access Database */
+	public static Connection getAccessDBConnection(String filename) throws SQLException {
+		filename = filename.replace(' ', '/').trim();
+		String databaseURL = accessDBURLPrefix + filename + accessDBURLSuffix;
+		return DriverManager.getConnection(databaseURL, "", "");
+	}  
+}

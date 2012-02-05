@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="net.sf.eclipsefp.haskell.core.launch.HaskellLaunchDelegate">
+<stringAttribute key="WORKING_DIRECTORY" value="C:\Documents and Settings\Administrator\My Documents\JavaWorkSpace\HW5\src"/>
+</launchConfiguration>

@@ -1,0 +1,12 @@
+package Tests;
+
+import DatabaseObjects.Database;
+
+public class SimpleInsertAndQuery {
+	public static void main(String[] args){
+		Database D = new Database("Simple");
+	
+	}
+
+
+}

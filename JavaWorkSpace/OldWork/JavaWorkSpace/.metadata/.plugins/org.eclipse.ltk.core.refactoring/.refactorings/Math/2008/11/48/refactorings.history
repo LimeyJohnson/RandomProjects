@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;output&apos; in &apos;Squared.main(...)&apos; to &apos;squared&apos;&#x0D;&#x0A;- Original project: &apos;Math&apos;&#x0D;&#x0A;- Original element: &apos;Squared.main(String[]).output&apos;&#x0D;&#x0A;- Renamed element: &apos;output&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;output&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Squared.java[Squared~main~\[QString;@output!203!244!234!239!I" name="squared" references="true" stamp="1227576559265" version="1.0"/>
+</session>

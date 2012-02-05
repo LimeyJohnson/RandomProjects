@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include "my_allocator.h"
+
+
+
+
+int main(){
+    init_allocator(4,1597);
+    int * begin = my_malloc(4);
+    printf("\n");
+    int * go = my_malloc(100*sizeof(int));
+    printf("\n");
+
+    int * go2 = my_malloc(200);
+    printf("\n");
+    //int * go3 = my_malloc(200);
+    printf("Memory allocated\n");
+
+    release_allocator();
+    return 0;
+}

@@ -1,0 +1,13 @@
+DROP TABLE sales;
+DROP TABLE payroll;
+DROP TABLE vehicle_requests;
+DROP TABLE messages;
+DROP TABLE employee;
+DROP TABLE job_categories;
+DROP TABLE vehicle;
+DROP TABLE color;
+DROP TABLE vehicle_condition;
+DROP TABLE vehicle_type;
+DROP TABLE valid_vehicle_types;
+DROP TABLE dealership;
+DROP TABLE customer;

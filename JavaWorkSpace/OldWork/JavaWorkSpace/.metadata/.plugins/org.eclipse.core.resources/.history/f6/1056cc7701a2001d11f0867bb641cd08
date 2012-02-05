@@ -1,0 +1,272 @@
+module CliteTypechecker ( checkProgram ) where
+
+import Position
+import CliteSyntax
+
+import List
+import qualified Data.Map as Map
+import Data.Maybe
+import Control.Monad.Identity
+import RWSE
+
+type TypeError = String
+
+--------------------------------------------------------------------------
+-- mapping from a variable name to its type and to the position the     --
+-- variable was defined in                                              --
+-- the entire context is a list of Maps. Every time a new scope (block  --
+-- statement) is entered, a new empty map is added as the first element --
+-- of the list. Lookup of a variable proceeds from the innermost scope  --
+-- towards the outer scopes---from the head of the list towards tail.   --
+--------------------------------------------------------------------------
+type TypeMap = [Map.Map Name (Type, Pos)]
+
+----------------------------------------------------------------------------
+-- the context where a statement or an expression is type checked         --
+-- is the current typemap and the position of the statement or expression --
+----------------------------------------------------------------------------
+type Context = (TypeMap, Pos)
+
+-------------------------------------------------------------------------
+-- An instance of the RWSE monad to encapsulate all kinds of effects   --
+-- for the type checker. RWSE monad combines the Error, Reader, Writer --
+-- and Output monads.                                                  --
+-- The instantiation is as "RWSE error environment state output"       --
+-------------------------------------------------------------------------
+type TypeCheckEffects = RWSE TypeError Context TypeMap TypeError Identity
+
+
+-- given a name, find the type and position of a variable names
+-- innermost definition
+lookupVar :: Name -> TypeCheckEffects (Type, Pos) 
+lookupVar ident = do
+  (tyMaps, _) <- ask
+  let m = map (Map.lookup ident) tyMaps
+  case catMaybes m of
+    (x:xs) -> return x -- pick first matching == innermost variable
+    [] -> throwTypeError ("Undefined variable " ++ (show ident))
+
+
+-- generate an error message with position
+throwTypeError str = 
+    do (_, pos) <- ask
+       throwError ((show pos) ++ ": Type error: " ++ str)
+       
+throwTypeErrorIf :: Bool -> String -> TypeCheckEffects ()
+throwTypeErrorIf True msg = throwTypeError msg
+throwTypeErrorIf False _ = return ()
+
+
+---------------------
+-- Check a program --
+---------------------
+
+-- check the program (list of statements) and return the list of type errors generated
+-- primitiveFuncs is a typemap for the built-in functions
+-- runRWSE "runs" the RWSE monad, namely extracts the state, environment, and output
+-- runIdentity "runs" the identity monad---we just return the output (error log)
+
+checkProgram :: [AST] -> ([String], [AST])
+checkProgram stmts =
+    let tyMap = [primitiveFuncs] in 
+    runIdentity (do (Right s, _, o) <- runRWSE (tyMap, dummyPos) tyMap (process stmts)
+                    return (o, s))
+
+process :: [AST] -> TypeCheckEffects [AST]
+process stmts =  mapM processOne stmts 
+    where processOne stmt = 
+              do { env <- get 
+                 ; local (\(_, pos) -> (env, pos)) (checkStmt stmt) 
+                 } `catchError` \e -> (tell e >> return ASTSkip)
+          -- for each statment, get the current state (with "get"), 
+          -- create a new typing context (with "local"), 
+          -- in case of errors, write the error to output (with "tell")
+
+--------------------------------------
+-- Check a statement or declaration --
+--------------------------------------
+checkStmt :: AST -> TypeCheckEffects AST
+
+checkStmt (ASTPos p n) = do
+    n' <- local (\(e, _) -> (e, p)) (checkStmt n) -- replace old pos with new pos
+    return (ASTPos p n')
+
+checkStmt ast@(ASTVariableDecl ident ty) = do
+  ((tymap:rest), p) <- ask -- get the current context
+  throwTypeErrorIf (Map.member ident tymap) ("Variable "++ (show ident) ++ " already defined in this block")
+  
+  -- FIXME: check for duplicate declaration of the same variable in 
+  -- one block
+
+  modify (\(tymap:rest) -> (Map.insert ident (ty, p) tymap):rest)
+  -- add the new binding
+  return ast
+
+
+checkStmt (ASTBlock stmts) = do 
+  tyMap <- get -- get the current state (list of type maps)
+  modify (\tymaps -> Map.empty:tymaps) 
+         -- modify state by adding an empty typemap for the new scope
+  stmts' <- process stmts 
+  put tyMap -- exiting scope, so revert back to old state
+  return (ASTBlock stmts')
+    
+checkStmt (ASTSkip) = return ASTSkip
+
+checkStmt (ASTConditional c t e) = do
+  (condTy, c') <- typeOf c
+  throwTypeErrorIf (condTy /= TyBool) ("Condition of if has type " ++ (show condTy)) 
+  t' <- checkStmt t
+  e' <- checkStmt e
+  return (ASTConditional c' t' e')
+     
+checkStmt (ASTLoop c body) = do
+  (condTy, c') <- typeOf c
+  throwTypeErrorIf (condTy /= TyBool) ("Condition of loop has type " ++ (show condTy)) 
+  body' <- checkStmt body
+-- FIXME (done) check c and body
+  return $ ASTLoop c' body'
+
+checkStmt (ASTAssignment left right) = do
+-- FIXME (done) the checks here are insufficient
+
+  (tyL, left') <- typeOf left
+  (tyR, right') <- typeOf right
+  throwTypeErrorIf (tyL /= tyR) ("assignment has type "++(show tyL) ++ " with "++(show tyR))
+
+  return (ASTAssignment left' right')
+
+checkStmt f@(ASTFuncCall _ _ _) = do
+  (_, node') <- typeOf f
+  return node'
+
+validCast t u = t == u
+-- FIXME: allow conversions 
+
+------------------------------------
+-- Type an expression             --
+------------------------------------
+-- returns a type and a new modified AST
+typeOf :: AST -> TypeCheckEffects (Type, AST)
+
+typeOf (ASTPos p node) = do
+    (ty, node') <- local (\(e, _) -> (e, p)) (typeOf node) -- replace old pos with new pos
+    return (ty, (ASTPos p node'))
+    
+typeOf ast@(ASTVariableRef ident) =
+    do
+      (ty, _) <- lookupVar ident
+      return (ty, ast)
+
+typeOf (ASTArrayRef ident expr) =
+    do
+      (ty, identDefPos) <- lookupVar ident
+      throwTypeErrorIf (not (isArrayType ty))
+                           (show ty ++ " is not an array type") 
+                           
+      let (TyArray ty2 _) = ty
+      
+      -- FIXME: (done) check that array index is of a suitable type
+
+      return (ty2, ASTArrayRef ident expr)
+
+typeOf ast@(ASTLiteral (VInt _)) = return (TyInt, ast)
+typeOf ast@(ASTLiteral (VBool _)) = return (TyBool, ast)
+typeOf ast@(ASTLiteral (VFloat _)) = return (TyFloat, ast)
+typeOF ast@(AstLiteral (VChar _)) = return (TyChar, ast)
+-- FIXME to deal with Float and Char literals
+
+-- FIXME  
+typeOf (ASTAnd a b) = do
+    (tyA, a') <- typeOf a
+    (tyB, b') <- typeOf b
+    throwTypeErrorIf (tyA /= tyB) (show tyA++" cannot AND with "++show tyB)
+     return (tyA, (ASTAnd a' b'))
+  
+-- FIXME
+typeOf (ASTOr a b) = do
+    (tyA, a') <- typeOf a
+    (tyB, b') <- typeOf b
+    throwTypeErrorIf (tyA /= tyB) (show tyA++" cannot OR with "++show tyB)
+    return (tyA, (ASTOr a' b'))
+
+-- FIXME
+typeOf (ASTCast ty node) = do
+	-- Allows all casts... just for now to test 
+	(tyA, a')<- typeOf node
+	return (ty, (AST Cast ty node))
+
+
+-- Function calls are type checked as follows:
+-- Function name must be a variable found in the symbol table (type map).
+-- The type of the variable must either be TyFunc, or TyIntersect where all types 
+-- are TyFuncs. A call matches a definition if parameter types exactly match
+-- the return types, for simplicity we allow no implicit coercions.
+-- Perform overload resolution is necessary.
+-- Mangle the function name to include its argument types: this avoids
+-- redoing overload resolution at evaluation time
+
+
+typeOf (ASTFuncCall fname arity args) = do
+  tyNodePairs <- mapM typeOf args
+  let (tys, args') = unzip tyNodePairs
+  v <- lookupVar fname
+  case v of
+    (TyIntersect fs, _) -> 
+        case concatMap (match tys) fs of 
+          [func@(TyFunc ty _)] -> 
+              return (ty, ASTFuncCall (mangle fname func) arity args')                     
+          [] -> throwTypeError ("No matching function for call to " ++ fname ++
+                                " with parameter types: (" ++ commaSep (map show tys) ++ ").")
+          x:y:xs -> throwTypeError ("Ambiguous overloads for " ++ fname ++
+                                    " with parameter types: (" ++ commaSep (map show tys) ++ ").")
+    (func@(TyFunc ty params), _) | tys == params ->
+         return (ty, ASTFuncCall (mangle fname func) arity args')
+    _ -> throwTypeError ("Call to a non-function " ++ fname ++ ".")
+    where
+      match args func@(TyFunc ty params) | args == params = [func]
+      match _ _ = []
+
+      -- simple name-mangling scheme, example: "funcname|returntype|firstparamtype|secondparamtype"
+      mangle :: String -> Type -> String
+      mangle funcName (TyFunc ret partys) =
+          funcName ++ "|" ++ (show ret) ++ "|" ++ concat (List.intersperse "|" (map show partys))
+
+         
+-- Parser turns operator invocations to normal function calls.
+-- the list of built-in functions overloaded function names return
+-- "intersection types". Note that there are no special cases for
+-- operator invocations (except for or and and) in typeOf function;
+-- Parser turns operator invocations to normal function calls.
+primitiveFuncs = 
+    Map.fromList 
+           [ ("-", (TyIntersect 
+                    (((map (allSame 2) [TyInt, TyFloat])) ++
+                    ((map (allSame 1) [TyInt, TyFloat])))
+                   , dp))
+           , ("+", (TyIntersect 
+                    (((map (allSame 2) [TyInt, TyFloat])) ++
+                    ((map (allSame 1) [TyInt, TyFloat])))
+                   , dp))
+           , ("*", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+           , ("/", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+           , ("%", (TyFunc TyInt [TyInt, TyInt], dp))
+             
+           , ("!", (TyFunc TyBool [TyBool], dp))
+             
+           , ("==", (TyIntersect ((map (paramsSame 2 TyBool) [TyBool, TyChar, TyInt, TyFloat])), dp))
+           , ("!=", (TyIntersect ((map (paramsSame 2 TyBool) [TyBool, TyChar, TyInt, TyFloat])), dp))
+		   , ("<", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+		   , ("<", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+		   , ("<=", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+		   , (">=", (TyIntersect ((map (allSame 2) [TyInt, TyFloat])), dp))
+		   
+-- FIXME: add entries for <, >, <=, >=
+
+           , ("printf", (TyIntersect ((map (paramsSame 1 TyInt) [TyBool, TyChar, TyInt, TyFloat])), dp))
+           ]
+        where 
+          dp = dummyPos
+          allSame n ty = TyFunc ty (replicate n ty)
+          paramsSame n retTy ty = TyFunc retTy (replicate n ty)
+    

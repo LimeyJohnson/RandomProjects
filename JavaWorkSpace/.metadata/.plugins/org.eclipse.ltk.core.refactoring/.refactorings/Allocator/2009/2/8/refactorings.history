@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Allocator/src/go&apos; to &apos;go.c&apos;" description="Rename resource &apos;go&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/go" name="go.c" stamp="1234762265346" updateReferences="true"/>
+</session>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="119" key="DIALOG_Y_ORIGIN"/>
+		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="1168" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="System.out" key="selection"/>
+		<list key="findhistory">
+			<item value="system.out"/>
+			<item value="package Tests;"/>
+			<item value="public class DuelTableTest {"/>
+			<item value="import java.net.*;"/>
+			<item value="package DatabaseObjects;"/>
+			<item value="p1"/>
+			<item value="ID1"/>
+			<item value="for(int numb :ID1){"/>
+		</list>
+		<list key="replacehistory">
+			<item value="p2"/>
+			<item value="ID2"/>
+			<item value="b"/>
+			<item value="c"/>
+			<item value="atomicMax"/>
+			<item value="sharedMax"/>
+		</list>
+	</section>
+</section>

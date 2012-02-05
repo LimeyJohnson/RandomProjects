@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class TicTacToe {
+	public static void main(String[] args){
+		int[] wins = new int[2];
+
+
+		for(int a = 0; a<=9; a++){
+
+			LinkedList<Integer> aList = getList(a,10,10,10,10,10,10,10,10);
+			int[] board = {0,0,0,0,0,0,0,0,0};
+			aBoard[a] = 1;
+			
+			while(!aList.isEmpty()){
+				int b=aList.remove();
+				LinkedList<Integer> bList = getList(a,b,10,10,10,10,10,10,10);
+			}
+			while(!aList.isEmpty())System.out.println("List a: "+aList.remove());
+		}
+	}
+
+	public static LinkedList getList(int a, int b, int c, int d, int e, int f, int g, int h, int i){
+		LinkedList<Integer> temp = new LinkedList<Integer>();
+		for(int x= 0; x<=9; x++){
+			temp.add(x);
+		}
+		if(a!=10)temp.remove(a);
+		if(b!=10)temp.remove(b);
+		if(c!=10)temp.remove(c);
+		if(d!=10)temp.remove(d);
+		if(e!=10)temp.remove(e);
+		if(f!=10)temp.remove(f);
+		if(g!=10)temp.remove(g);
+		if(h!=10)temp.remove(h);
+		if(i!=10)temp.remove(i);
+
+
+
+
+
+		return temp;
+
+	}
+	public static boolean isWin(int a[]){
+		if(a[0]==a[3]==a[6]) wins[a[0]]++;
+		
+
+
+	}
+}

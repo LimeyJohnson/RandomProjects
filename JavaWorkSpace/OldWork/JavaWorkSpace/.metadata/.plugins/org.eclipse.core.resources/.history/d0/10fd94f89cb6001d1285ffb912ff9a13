@@ -1,0 +1,39 @@
+package pokerPackage;
+import java.util.*;
+
+public class Combinations {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Vector<Integer> v = new Vector<Integer>();
+
+		for(int x = 1;x<=48;x++)v.add(x);
+		int count = 0;
+		double start = System.currentTimeMillis();
+		while(v.size()>=3){
+			int a = v.remove(0);
+			//for(int a = 0; a<(v.size()-3);a++){
+			for(int b = 0;b<=(v.size()-4);b++){
+				for(int c = b+1; c<=(v.size()-3);c++){
+					for(int d = c+1; d<=(v.size()-2);d++){
+						for(int e = d+1; e<=(v.size()-1);e++){
+							//System.out.println(a+", "+v.get(b)+", "+v.get(c)+", "+v.get(d)+","+v.get(e));
+							count++;
+						}
+					}
+					//System.out.println(a+", "+v.get(b)+", "+v.get(c));
+					//System.out.println(v.get(a)+", "+v.get(b)+", "+v.get(c));
+					
+				}
+			}
+		}
+		double finish = System.currentTimeMillis();
+
+		System.out.println("Count = "+count+" Time taken= "+((finish-start)/1000)+" sec");
+
+
+	}
+
+}

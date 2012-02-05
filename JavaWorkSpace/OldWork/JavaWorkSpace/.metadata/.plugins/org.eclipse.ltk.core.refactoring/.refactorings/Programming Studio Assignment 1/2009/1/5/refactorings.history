@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Main.FindUser(...)&apos; to &apos;findUser&apos;&#x0D;&#x0A;- Original project: &apos;Programming Studio Assignment 1&apos;&#x0D;&#x0A;- Original element: &apos;Main.FindUser(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;Main.findUser(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;FindUser&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Main.java[Main~FindUser~QString;" name="findUser" references="true" stamp="1232924304658" version="1.0"/>
+</session>

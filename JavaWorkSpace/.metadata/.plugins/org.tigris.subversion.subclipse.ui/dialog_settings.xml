@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="555" key="CommitDialog.weights.0"/>
+	<item value="444" key="CommitDialog.weights.1"/>
+	<item value="600" key="DifferencesDialog.location.x"/>
+	<item value="427" key="BranchTag.size.y"/>
+	<item value="576" key="BranchTag.size.x"/>
+	<item value="606" key="SwitchDialog.size.x"/>
+	<item value="301" key="BranchTag.location.y"/>
+	<item value="672" key="BranchTag.location.x"/>
+	<item value="427" key="SwitchDialog.size.y"/>
+	<item value="657" key="SwitchDialog.location.x"/>
+	<item value="301" key="SwitchDialog.location.y"/>
+	<item value="291" key="CommitDialog.location.y"/>
+	<item value="698" key="CommitDialog.location.x"/>
+	<item value="381" key="DifferencesDialog.size.y"/>
+	<item value="525" key="CommitDialog.size.x"/>
+	<item value="https://databasecpsc315.googlecode.com/svn/branch/WS1" key="UrlCombo.Database2.0"/>
+	<item value="441" key="CommitDialog.size.y"/>
+	<item value="721" key="DifferencesDialog.size.x"/>
+	<item value="http://limeyhouse.dyndns.org:1234/svn/Database/src/DatabaseObjects/Table.java" key="UrlCombo.Database.0"/>
+	<item value="331" key="DifferencesDialog.location.y"/>
+	<section name="NewLocationWizard">
+		<list key="ConfigurationWizardMainPage.STORE_URL_ID">
+			<item value="http://limeyhouse.dyndns.org:1234/svn/Database"/>
+			<item value="http://limeyhouse.dyndns.org:1234/svn"/>
+			<item value="http://limeyhouse.dyndns.org:1234"/>
+			<item value=""/>
+		</list>
+	</section>
+</section>

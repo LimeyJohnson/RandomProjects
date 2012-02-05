@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CommitComments>	<CommitComment>Ready to go</CommitComment>
+	<CommitComment>Final turned in version</CommitComment>
+	<CommitComment>New XML files</CommitComment>
+	<CommitComment>Changed Tests to check if the database imported</CommitComment>
+	<CommitComment>Fixed up</CommitComment>
+	<CommitComment>Finalize is correct and parser works</CommitComment>
+	<CommitComment>Got the duel table query working</CommitComment>
+	<CommitComment>All WhereClauseObjects Complete</CommitComment>
+	<CommitComment>Fixed all the errors</CommitComment>
+	<CommitComment>Added Select Functionality from Database. Changed WhereClauseObject to allow full tuple comparison.</CommitComment>
+</CommitComments>

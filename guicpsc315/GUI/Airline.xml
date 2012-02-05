@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE Database SYSTEM "database.dtd">
+<Database DbName="Airline">
+<Table name="Flights">
+<tuple Date="1-1-01" EndCity="New York" FlightNum="234123f" MaxPassenger="42" Plane="32421p" StartCity="San Antonio"/>
+<tuple Date="5-5-51" EndCity="Little Rock" FlightNum="141123f" MaxPassenger="2" Plane="331421p" StartCity="New York"/>
+<tuple Date="2-5-01" EndCity="Little Rock" FlightNum="654123f" MaxPassenger="61" Plane="3244521p" StartCity="San Antonio"/>
+<tuple Date="5-3-01" EndCity="San Antonio" FlightNum="23123f" MaxPassenger="32" Plane="32411p" StartCity="Little Rock"/>
+<tuple Date="5-2-01" EndCity="San Antonio" FlightNum="2341123f" MaxPassenger="32" Plane="32411p" StartCity="Little Rock"/>
+<tuple Date="5-1-01" EndCity="San Antonio" FlightNum="2312433f" MaxPassenger="32" Plane="321411p" StartCity="Austin"/>
+<tuple Date="5-5-01" EndCity="Austin" FlightNum="23123411f" MaxPassenger="32" Plane="32211p" StartCity="Little Rock"/>
+<tuple Date="1-2-01" EndCity="A City" FlightNum="23f" MaxPassenger="425" Plane="321p" StartCity="A Farm"/>
+</Table>
+<Table name="Passengers">
+<tuple Address="Oak Woods" FirstName="Tom" LastName="Robbins" Miles="34" PassengerID="tomr13"/>
+<tuple Address="N/A" FirstName="James" LastName="Bond" Miles="141411" PassengerID="007"/>
+<tuple Address="No Where" FirstName="John" LastName="Doe" Miles="0" PassengerID="Nobody"/>
+<tuple Address="Cartoon" FirstName="Bob" LastName="Builder" Miles="134" PassengerID="TheBuilder"/>
+<tuple Address="Heaven" FirstName="Jim" LastName="Carrey" Miles="0" PassengerID="God"/>
+<tuple Address="Hell" FirstName="Grim" LastName="Reaper" Miles="0" PassengerID="reaper"/>
+</Table>
+<Table name="Tickets">
+<tuple FlightNum="234123f" PassengerID="tomr13"/>
+</Table>
+</Database>

@@ -1,0 +1,13 @@
+package pokerPackage;
+
+public class HandComparator {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

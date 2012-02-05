@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Database DbName="Numbers">
+<Table name="Ages">
+<tuple Age="3.0" FirstName="Andrew"/>
+<tuple Age="4.0" FirstName="Drew"/>
+<tuple Age="44.0" FirstName="Tom"/>
+<tuple Age="21.0" FirstName="John"/>
+</Table>
+<Table name="Names">
+<tuple First="Andrew" Last="Johnson" Number="1.0"/>
+<tuple First="Drew" Last="Havard" Number="2.0"/>
+<tuple First="Tom" Last="Robbins" Number="3.0"/>
+<tuple First="John" Last="John" Number="4.0"/>
+</Table>
+<<<<<<< .mine
+<Table name="Qry0">
+<tuple First="Andrew"/>
+<tuple First="Drew"/>
+<tuple First="Tom"/>
+<tuple First="John"/>
+</Table>
+=======
+<Table name="Qry0">
+<tuple Age="3.0" First="Andrew" FirstName="Andrew" Last="Johnson" Number="1.0"/>
+<tuple Age="4.0" First="Drew" FirstName="Drew" Last="Havard" Number="2.0"/>
+<tuple Age="44.0" First="Tom" FirstName="Tom" Last="Robbins" Number="3.0"/>
+</Table>
+>>>>>>> .r64
+</Database>

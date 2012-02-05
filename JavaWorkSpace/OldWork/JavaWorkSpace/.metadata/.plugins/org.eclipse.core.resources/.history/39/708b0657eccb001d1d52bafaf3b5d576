@@ -1,0 +1,78 @@
+package pokerPackage;
+import java.util.Collections;
+import java.util.Vector;
+
+
+public class Tester {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Vector<Integer> test = new Vector<Integer>();
+		test.add(4);
+		test.add(5);
+		test.add(8);
+		test.add(2);
+		test.add(18);
+		test.add(26);
+		test.add(37);
+		Collections.sort(test);
+		
+		Hand a = new Hand(test);
+		a.calculateHand();
+		a.printHand();
+		
+	}
+	public static String getCard(int input){
+		String card;
+		switch(input/4){
+		case 0: card = "A";
+		break;
+		case 1: card = "K";
+		break;
+		case 2: card = "Q";
+		break;
+		case 3: card = "J";
+		break;
+		case 4: card = "10";
+		break;
+		case 5: card = "9";
+		break;
+		case 6: card = "8";
+		break;
+		case 7: card = "7";
+		break;
+		case 8: card = "6";
+		break;
+		case 9: card = "5";
+		break;
+		case 10: card = "4";
+		break;
+		case 11: card = "3";
+		break;
+		case 12: card = "2";
+		break;
+		default: card = "unknown";
+		break;
+		}
+		return card;
+	}
+	public static String getSuit(int input){
+		String suit;
+		switch(input%4){
+		case 0: suit="Spades";
+		break;
+		case 1: suit = "Hearts";
+		break;
+		case 2: suit = "Diamonds";
+		break;
+		case 3: suit = "Clubs";
+		break;
+		default: suit = "unknown";
+		break;
+		}
+		return suit;
+	}
+
+}

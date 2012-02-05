@@ -1,0 +1,16 @@
+package Tests;
+
+import DatabaseObjects.Database;
+
+public class SimpleInsertAndQuery {
+	public static void main(String[] args){
+		Database D = new Database("Simple");
+		String[] columnNames = {"First","Last"};
+		D.createTable("Names", columnNames);
+		System.out.println("Finished");
+		
+		
+	}
+
+
+}

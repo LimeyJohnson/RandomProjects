@@ -1,0 +1,168 @@
+package DatabaseObjects;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.Map.Entry;
+
+import TupleObjects.*;
+import Where.*;
+public class Table implements Iterable<Tuple>{
+	protected Vector<Tuple> TupleVector;
+	protected Vector<String> ColumnNames;
+	protected String Name;
+	protected String PrimaryKey;
+
+	public Table(String tableName, Vector<String> columnIn){
+		/*
+		 * Initialize the table and add the attributes
+		 */
+		Name = tableName;
+		ColumnNames = columnIn;
+		TupleVector = new Vector<Tuple>();
+	}
+	public Table(String tableName, Vector<String> columnIn, String primaryKeyIn ){
+		Name = tableName;
+		ColumnNames = columnIn;
+		PrimaryKey = primaryKeyIn;
+		TupleVector = new Vector<Tuple>();
+	}
+
+	public boolean insert(Tuple data){
+		/*
+		 * CHANGED FUNCTION:
+		 * 
+		 * Previously, this returned false if data had different columns, it was unhandled
+		 * (assumed that only data on a SUBSET of columns on current data), current version
+		 * will first normalize first columns of the inserting tuple to the current table, and if there
+		 * are any extra columns it will add those to the table.
+		 * 
+		 */
+		//try{
+		if(data == null)
+			return false;
+		else{
+			//Check for duplicates
+			for(String test1: data.getColumns()){
+				int count=0;
+				for(String test2: data.getColumns())
+					if(test1.equals(test2))
+						count++;
+				if(count>1)
+					return false;
+			}
+
+		}
+		/*
+		 * Normalizes Tuple to Table: ensures current table columns are first and that any
+		 * missing columns are added as nulls
+		 */
+		int i;
+		for(i=0; i<ColumnNames.size(); ++i){
+			if(data.getColumns().get(i) != ColumnNames.get(i)){
+				if(data.getColumns().contains(ColumnNames.get(i))){
+					data.moveColumn(ColumnNames.get(i), i);
+				} else {
+					data.addColumn(ColumnNames.get(i), new TupleNull(), i);
+				}
+			}
+		}
+		/*
+		 * Add in columns from Tuple that don't exist in the table:
+		 * 
+		 */
+		/*for(; i<data.getColumns().size(); ++i)
+			for(Tuple currentlyInTable: TupleVector)
+				currentlyInTable.addColumn(data.getColumns().get(i), new TupleNull(), i);
+
+
+		 */
+		return TupleVector.add(data);
+		//}catch(Exception e){
+		//	return false;
+		//}
+	}
+
+	/*
+	 * Relies on GUI to ensure that ColumnNames remains the same and that the tuples
+	 * in the data have the proper number of columns.
+	public boolean insert(TupleObject[] data){
+		return true;
+	}
+	 */
+
+
+	/*
+	 * Drew says:  No idea what this would be used for.  So-if you don't want to type true,
+	 * you can just type (new Table()).update(new TreeMap<String, Object>())!
+	 */
+	public boolean update(Map<String,Object> data){
+		return true;
+	}
+
+	public Iterator<Tuple> iterator(){
+		return TupleVector.iterator();
+	}
+
+	/*
+	 * Not quite sure of the operation of this method, so I made an extra one with
+	 * a different signature (below) that returns a table
+	 */
+	public Table select(Map<String, String> data, WhereClauseObject whereClause){
+		return null;
+	}
+	/*
+	 * tablename is the new Table's (return value) name.  Given the current table and
+	 * possibly another table, will create a table with all data that matches the clauses
+	 * from both tables.  
+	 */
+	public Table select(String tableName, Table otherTable, WhereClauseObject whereClause){
+		Table result = new Table(tableName, new Vector<String>());
+
+		/*
+		 * Copy each tuple in current table, remove columns that don't match tuple by tuple
+		 * and then insert the copy
+		 */
+		/*for(Tuple tempTup: this){
+			Tuple toInsert = tempTup.clone();
+			for(int i=0; i<tempTup.getColumns().size(); ++i)
+				//changed from previous form because compare is depreciated
+				if(whereClause.evaluate(tempTup))
+					toInsert.removeColumn(i);
+			result.insert(toInsert);
+		}
+		if(otherTable == null)
+			return result;
+		/*
+		 * Same as a few lines previous but with other table.
+		 */
+
+		//		for(Tuple tempTup: otherTable){
+		//			Tuple toInsert = tempTup.clone();
+		//			for(int i=0; i<tempTup.getColumns().size(); ++i)
+		//				if(whereClause.evaluate(tempTup))
+		//					toInsert.removeColumn(i);
+		//			result.insert(toInsert);
+		//		}
+		for(Tuple firstTableTuple : this){
+
+			for(Tuple secondTableTuple : otherTable){
+				Vector<TupleObject> newElements = new Vector<TupleObject>();
+				newElements.addAll(firstTableTuple.getElements());
+				newElements.addAll(secondTableTuple.getElements());
+
+				Vector<String> newColumns = new Vector<String>();
+				newColumns.addAll(firstTableTuple.getColumns());
+				newColumns.addAll(secondTableTuple.getColumns());
+				Tuple newTuple = new Tuple(newElements, newColumns);
+				if(whereClause != null){
+					if(whereClause.evaluate(newTuple))result.insert(newTuple);
+				}
+				else result.insert(newTuple);
+			}
+		}
+		return result;
+
+	}
+	public Table select(String tableName, WhereClauseObject whereClause){
+		return select(tableName, (Table)null, whereClause);
+	}
+}

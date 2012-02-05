@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;Repeat&apos; in &apos;Tester.ProcessSection(...)&apos; to &apos;repeat&apos;&#x0D;&#x0A;- Original project: &apos;Html&apos;&#x0D;&#x0A;- Original element: &apos;Tester.ProcessSection(String, Boolean).Repeat&apos;&#x0D;&#x0A;- Renamed element: &apos;Repeat&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;Repeat&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Tester.java[Tester~ProcessSection~QString;~QBoolean;@Repeat!2759!2772!2767!2772!QBoolean;" name="repeat" references="true" stamp="1236452482767" version="1.0"/>
+</session>

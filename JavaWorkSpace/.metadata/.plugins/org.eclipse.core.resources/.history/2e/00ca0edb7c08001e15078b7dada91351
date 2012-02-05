@@ -1,0 +1,249 @@
+package Tests;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+import java.util.Vector;
+
+import TupleObjects.*;
+import Where.*;
+
+import DatabaseObjects.*;
+
+public class FullConsoleTest {
+	public static void main(String[] args) throws IOException, ParseException{
+		Database db = new Database("FullConsoleTestDB");
+		Database old = db;
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Currently not finished: Where functionality.");
+		System.out.println("All where clauses currently ignored");
+		System.out.println("It seems likely that tuple column should be reimplemented\n\n");
+		while(true){
+		try{
+			System.out.print("Please input command (type Help of ? for commands): ");
+			String command = in.readLine();
+			StringTokenizer tokenizer = new StringTokenizer(command, " ,{}:", false);
+			String token = tokenizer.nextToken();
+			System.out.println("");
+			if(token.equalsIgnoreCase("Help") || token.equals("?")){
+				System.out.println("There are four commands:");
+				System.out.println("Print");
+				System.out.println("NewTable \"TableName\" \"PrimaryKey\" {Column, Column, Column}");
+				System.out.println("Add \"TableName\" {Data, Data, ... Data}");
+				System.out.println("RemoveTable \"TableName\"");
+				System.out.println("Select {Column, Column, Column} From \"TableName\"");
+				System.out.println("You may use * instead of column names to select all");
+			}
+			else if(token.equalsIgnoreCase("NEWTABLE")){
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input table name: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				String tableName = tokenizer.nextToken();
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input primary key: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				String primaryKey = tokenizer.nextToken();
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input column names, in the format {name, name, name}: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				ArrayList<String> columnNames = new ArrayList<String>();
+				for(int i=0; tokenizer.hasMoreTokens(); ++i){
+					columnNames.add(tokenizer.nextToken());
+				}
+				old = db.clone();
+				db.createTable(tableName, columnNames.toArray(new String[columnNames.size()]), primaryKey);
+			}else if(token.equalsIgnoreCase("ADD")){
+				Vector<Object> out = new Vector<Object>();
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input table name: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				String tableName = tokenizer.nextToken();
+				String value;
+				Object inObj;
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Columns are:");
+					System.out.println(db.returnTable(tableName).columnNames());
+					System.out.println("Input data in the form {data, data, data}: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				for(int i=0; tokenizer.hasMoreTokens(); ++i){
+					value = tokenizer.nextToken();
+					if(value.equalsIgnoreCase("null"))
+						inObj=null;
+					else if(Character.isDigit(value.charAt(0)))
+						if(value.length() == 10 && value.charAt(2) == '\\'){
+							DateFormat DF = new SimpleDateFormat("MM/dd/yyyy");
+							inObj = DF.parseObject(value);
+						}else
+							inObj = Double.parseDouble(value);
+					else
+						inObj = value;
+					out.add(inObj);
+				}
+				old = db.clone();
+				db.insertQuery(tableName, out.toArray());
+			}else if(token.equalsIgnoreCase("REMOVETABLE")){
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input table name: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				old = db.clone();
+				db.deleteTable(tokenizer.nextToken());
+			}else if(token.equalsIgnoreCase("SELECT")){
+				TreeMap<String, String> columnMap = new TreeMap<String, String>();
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Input column names in form (name, name, name}, \noptionally including AS newName for each followed by From: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				String value = tokenizer.nextToken();
+				do{
+					if(value.equals("*"))
+						columnMap = null;
+					else if(value.equalsIgnoreCase("AS"))
+						columnMap.put(value, tokenizer.nextToken());
+					else
+						columnMap.put(value, value);
+					value = tokenizer.nextToken();
+				}while(!value.equalsIgnoreCase("FROM"));
+				if(!tokenizer.hasMoreTokens()){
+					System.out.println("Choose table(s), either one or two, to select from: ");
+					tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+				}
+				String tableName = tokenizer.nextToken();
+				String tableName2 = null;
+				if(tokenizer.hasMoreTokens())
+					tableName2 = tokenizer.nextToken();
+				Vector<WhereClauseObject> clauses = null;
+				while(true){
+					if(!tokenizer.hasMoreTokens()){
+						System.out.println("Type what clauses for the query you want: hit enter for no clauses: ");
+						tokenizer = new StringTokenizer(in.readLine(), " ,{}:", false);
+					}
+					if(!tokenizer.hasMoreTokens())
+						break;
+					else
+						if(clauses == null)
+							clauses = new Vector<WhereClauseObject>();
+					value = tokenizer.nextToken();
+					WhereClauseObject where = null;
+					TupleObject left;
+					if(value.charAt(0) == '\''){
+						left = new TupleColumn(value.substring(1, value.length()-1));
+					}else
+						if(Character.isDigit(value.charAt(0)))
+							left = db.tupleObjectConverter(Double.parseDouble(value));
+						else
+							left = db.tupleObjectConverter(value);
+					System.out.println("value is: " + value + "and substring is: " + value.substring(1, value.length()-1));
+					value = tokenizer.nextToken();
+					if(value.equals("==")){
+						value = tokenizer.nextToken();
+						TupleObject right;
+						if(value.charAt(0) == '\''){
+							right = new TupleColumn(value.substring(1, value.length()-1));
+						}else
+							if(value.equalsIgnoreCase("null"))
+								right = new TupleNull();
+							else if(Character.isDigit(value.charAt(0)))
+								right = db.tupleObjectConverter(Double.parseDouble(value));
+							else
+								right = db.tupleObjectConverter(value);
+						where = new WhereEqual(left, right);
+					}else if(value.equals("<")){
+						value = tokenizer.nextToken();
+						TupleObject right;
+						if(value.charAt(0) == '\''){
+							right = new TupleColumn(value.substring(1, value.length()-1));
+						}else
+							if(value.equalsIgnoreCase("null"))
+								right = new TupleNull();
+							else if(Character.isDigit(value.charAt(0)))
+								right = db.tupleObjectConverter(Double.parseDouble(value));
+							else
+								right = db.tupleObjectConverter(value);
+						where = new WhereLessThan(left, right);
+					}else if(value.equals(">")){
+						value = tokenizer.nextToken();
+						TupleObject right;
+						if(value.charAt(0) == '\''){
+							right = new TupleColumn(value.substring(1, value.length()-1));
+						}else
+							if(value.equalsIgnoreCase("null"))
+								right = new TupleNull();
+							else if(Character.isDigit(value.charAt(0)))
+								right = db.tupleObjectConverter(Double.parseDouble(value));
+							else
+								right = db.tupleObjectConverter(value);
+						where = new WhereGreaterThan(left, right);
+					}else if(value.equals("<=")){
+						value = tokenizer.nextToken();
+						TupleObject right;
+						if(value.charAt(0) == '\''){
+							right = new TupleColumn(value.substring(1, value.length()-1));
+						}else
+							if(value.equalsIgnoreCase("null"))
+								right = new TupleNull();
+							else if(Character.isDigit(value.charAt(0)))
+								right = db.tupleObjectConverter(Double.parseDouble(value));
+							else
+								right = db.tupleObjectConverter(value);
+						where = new WhereLessThanOrEqual(left, right);
+					}else if(value.equals(">=")){
+						value = tokenizer.nextToken();
+						TupleObject right;
+						if(value.charAt(0) == '\''){
+							right = new TupleColumn(value.substring(1, value.length()-1));
+						}else
+							if(value.equalsIgnoreCase("null"))
+								right = new TupleNull();
+							else if(Character.isDigit(value.charAt(0)))
+								right = db.tupleObjectConverter(Double.parseDouble(value));
+							else
+								right = db.tupleObjectConverter(value);
+						where = new WhereGreaterThanOrEqual(left, right);
+					}else
+						break;
+					clauses.add(where);
+					
+				}
+				WhereAnd whereAnd;
+				if(clauses==null)
+					whereAnd = null;
+				else
+					whereAnd = new WhereAnd(clauses);
+				if(tableName2 != null){
+					System.out.println(db.selectQuery(columnMap, tableName, tableName2, whereAnd));
+				}else{
+					System.out.println(db.selectQuery(columnMap, tableName, whereAnd));
+				}	
+					
+				/*
+				 * TODO: Have to implement where clauses:
+				 * 
+				 * HOW DO COLUMNS AND ANY/ALL/WHERE WORK???
+				 */
+			}
+			else if(token.equalsIgnoreCase("Print")){
+				System.out.println(db);
+			}else if(token.equalsIgnoreCase("undo") || token.equalsIgnoreCase("back"))
+				db = old;
+
+		}catch(Exception e){
+			System.out.println("Either you typed in something wrong or program had error");
+			System.out.println("Error message: " + e.getMessage());
+			System.out.println("Undoing whatever was screwed up");
+			db = old;
+		}
+		}
+	}
+			
+}

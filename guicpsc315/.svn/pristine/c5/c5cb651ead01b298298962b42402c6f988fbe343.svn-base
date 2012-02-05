@@ -1,0 +1,20 @@
+ Database Tables  
+ FlightInfo: 
+ Flight Number // Primary Key 
+ Date  
+ Plane // type of plane used 
+ StartCity 
+ EndCity 
+  
+ Passenger: 
+ FirstName 
+ LastName 
+ Frequent
+ FligherNumber 
+ MoneyPaid 
+ Address 
+ PassengerID //Primary Key  
+ 
+ Tickets: 
+ FlightNumber 
+ PassengerID 

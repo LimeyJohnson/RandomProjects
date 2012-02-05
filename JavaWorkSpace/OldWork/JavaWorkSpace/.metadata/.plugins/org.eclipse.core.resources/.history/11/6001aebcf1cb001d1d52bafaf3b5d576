@@ -1,0 +1,239 @@
+package pokerPackage;
+import java.util.*;
+
+public class Hand {
+	int[] ID1 = {0,0,0,0,0};
+	//Vector<Integer> ID1;
+	//Vector<Integer>ALTID1;
+	int[] prev = {0,0,0,0,0};
+	//int[] B = {100,100,100,100,100};
+	int[] nums = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int[] suits = {0,0,0,0};
+	int size, loop, altSize;
+	public int HandID = 0;
+	public Hand(){}
+
+	public Hand(Vector<Integer> ID_1){
+		//ID1 = ID_1;
+	}
+	public Hand(int[] ID_1){
+		ID1 = ID_1;
+	}
+	public void addCard(int card, int pos){
+		int pre = prev[pos];
+		nums[pre/4]--;
+		suits[pre%4]--;
+		
+		prev[pos] = ID1[pos];
+		ID1[pos] = card;
+		
+		nums[card/4]++;
+		suits[card%4]++;
+		
+		
+		
+		
+	}
+	public void calculateHand(){
+		//Collections.sort(ID1); NEED TO SORT SOMEHOW
+		
+		// Set the global variable size
+		//size = ID1.size();
+		// set the nums array with the number of cards of each given number
+		//for(int d: ID1)nums[d/4]++;
+
+
+		//		for(loop = 0; loop<size; loop++){
+		//			nums[ID1.get(loop)/4]++;
+		//		}
+		// set the suits with the number of cards of each suit
+		//for(int d: ID1)suits[d%4]++;
+		//			suits[ID1.get(loop)%4]++;
+		//		}
+		//Create Alternet ID1 with low Aces added
+		//		ALTID1 = ( Vector<Integer>)ID1.clone();
+		//		for(loop = 0;loop<size;loop++){
+		//			if(ID1.get(loop)>3)break;
+		//			if(ID1.get(loop)<=3)ALTID1.add(ALTID1.get(loop)+52);
+		//		}
+		//	altSize = ALTID1.size();
+		Boolean Straight = false, Flush = false, TwoPair = false;
+		if(isPR()){
+			HandID = 2;
+			if(isTP()){
+				HandID = 3;
+				TwoPair = true;
+			}
+			if(isTK()){
+				HandID = 4;
+				if(TwoPair)if(isFH())HandID = 7;
+				if(isFK())HandID = 8;
+			}
+		}
+		else HandID = 1;
+
+		if(isST()){
+			HandID = 5;
+			Straight = true;
+
+		}
+		if(isFL()){
+			HandID = 6;
+			Flush = true;
+		}
+		if(Straight&&Flush){
+			if(isSF())HandID = 9;
+		}
+		
+	}
+
+
+	
+
+
+	// Based on numbers in ascending order
+	public boolean isSF(){
+//		
+//		for(int numb :ID1){
+//			//			int numb = ID1.get(b) / 4;
+//			if(numb<36){
+//				if(ID1.contains(numb+4)&&ID1.contains(numb+8)&&ID1.contains(numb+12)&&ID1.contains(numb+16)) return true;
+//			}
+//			else if(numb<40){
+//				if(ID1.contains(numb+4)&&ID1.contains(numb+8)&&ID1.contains(numb+12)&&ID1.contains(numb-36)) return true;
+//			}
+//
+//		}
+		return false;
+	}
+
+	public boolean isFK(){
+		for(int b = 0; b<=12; b++){
+			if(nums[b]>=4){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isFH(){
+		for(int b: nums){
+			if(b>=3){
+				for(int c: nums){
+					if(c>=2&&c!=b)return true;
+				}
+
+			}
+		}
+		return false;
+	}
+	public boolean isFL(){
+		for(int g: suits){
+			if(g>=5)return true;
+
+		}
+		return false;
+
+	}
+	public boolean isST(){
+		//		
+
+		for(int b: ID1){
+//			int numb = ID1.get(b) / 4;
+			int numb = b / 4;
+			if(numb<=8){
+				if(nums[numb+1]>0&&nums[numb+2]>0&&nums[numb+3]>0&&nums[numb+4]>0) return true;
+			}
+			else if(numb==9){
+				if(nums[numb+1]>0&&nums[numb+2]>0&&nums[numb+3]>0&&nums[0]>0) return true;
+			}
+
+		}
+		return false;
+
+
+	}
+	public boolean isTK(){
+		for(int b: nums){
+			if(b>=3){
+				return true;
+			}
+		}
+	
+		return false;
+	}
+	public boolean isTP(){
+		int count = 0;
+		for(int b: nums){
+			if(b>=2)count++;
+		}
+		if(count>=2)return true;
+		else return false;
+	}
+	public boolean isPR(){
+		for(int b: nums){
+			if(b>=2) return true;
+			//			
+		}
+		return false;
+	}
+	public void printHand(){
+		System.out.println("Number of cards: "+ID1.length);
+		
+		for(int x = 0; x<5; x++){
+		//	if(B[x]>=0)System.out.print(getCard(B[x])+getSuit(B[x])+"("+B[x]+"),");
+		}
+		
+	}
+	public String getCard(int input){
+		String card;
+		if(input<0||input>52) return"unknown";
+		switch(input/4){
+		case 0: card = "A";
+		break;
+		case 1: card = "K";
+		break;
+		case 2: card = "Q";
+		break;
+		case 3: card = "J";
+		break;
+		case 4: card = "10";
+		break;
+		case 5: card = "9";
+		break;
+		case 6: card = "8";
+		break;
+		case 7: card = "7";
+		break;
+		case 8: card = "6";
+		break;
+		case 9: card = "5";
+		break;
+		case 10: card = "4";
+		break;
+		case 11: card = "3";
+		break;
+		case 12: card = "2";
+		break;
+		default: card = "unknown";
+		break;
+		}
+		return card;
+	}
+	public String getSuit(int input){
+		String suit;
+		if(input<0||input>52) return"unknown";
+		switch(input%4){
+		case 0: suit="S";
+		break;
+		case 1: suit = "H";
+		break;
+		case 2: suit = "D";
+		break;
+		case 3: suit = "Cnm";
+		break;
+		default: suit = "unknown";
+		break;
+		}
+		return suit;
+	}
+}

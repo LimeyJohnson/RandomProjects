@@ -1,0 +1,27 @@
+package Where;
+
+import java.util.Vector;
+
+import TupleObjects.TupleObject;
+
+public class WhereAny implements WhereClauseObject{
+	Vector<WhereClauseObject> clause;
+	
+	public WhereAny(Vector<WhereClauseObject> inClause){
+		clause = inClause;
+	}
+
+	@Override
+	public int compare(TupleObject tupleOb) {
+		// TODO Auto-generated method stub
+		int result = -1;
+		for(WhereClauseObject temp: clause){
+			if(temp.compare(tupleOb)==1)
+				return 1;
+			else
+				if(temp.compare(tupleOb)==0)
+					result = 0;
+		}
+		return result;
+	}
+}

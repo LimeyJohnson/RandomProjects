@@ -1,0 +1,8 @@
+main : main.o
+gcc -o main main.o -L C:/MinGW/lib/gcc-lib/mingw32/3.2.3/ -lstdc++
+main.o :tester.c my_allocator.c my_allocator.h
+gcc -ggdb -c tester.c my_allocator.c my_allocator.h
+all :
+${MAKE} main
+clean :
+-del main.o

@@ -1,0 +1,37 @@
+package Where;
+
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleColumn;
+import TupleObjects.TupleObject;
+
+public class WhereGreaterThan implements WhereClauseObject {
+
+	TupleObject tupleLeft, tupleRight;
+	public WhereGreaterThan(TupleObject left, TupleObject right){
+		tupleLeft = left;
+		tupleRight = right;
+	}
+	
+	
+//	public String toString(){
+//		return columnName + " > " + toCompare.toString();
+//	}
+	@Override
+	public boolean evaluate(Tuple tuple) {
+		TupleObject evaluateLeft, evaluateRight;
+		if(tupleLeft instanceof TupleColumn){
+			String s = ((TupleColumn) tupleLeft).getData();
+			((TupleColumn) tupleLeft).setValue(tuple.getColumnValue(s));
+			evaluateLeft = tuple.getColumnValue(s);
+		}
+		else evaluateLeft = tupleLeft;
+		if(tupleRight instanceof TupleColumn){
+			String s = ((TupleColumn)tupleRight).getData();
+			((TupleColumn) tupleRight).setValue(tuple.getColumnValue(s));
+			evaluateRight = tuple.getColumnValue(s);
+		}
+		else evaluateRight = tupleRight;
+		if(evaluateLeft.compare(evaluateRight)>0)return true;
+		return false;
+	}
+}

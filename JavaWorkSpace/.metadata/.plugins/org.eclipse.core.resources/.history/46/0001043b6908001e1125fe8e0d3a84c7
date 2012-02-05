@@ -1,0 +1,72 @@
+package Tests;
+
+import DatabaseObjects.Database;
+import DatabaseObjects.Table;
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleColumn;
+import TupleObjects.TupleDouble;
+import TupleObjects.TupleObject;
+import Where.WhereAnd;
+import Where.WhereClauseObject;
+import Where.WhereEqual;
+import Where.WhereNot;
+
+import java.util.*;
+public class DuelTableTest {
+	public static void main(String[] args){
+		Database D = new Database("Numbers");
+		
+		//Create First Table
+		String[] columnNames = {"First","Last","Number"};
+		if(!D.createTable("Names", columnNames))System.out.println("Create Table Failed");
+
+		Object[] Andrew = {"Andrew","Johnson",1.0};
+		Object[] Drew = {"Drew","Havard",2.0};
+		Object[] Tom = {"Tom","Robbins",3.0};
+		Object[] SameName ={"John","John",4.0};
+
+		if(!D.insertQuery("Names", Andrew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Drew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Tom))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", SameName))System.out.println("Insert Failed");
+		
+		
+		WhereClauseObject w1 = new WhereEqual(new TupleColumn("First"), new TupleColumn("FirstName"));
+		WhereClauseObject w2 = new WhereNot(new WhereEqual(new TupleColumn("Age"), new TupleDouble(21.0)));
+		Vector<WhereClauseObject> whereAll = new Vector<WhereClauseObject>();
+		whereAll.add(w1);
+		whereAll.add(w2);
+		WhereAnd wa = new WhereAnd(whereAll);
+		//Create Second Table
+		
+		String[] columnNames2 = {"FirstName","Age"};
+		if(!D.createTable("Ages", columnNames2));
+		
+		Object[] Andrew2 = {"Andrew",3.0};
+		Object[] Drew2 = {"Drew",4.0};
+		Object[] Tom2 = {"Tom", 44.0};
+		Object[] SameName2 = {"John", 21.0};
+		
+		if(!D.insertQuery("Ages", Andrew2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", Drew2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", Tom2))System.out.println("Insert Failed");
+		if(!D.insertQuery("Ages", SameName2))System.out.println("Insert Failed");
+		Map<String, String > asMap = new TreeMap<String,String>();
+		asMap.put("Name", "Name");
+		asMap.put("Age", "Age");
+		
+		Table T = D.selectQuery(asMap, "Names", "Ages", wa);
+		
+		for(Tuple tuple: T){
+			for(TupleObject TO: tuple){
+				System.out.print(TO+" ");
+			}
+			System.out.println();
+
+		}
+	D.finalize();
+}
+
+
+}
+

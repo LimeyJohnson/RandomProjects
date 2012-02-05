@@ -1,0 +1,42 @@
+package Tests;
+
+
+import DatabaseObjects.*;
+import TupleObjects.*;
+import Where.*;
+
+public class SimpleInsertAndQuery {
+	public static void main(String[] args){
+		Database D = new Database("Simple");
+		String[] columnNames = {"First","Last"};
+		if(D.createTable("Names", columnNames)){
+
+			String[] Andrew = {"Andrew","Johnson"};
+			String[] Drew = {"Drew","Havard"};
+			String[] Tom = {"Tom","Robbins"};
+
+			if(D.insertQuery("Names", Andrew)){
+				if(D.insertQuery("Names", Drew)){
+					if(D.insertQuery("Names", Tom)){
+
+						WhereEqual we = new WhereEqual(new TupleColumn("First"), new TupleString("Andrew"));
+						Table T = D.selectQuery(null, "Names", null);
+						for(Tuple tuple: T){
+							for(TupleObject TO: tuple){
+								System.out.print(TO+" ");
+							}
+							System.out.println();
+
+						}
+						System.out.println("Finished");
+					}
+					
+				}
+			}
+			else System.out.println("Insert Failed");
+		}
+
+	}
+
+
+}

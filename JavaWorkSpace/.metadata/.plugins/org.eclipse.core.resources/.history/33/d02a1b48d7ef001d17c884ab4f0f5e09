@@ -1,0 +1,22 @@
+import java.util.*;
+import java.io.*;
+public class HtmlWriter {
+	public HtmlWriter(){
+
+	}
+	public void writeFiles(Vector<User> users){
+		try {
+			FileOutputStream fileStream = new FileOutputStream("index.html");
+			PrintStream mainStream = new PrintStream(fileStream);
+			mainStream.println("<html><body><h1>Results for the Games<h1><br/>");
+			for(User u: users){
+				mainStream.println("<a href=\""+u.Name+".html\">"+u.Name+"</a><br/>");
+			}
+			
+		mainStream.println("</body></html>");	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}

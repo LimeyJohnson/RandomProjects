@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE Database SYSTEM "database.dtd">
+<Database DbName="Simple">
+<Table name="Names">
+<tuple First="Andrew" Last="Johnson"/>
+<tuple First="Drew" Last="Havard"/>
+<tuple First="Tom" Last="Robbins"/>
+<tuple First="John" Last="John"/>
+</Table>
+</Database>

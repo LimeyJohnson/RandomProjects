@@ -1,0 +1,22 @@
+package Tests;
+
+import DatabaseObjects.Database;
+import DatabaseObjects.Table;
+import TupleObjects.*;
+impoty Where.*;
+
+public class SimpleInsertAndQuery {
+	public static void main(String[] args){
+		Database D = new Database("Simple");
+		String[] columnNames = {"First","Last"};
+		D.createTable("Names", columnNames);
+		
+		Table T = D.selectQuery(null, "Names", null);
+		
+		System.out.println("Finished");
+		
+		
+	}
+
+
+}

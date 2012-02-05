@@ -1,0 +1,26 @@
+package TupleObjects;
+
+public class TupleColumn implements TupleObject {
+String Data; // The column name
+TupleObject Value; // the actual value of the given object
+
+	public int compare(TupleObject toBeCompared) {
+		// TODO Auto-generated method stub
+		return Value.compare(toBeCompared);
+	}
+
+	public Object parse() {
+		// TODO Auto-generated method stub
+		return Value.parse();
+	}
+	public void setValue(TupleObject inValue){
+		Value = inValue;
+	}
+	public void getData(){
+		
+	}
+	public String toString(){
+		return Data;
+	}
+
+}

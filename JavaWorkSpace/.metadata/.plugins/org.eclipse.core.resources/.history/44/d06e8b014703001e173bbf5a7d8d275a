@@ -1,0 +1,45 @@
+package Tests;
+
+
+import DatabaseObjects.*;
+import TupleObjects.*;
+import Where.*;
+
+public class QueryWithNumbers {
+	public static void main(String[] args){
+		Database D = new Database("Numbers");
+		String[] columnNames = {"First","Last","Number"};
+		if(!D.createTable("Names", columnNames))System.out.println("Create Table Failed");
+
+		Object[] Andrew = {"Andrew","Johnson",1.0};
+		Object[] Drew = {"Drew","Havard",2.0};
+		Object[] Tom = {"Tom","Robbins",3.0};
+		Object[] SameName ={"John","John",4.0};
+
+		if(!D.insertQuery("Names", Andrew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Drew))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", Tom))System.out.println("Insert Failed");
+		if(!D.insertQuery("Names", SameName))System.out.println("Insert Failed");
+		WhereGreaterThanOrEqual we = new WhereGreaterThanOrEqual(new TupleColumn("Number"), new TupleDouble(0.0));
+		Table T = D.selectQuery(null, "Names", we);
+		for(Tuple tuple: T){
+			for(TupleObject TO: tuple){
+				System.out.print(TO+" ");
+			}
+			System.out.println();
+
+		}
+	
+
+
+
+
+
+
+
+	D.finalize();
+}
+
+
+}
+

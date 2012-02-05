@@ -1,0 +1,37 @@
+package Where;
+
+import java.util.Vector;
+
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleObject;
+
+public class WhereNot implements WhereClauseObject {
+	String columnName;
+	TupleObject toCompare;
+	
+	public WhereNot(String testColumn, TupleObject testTuple){
+		columnName = testColumn;
+		toCompare = testTuple;
+	}
+	
+	public int compare(TupleObject tupleOb) {
+		// TODO Auto-generated method stub
+		if(tupleOb.compare(toCompare) == Integer.MAX_VALUE)
+			return -1;
+		if(tupleOb.compare(toCompare) != 0)
+			return 1;
+		else
+			return 0;
+	}
+	
+	public String toString(){
+		return columnName + " == " + toCompare.toString();
+	}
+
+	@Override
+	public int evaluate(Tuple tuple) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

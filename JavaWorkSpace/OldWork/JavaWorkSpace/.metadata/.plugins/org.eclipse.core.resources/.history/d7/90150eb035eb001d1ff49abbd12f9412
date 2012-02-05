@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+	static Vector<Game> Games = new Vector<Game>();
+	static Vector<User> Users = new Vector<User>();
+	public static void main(String[] args) {
+		try {
+			File file = new File("scores.txt");
+			Scanner scanner = new Scanner(file);
+			String line;
+			while((line = scanner.nextLine())!=null){
+				if(line.charAt(0)>=48&&line.charAt(0)<=57){
+					String[] tokens = line.split(" ");
+					int score = Integer.parseInt(tokens[0]);
+					String name = tokens[1];
+					for(int i = 2; i<tokens.length;i++)name+=" "+tokens[1];
+					Game game;
+					if((game = FindGame(name))!=null){
+						game.setPoints(score);						
+					}
+					else{
+						game = new Game(name, score);
+						Games.add(game);
+						
+					}
+				}
+				else{
+
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	//Check if the game exists with a certain name. Returns null if no game is found
+	static Game FindGame(String s){
+		for(Game u: Games){
+			if(u.getName().equals(s)){
+				return u;
+			}
+		}
+		return null;
+	}
+}

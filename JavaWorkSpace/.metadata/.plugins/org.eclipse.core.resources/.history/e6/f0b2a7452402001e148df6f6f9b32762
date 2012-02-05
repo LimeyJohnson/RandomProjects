@@ -1,0 +1,52 @@
+package Where;
+
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleColumn;
+import TupleObjects.TupleObject;
+
+public class WhereEqual implements WhereClauseObject{
+	//String columnName;
+	TupleObject toCompare;
+	TupleObject tupleLeft, tupleRight;
+	
+//	public WhereEqual(String testColumn, TupleObject testTuple){
+//		columnName = testColumn;
+//		toCompare = testTuple;
+//	}
+	public WhereEqual(TupleObject left, TupleObject right){
+		tupleLeft = left;
+		tupleRight = right;
+		
+	}
+	
+	public int compare(TupleObject tupleOb) {
+		// TODO Auto-generated method stub
+		if(tupleOb.compare(toCompare) == 0)
+			return 1;
+		else
+			if(tupleOb.compare(toCompare) == Integer.MAX_VALUE)
+				return -1;
+			else
+				return 0;
+	}
+	
+	public String toString(){
+		return columnName + " == " + toCompare.toString();
+	}
+
+	@Override
+	public int evaluate(Tuple tuple) {
+		if(tupleLeft instanceof TupleColumn){
+			String s = ((TupleColumn) tupleLeft).getData();
+			((TupleColumn) tupleLeft).setValue(tuple.getColumnValue(s));
+		}
+		if(tupleRight instanceof TupleColumn){
+			String s = ((TupleColumn)tupleRight).getData();
+			((TupleColumn) tupleRight).setValue(tuple.getColumnValue(s));
+		}
+		if(tupleLeft.compare(tupleRight) == 0)return 0;
+		else return -1;
+		
+	}
+
+}

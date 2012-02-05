@@ -1,0 +1,87 @@
+import java.net.*;
+import java.io.*;
+import java.util.regex.*;
+public class HTML {
+	public static void main(String[] args) throws MalformedURLException, IOException{
+		URL server = new URL("http://news.google.com/archivesearch?as_q=IRAN+US&num=10&hl=en&btnG=Search+Archives&as_epq=&as_oq=&as_eq=&as_user_ldate=2000%2F01&as_user_hdate=2000%2F02&lr=&as_src=&as_price=p0&as_scoring=");
+		FileOutputStream fileStream = new FileOutputStream("index7.html");
+		PrintStream mainStream = new PrintStream(fileStream);
+
+		HttpURLConnection connect = (HttpURLConnection) server.openConnection();
+		connect.connect();
+		InputStream in = connect.getInputStream();
+		String input = "";
+		byte[] bytes = new byte[1024];
+
+		while(in.read(bytes) >=0){
+			input += new String(bytes);
+		}
+
+
+
+
+		String output = input.substring(input.indexOf("<body"),input.indexOf("</body"));
+
+
+		Pattern pat = Pattern.compile("<td><a href.+?div class=j.+?margin-left: 1em;");
+		Matcher mat = pat.matcher(output);
+		int count = 0;
+		while(mat.find()){
+			String titleLink,Title;
+
+			String art = mat.group();
+			art = art.substring(12, art.length());
+			titleLink = art.substring(0,art.indexOf('>'));
+			art = art.substring(titleLink.length()+1,art.length());
+			Title = art.substring(0, art.indexOf("<br>"));
+			art = art.substring(Title.length(),art.length());
+			//			Pattern pat2 = Pattern.compile("<a href.+?>");
+			//			Matcher mat2 = pat2.matcher(mat.group());
+			//			while(mat2.find()){
+			//				mainStream.println(mat2.group());
+			//			}
+			mainStream.println("Main Link: "+titleLink);
+			mainStream.println("Title: "+removeHTML(Title));
+			mainStream.println(art);
+			mainStream.println("Found \n\n");
+			count++;
+		}
+		System.out.println("Count: "+count);
+		//		for(int x = 2; x<output.length;x++){
+		////			if(input.contains("div class=\"j\">")){
+		//			mainStream.println("\n\n");
+		//			mainStream.println(output[x]);
+		////			}
+		//			
+		//		}
+		//		boolean print = false;
+		//		for(int x = 0; x<input.length();x++){
+		//			if(input.charAt(x)=='<')print = false;
+		//			if(input.charAt(x)=='>')print = true;
+		//			if(print && input.charAt(x)!='>') mainStream.print(input.charAt(x));
+		//		}
+		System.out.print("Done");
+
+		//		String[] go = input.split("href=\"");
+		//		for(String a:go){
+		//			try{
+		//			System.out.println(a.substring(0, a.indexOf((char)34)));
+		//			}
+		//			catch(Exception e){
+		//				System.out.println("one Failed");
+		//			}
+		//		}
+	}
+	static String removeHTML(String input){
+
+		boolean print = false;
+		String output = "";
+		for(int x = 0; x<input.length();x++){
+			if(input.charAt(x)=='<')print = false;
+			if(input.charAt(x)=='>')print = true;
+			if(print && input.charAt(x)!='>') output+=(input.charAt(x));
+			//		}
+		}
+		return output;
+	}
+}

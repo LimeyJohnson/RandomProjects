@@ -1,0 +1,399 @@
+package DatabaseObjects;
+import java.io.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Vector;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import TupleObjects.TupleDate;
+import TupleObjects.TupleDouble;
+import TupleObjects.TupleNull;
+import TupleObjects.TupleObject;
+import TupleObjects.TupleString;
+import Where.WhereClauseObject;
+
+public class Database implements Cloneable{
+	private Map<String,Table> TableMap;
+	private String dbName;
+	int QueryNum;
+	public Database(String name){
+		/*
+		 * Checks to see if the database exists as an XML file
+		 * if it does it restores the database, if not it will create a new database with this name
+		 */
+		File file = new File(name+".xml");
+		System.out.println(file.getPath());
+		if(file.exists()&&file.canRead()){
+			TableMap = new TreeMap<String, Table>();
+			QueryNum = 0;
+					
+			Document dom = null;
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+			try{
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				dom = db.parse(file);
+				
+
+			}
+			catch(ParserConfigurationException pce){
+				
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			Element docEle = dom.getDocumentElement();
+			NodeList nl = docEle.getElementsByTagName("Database");
+			dbName = docEle.getAttribute("DbName");
+			//System.out.println("Database Name: " + docEle.getAttribute("DbName"));
+			if(nl != null && nl.getLength() > 0) {
+				for(int i = 0 ; i < nl.getLength();i++) {
+
+					//get the table element
+					Element el = (Element)nl.item(i);
+					String tableName = el.getAttribute("Names");
+					
+					NodeList tupleList = el.getElementsByTagName("Tuple");
+					
+					
+					for(int j = 0; j< tupleList.getLength(); j++){
+						Vector<String> Columns = new Vector<String>();
+						Vector<TupleObject> Elements = new Vector<TupleObject>();
+						Element tupleElement = (Element)tupleList.item(j);
+						
+						NamedNodeMap ColumnList = tupleElement.getAttributes();
+						
+						
+					}
+										
+				}
+			}
+
+			
+			
+			
+		}
+		else{
+			TableMap = new TreeMap<String, Table>();
+			QueryNum = 0;
+			dbName = name;
+		}
+	}
+	
+	public Database clone(){
+		Database clone = new Database(dbName + "clone");
+		clone.QueryNum = QueryNum;
+		clone.TableMap.putAll(TableMap);
+		for(String tableName: TableMap.keySet())
+			TableMap.put(tableName, TableMap.get(tableName).clone());
+		return clone;
+		
+	}
+	public Table returnTable(String tableName){
+		return TableMap.get(tableName);
+	}
+	public boolean createTable(String tableName, String[] columnNames){
+		/*
+		 * Creates a table with the given information
+		 * Needs to do basic error checking on table such as duplicate column names
+		 * Returns true if Succeeded, return false if it failed
+		 */
+		for(int i=0; i<columnNames.length; ++i){
+			for(int j=(i+1); j<columnNames.length; ++j){ // fixed was int j = i which means it will fail everytime
+				if(columnNames[i].equals(columnNames[j])){
+					return false;
+				}
+			}
+		}
+		TableMap.put(tableName, new Table(tableName, new Vector<String>(Arrays.asList(columnNames))));
+		return true;
+	}
+	public boolean createTable(String tableName, String[] columnNames,String primaryKey){
+		/*
+		 * Same as above, except primary key needs to be added to the table
+		 * Returns true if Succeeded, return false if it failed
+		 */
+		for(int i=0; i<columnNames.length; ++i){
+			for(int j=(i+1); j<columnNames.length; ++j){ // fixed was int j = i which means it will fail everytime
+				if(columnNames[i].equals(columnNames[j])){
+					return false;
+				}
+			}
+		}
+		TableMap.put(tableName, new Table(tableName, new Vector<String>(Arrays.asList(columnNames)), primaryKey));
+		return true;
+		
+	}
+	public boolean deleteTable(String tableName){
+		/*
+		 * Deletes the table from the database
+		 * Returns true if Succeeded, return false if it failed
+		 */
+
+		return TableMap.remove(tableName)==null;
+	}
+
+	/*************************************************************************************************
+	 * 												NOTICE
+	 * 
+	 * See new Table select methods that return a table, likely overlap with intended funtion of 
+	 * insertQuery.  Need to consider how we right this, but all this method needs to do is throw
+	 * the to be returned table name, extra table (if any) to be queried and the WhereClauseObjects
+	 * at the Table select method
+	 * 
+	 * Constructing WhereClauseObjects is hairy, they all have different constructors
+	 * Recommend making GUI parse and construct whereClauseObjects and pass a single WhereClauseObject
+	 * to this method
+	 */
+	public boolean insertQuery(String tableName, Map<String,Object> data){
+		/*
+		 * One of many insertQuery instances, uses Map to relate data to column
+		 * This version would be used if data is being inserted into a subset of columns in the database
+		 * the objects need to be converted into their respective TupleData objects
+		 * Returns true if Succeeded, return false if it failed
+		 */
+		return true;
+	}
+	public boolean insertQuery(String tableName, Object[] data){
+		Table insertTable = TableMap.get(tableName);
+		
+		
+		
+		Vector<TupleObject> insertVector = new Vector<TupleObject>();
+		for(Object o: data) insertVector.add(tupleObjectConverter(o));
+		//Check to see that the inserted data has the same amount of columns as the data there
+		if(data.length!=insertTable.ColumnNames.size()) return false;
+		Tuple insertTuple = new Tuple(insertVector, insertTable.ColumnNames);
+		
+		return insertTable.insert(insertTuple);
+		
+		/*
+		 * This version would be used if the tuple will include data for each column 
+		 * Returns true if Succeeded, return false if it failed
+		 */
+		
+	}
+
+	public boolean updateQuery(String tableName, Map<String,Object> data, WhereClauseObject whereClause){
+		/*
+		 * Updates a given tuple given a whereclause
+		 * Must check to make sure the columns to be updated can accept a the given TupleObject
+		 * Returns true if Succeeded, return false if it failed
+		 */
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Table selectQuery(Map<String, String> data, String tableName, WhereClauseObject whereClause){
+
+		/*
+		 * Returns a new table based on the the given query. The first column in the dataMap is the column name. 
+		 * The second column is the output column name (SQL AS statement)
+		 * The resulting table should also be added to the Database
+		 * 
+		 * Second explanation:
+		 * The Key String of data is the RETURN Column name the same as an "AS" statement in SQL
+		 * The Object of the data Map is the current Column Name 
+		 * !!!! IF data = null is the same as Select * which means all of the columns are being queried
+		 * !!!! IF whereClause = null there is no where clause
+		 */
+		int index = 0;
+		Vector<String> columnNames;
+		Table queryTable = TableMap.get(tableName);
+		/* 
+		 * Create new columnNames by checking if the new column name should keep the old column name
+		 * If we are keeping all of the column names the same, but keeping only the old columns
+		 * This is the case when the entry (the second part of the Map) = null
+		 */
+		
+		if(data == null){
+			
+			columnNames = (Vector<String>) queryTable.ColumnNames.clone();
+		}
+		else{
+			columnNames = new Vector<String>(1,1);
+			for(String s: data.keySet()){
+				if(data.get(s) == null){
+					columnNames.add(index++, s);
+				}
+				else{
+					columnNames.add(index++, data.get(s));
+				}
+			}
+		}
+		String newTableName = "Qry"+(QueryNum++);
+		Table returnTable = new Table(newTableName, columnNames);
+
+		//Start adding data to the new returnTable
+		for(Tuple T: queryTable.TupleVector){
+			Tuple newTuple = T.clone();
+			//Change Columns for new Tuple
+			if(data != null && data.keySet() != null)
+				for(int x = 0; x<columnNames.size(); x++){
+					if(newTuple.getColumns().contains(columnNames.get(x)))
+						newTuple.renameColumn((data.keySet().toArray(new String[1]))[x], columnNames.get(x));
+				}
+			//Decide if it to be added to the new Table
+			for(String column: (Vector<String>)newTuple.getColumns().clone())
+				if(data!=null && !data.containsKey(column))
+					newTuple.removeColumn(column);
+			if(whereClause == null){
+				returnTable.insert(newTuple);
+			}
+			else if(whereClause.evaluate(newTuple))returnTable.insert(newTuple);
+				
+//				for(TupleObject tupleO: newTuple)
+//					if(whereClause.compare(tupleO)==1){
+//						returnTable.insert(newTuple);
+//					}
+			
+		}
+		return returnTable;
+
+		//Table t = TableMap.get(tableName).select(data,newTableName,whereClause);
+		//TableMap.put(newTableName,t);
+
+	}
+	public Table selectQuery(Map<String, String> data, String firstTable, String secondTable, WhereClauseObject whereClause){
+		/*
+		 * Same as above, except joins two columns together
+		 */
+		String newTableName = "Qry"+(QueryNum++);
+		Table firstQueryTable = TableMap.get(firstTable);
+		Table secondQueryTable = TableMap.get(secondTable);
+		if(firstQueryTable == null || secondQueryTable == null){
+			System.out.println("Incorrect Table Names");
+			return null;
+			}
+		
+		Table returnTable = this.selectQuery(data, firstTable, whereClause);
+		Table temp = this.selectQuery(data, secondTable, whereClause);
+		for(Tuple tempTup: temp.TupleVector)
+			returnTable.insert(tempTup);
+		return returnTable;
+	}
+
+	public int tableCount(){
+		/*
+		 * Returns the number of tables in the database
+		 */
+		return TableMap.size();
+	}
+	public String describeDatabase(){
+		/*
+		 * Lists all attributes/relations in the database
+		 */
+		return this.toString();
+	}
+	public String toString(){
+		String databaseString = "";
+		for(Table toPrint: TableMap.values())
+			databaseString += toPrint.Name + "\n" + toPrint.toString();
+		return databaseString;
+	}
+	//Helper functions
+	public TupleObject tupleObjectConverter(Object o){
+		/*
+		 * Returns a tuple object with the given type of o. Use "instanceOf" operator
+		 */
+		if (o == null)
+			return new TupleNull();
+		else if(o instanceof Date)
+			return new TupleDate((Date)o);
+		else if(o instanceof Double)
+			return new TupleDouble((Double)o);
+		else if(o instanceof String)
+			return new TupleString((String)o);
+		return null;
+	}
+
+	public void finalize(){
+		System.out.println("Shutting Down Database");
+		try {
+			//printwriter for file IO
+			PrintWriter out = new PrintWriter(new FileOutputStream(dbName+".xml"));
+
+			//All the object needed to create an XML document
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			DOMImplementation impl = builder.getDOMImplementation();
+			Document xmldoc = impl.createDocument(null, "Database" , null);
+
+			//Root of the document to which everything is going to be appended
+			Element root = xmldoc.getDocumentElement();
+
+			//set Database Name
+			root.setAttribute("DbName", dbName);
+			for(Table t: TableMap.values()){//For every table create an element table
+				Element e = xmldoc.createElement("Table");
+				e.setAttribute("name", t.Name); // set Table name
+				int columnIndex = 0;
+				Element c = xmldoc.createElement("columns");
+				
+				for(String columnString: t.ColumnNames){
+					c.setAttribute("col"+columnIndex, columnString);
+				}
+				e.appendChild(c);
+				for(Tuple tuple: t.TupleVector){//Add tuple object
+					Element f = xmldoc.createElement("tuple");
+					
+					for(String columnName: tuple.getColumns() ){//add data from tuple
+					f.setAttribute(columnName, tuple.getColumnValue(columnName)+"" );
+					}
+					e.appendChild(f);
+				}
+				root.appendChild(e);
+			}
+			//Finalize document and stream to file
+			DOMSource domSource = new DOMSource(xmldoc);
+			StreamResult streamResult = new StreamResult(out);
+			TransformerFactory tf = TransformerFactory.newInstance();
+			Transformer serializer = tf.newTransformer();
+			serializer.setOutputProperty(OutputKeys.ENCODING,"ISO-8859-1");
+		
+			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
+			serializer.transform(domSource, streamResult); 
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		}
+		// Create XML DOM document (Memory consuming).
+		catch (ParserConfigurationException e) {
+			
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			
+			e.printStackTrace();
+		}
+
+		// Document.
+		/*
+		 * Write Database to XML file
+		 */
+
+	}
+
+
+
+}

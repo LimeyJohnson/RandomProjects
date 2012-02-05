@@ -1,0 +1,204 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Tester {
+	static int mStart;
+	static int mEnd;
+	int yStart, yEnd;
+	static PrintStream mainStream;
+	static Data data;
+	//Connection conn;
+	static int out = 0;
+	
+	//static String output;
+	public static void main(String[] args) {
+		try {
+			mainStream = new PrintStream(new FileOutputStream("new.html"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		data = new Data();
+		try {
+			runURL(true,01,2000,02,2003,0,false);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	// public void runURL(String monthStart, String monthEnd, String yearStart, String yearEnd, String start, boolean Repeat)throws MalformedURLException, IOException{
+	public static void runURL(boolean repeat, int monthStart, int yearStart, int monthEnd, int yearEnd, int start, boolean related)throws MalformedURLException, IOException{
+		String urlString = "http://news.google.com/archivesearch?as_q=iran+us&num=100&hl=en&btnG=Search+Archives&as_epq=&as_oq=&as_eq=&as_user_ldate="+monthStart+"%2F"+yearStart+"&as_user_hdate="+monthEnd+"%2F"+yearEnd+"&lr=&as_src=&as_price=p0&as_scoring=&start="+start;
+		System.out.println(urlString);
+		URL server = new URL(urlString);
+		HttpURLConnection connect = (HttpURLConnection) server.openConnection();
+		connect.connect();
+		InputStream in = connect.getInputStream();
+		String input = "";
+		String temp;
+		BufferedReader d = new BufferedReader(new InputStreamReader(in));
+		while((temp = d.readLine())!=null){
+			input+=temp;
+		}
+		String output = input.substring(input.indexOf("<body"),input.indexOf("</body"));
+
+		Pattern pat = Pattern.compile("<table cellpadding=0 cellspacing=0 border=0 style=\"margin-left: 1em;\"><tr><td><a href=.+?</div>.+?Related web pages");
+		Matcher mat = pat.matcher(output);
+
+		while(mat.find()){
+			String art = mat.group();
+			int a, numRelated = 0;
+			String titleLink, title, source, date, snippet,search="", keywords, RelatedLink="";
+			art = art.substring(86, art.length());
+			titleLink = art.substring(0,art.indexOf(">"));
+			art = art.substring(art.indexOf(">")+1);
+			title = art.substring(0,art.indexOf("<br>"));
+			art = art.substring(art.indexOf("class=l")+8);
+			source = art.substring(0, art.indexOf("<"));
+			art = art.substring(art.indexOf(">")+4);
+			date = art.substring(0,art.indexOf("<"));
+			art = art.substring(art.indexOf("size=-1")+9);
+			snippet = art.substring(0,art.indexOf("</font>"));
+
+			if((a = art.indexOf("related"))>0){
+				art = art.substring(art.indexOf("archivesearch?"));
+				RelatedLink = art.substring(art.indexOf("archivesearch?"),art.indexOf(">"));
+				a = art.indexOf("related");
+				try{
+					search = art.substring(a-15,a);
+					numRelated = Integer.parseInt(search.substring(search.indexOf("All")+4,search.lastIndexOf(" ")));
+				}
+				catch( NumberFormatException ex){
+					out ++;
+					return;
+				}
+				catch( StringIndexOutOfBoundsException ex){
+					out ++;
+					return;
+				}
+
+			}
+			art = art.substring(art.indexOf("/search?"));
+			art = art.substring(art.indexOf("+")+1);
+			keywords = art.substring(0,art.indexOf(">"));
+			int currentID = data.writeToMovesDB(data.getCount(), getSQLDate(date), numRelated, keywords, source, removeHTML(title), titleLink, removeHTML(snippet));
+			System.out.println("currentID= "+ currentID);
+			if(numRelated>0){
+				runRelated("http://news.google.com/"+RelatedLink,currentID);
+			}
+			data.addCount();
+			if(repeat){
+				pat = Pattern.compile("<td nowrap>");
+				mat = pat.matcher(output);
+				int countrepeat = 0;
+				while(mat.find()){
+					countrepeat ++;
+				}
+				System.out.println("Extra Pages " +(countrepeat-2) );
+
+				for(int x = 1; x<=countrepeat-3;x++){
+					runURL(false,monthStart,yearStart,monthEnd,yearEnd,(x*100),false);
+				}
+			}
+
+		}
+		System.out.println("Count: "+data.getCount()+" throughout "+out);
+
+	}
+	public static void runRelated(String urlString, int index)throws MalformedURLException, IOException{
+	
+	System.out.println(urlString);
+	URL server = new URL(urlString);
+	HttpURLConnection connect = (HttpURLConnection) server.openConnection();
+	connect.connect();
+	InputStream in = connect.getInputStream();
+	String input = "";
+	String temp;
+	BufferedReader d = new BufferedReader(new InputStreamReader(in));
+	while((temp = d.readLine())!=null){
+		input+=temp;
+	}
+	String output = input.substring(input.indexOf("<body"),input.indexOf("</body"));
+
+	Pattern pat = Pattern.compile("<table cellpadding=0 cellspacing=0 border=0 style=\"margin-left: 1em;\"><tr><td><a href=.+?</div>.+?Related web pages");
+	Matcher mat = pat.matcher(output);
+
+	while(mat.find()){
+		String art = mat.group();
+		String titleLink, title, source, date, snippet;
+		art = art.substring(86, art.length());
+		titleLink = art.substring(0,art.indexOf(">"));
+		art = art.substring(art.indexOf(">")+1);
+		title = art.substring(0,art.indexOf("<br>"));
+		art = art.substring(art.indexOf("class=l")+8);
+		source = art.substring(0, art.indexOf("<"));
+		art = art.substring(art.indexOf(">")+4);
+		date = art.substring(0,art.indexOf("<"));
+		art = art.substring(art.indexOf("size=-1")+9);
+		snippet = art.substring(0,art.indexOf("</font>"));
+
+		
+		data.writeToRelatedDB(getSQLDate(date),index,source, removeHTML(title), titleLink, removeHTML(snippet));
+		
+		
+
+	}
+	System.out.println("Count: "+data.getCount()+" throughout "+out);
+
+}
+	static String removeHTML(String input){
+
+		boolean print = true;
+		String output = "";
+		for(int x = 0; x<input.length();x++){
+			if(input.charAt(x)=='<')print = false;
+			if(input.charAt(x)=='>')print = true;
+			if(print && input.charAt(x)!='>') output+=(input.charAt(x));
+			//		}
+		}
+		return output;
+	}
+	static String getSQLDate(String input){
+		Vector<String> months = new Vector<String>();
+		months.add("Jan");
+		months.add("Feb");
+		months.add("Mar");
+		months.add("Apr");
+		months.add("May");
+		months.add("Jun");
+		months.add("Jul");
+		months.add("Aug");
+		months.add("Sep");
+		months.add("Oct");
+		months.add("Nov");
+		months.add("Dec");
+
+
+		String month = input.substring(0,3);
+		input = input.substring(4);
+		int day = Integer.parseInt(input.substring(0,input.indexOf(",")));
+		int year = Integer.parseInt(input.substring(input.indexOf(",")+2,input.length()));
+
+		return year+"-"+(months.indexOf(month)+1)+"-"+day;
+	}
+
+
+}

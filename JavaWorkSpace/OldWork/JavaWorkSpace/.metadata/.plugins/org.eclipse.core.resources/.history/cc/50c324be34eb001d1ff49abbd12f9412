@@ -1,0 +1,16 @@
+import java.util.*;
+public class Game {
+	String Name;
+	int Points;
+	Vector<User> Users = new Vector<User>(); 
+	public Game(String name, int points){
+		Points = points; 
+		Name = name;
+	}
+	public String getName(){
+		return Name;
+	}
+	public void setPoints(int points){
+		Points = points;
+	}
+}

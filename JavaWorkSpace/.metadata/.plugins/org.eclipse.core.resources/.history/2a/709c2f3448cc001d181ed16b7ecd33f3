@@ -1,0 +1,59 @@
+package pokerPackage;
+import java.util.*;
+
+public class Combinations { //lks
+	public static void main(String[] args) {
+		Vector<Integer> v = new Vector<Integer>();
+		Vector<Integer> cards = new Vector<Integer>();
+		int[] testarray = new int[10];
+		for(int x = 0;x<=47;x++)v.add(x);
+		int count = 0;
+		double start = System.currentTimeMillis();
+		while(v.size()>=5){
+			int a = v.remove(0);
+			cards.add(a);
+			//for(int a = 0; a<(v.size()-3);a++){
+			for(int b = 0;b<=(v.size()-4);b++){
+				cards.add(v.get(b));
+				for(int c = b+1; c<=(v.size()-3);c++){
+					cards.add(v.get(c));
+					for(int d = c+1; d<=(v.size()-2);d++){
+						cards.add(v.get(d));
+						for(int e = d+1; e<=(v.size()-1);e++){
+//							Vector<Integer> cards = new Vector<Integer>();
+							cards.add(v.get(e));
+//							cards.add(a);
+//							cards.add(v.get(d));
+//							cards.add(v.get(b));
+//							cards.add(v.get(c));
+							//System.out.println(a+", "+v.get(b)+", "+v.get(c)+", "+v.get(d)+","+v.get(e));
+							count++;
+//							Hand h = new Hand(cards);
+							Hand h = new Hand((Vector<Integer>) cards.clone());
+//							h.ID1 = (Vector<Integer>) cards.clone();
+							h.calculateHand();
+							//h.printHand();
+							testarray[h.HandID]++;
+							cards.remove(4);
+						}
+//						cards.remove(cards.indexOf(v.get(d)));
+						cards.remove(3);
+					}
+//					cards.remove(cards.indexOf(v.get(c)));
+					cards.remove(2);
+					//System.out.println(a+", "+v.get(b)+", "+v.get(c));
+					//System.out.println(v.get(a)+", "+v.get(b)+", "+v.get(c));
+				}
+				cards.remove(1);
+//				cards.remove(cards.indexOf(v.get(b)));
+			}
+			cards.remove(0);
+//			cards.remove(cards.indexOf(a));
+		}
+		double finish = System.currentTimeMillis();
+		for(int l = 0; l<10; l++){
+			System.out.println(l+ " - "+ testarray[l]);
+		}
+		System.out.println("Count = "+count+" Time taken= "+((finish-start)/1000)+" sec");
+	}
+}

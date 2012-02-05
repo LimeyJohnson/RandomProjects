@@ -1,0 +1,7 @@
+package Tests;
+
+import DatabaseObjects.*;
+
+public class SimpleInsertAndQuery {
+Database D = new Database();
+}

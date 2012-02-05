@@ -1,0 +1,22 @@
+package Where;
+
+import java.util.Vector;
+
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleObject;
+
+public class WhereNot implements WhereClauseObject {
+	WhereClauseObject clause;
+	
+	public WhereNot(WhereClauseObject clauseIN){
+		clause = clauseIN;
+	}
+	
+	
+	@Override
+	public boolean evaluate(Tuple tuple) {
+		// TODO Auto-generated method stub
+		return !clause.evaluate(tuple);
+	}
+
+}

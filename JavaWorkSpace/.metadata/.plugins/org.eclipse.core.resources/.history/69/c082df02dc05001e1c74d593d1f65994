@@ -1,0 +1,76 @@
+package DatabaseObjects;
+import java.util.*;
+
+import TupleObjects.TupleObject;
+public class Tuple implements Iterable<TupleObject>, Cloneable{
+	protected Vector<TupleObject> Elements;
+	protected Vector<String> Columns;
+	public Tuple(){
+		Elements = new Vector<TupleObject>();
+		Columns = new Vector<String>();
+	}
+	
+	public void addColumn(String columnName, TupleObject tupleData, int pos){
+		Elements.add(pos, tupleData);
+		Columns.add(pos, columnName);
+	}
+	
+	public Tuple clone(){
+		Tuple result = new Tuple();
+		result.Elements = (Vector<TupleObject>) this.Elements.clone();
+		result.Columns = (Vector<String>) this.Columns.clone();
+		return result;
+	}
+	
+	public void renameColumn(String oldName, String newName){
+		Columns.set(Columns.indexOf(oldName), newName);
+	}
+	public void renameColumn(int columnIndex, String newName){
+		Columns.set(columnIndex, newName);
+	}
+	
+	public void removeColumn(int index){
+		Elements.remove(index);
+		Columns.remove(index);
+	}
+
+	public void removeColumn(String columnName){
+		int index = Columns.indexOf(columnName);
+		removeColumn(index);
+	}
+	
+	public void moveColumn(String columnName, int destination){
+		int origin=-1;
+		for(int i=0; i<Columns.size(); ++i)
+			if(Columns.get(i).equals(columnName)){
+				origin = i;
+				i = Columns.size();
+			}
+		TupleObject tempTuple = Elements.get(origin);
+		String tempColumn = Columns.get(origin);
+		Elements.remove(origin);
+		Columns.remove(origin);
+		Elements.add(destination, tempTuple);
+		Columns.add(destination, tempColumn);
+	}
+	public Iterator<TupleObject> iterator(){
+		return Elements.iterator();
+	}
+	
+	public Tuple(Vector<TupleObject> inElements, Vector<String> inColumns){
+		Elements = inElements;
+		Columns = inColumns;
+	}
+	
+	public Vector<String> getColumns(){
+		return Columns;
+	}
+	
+	public Vector<TupleObject> getElements(){
+		return Elements;
+	}
+	public TupleObject getColumnValue(String column){
+		return Elements.get(Columns.indexOf(column));
+	}
+	
+}

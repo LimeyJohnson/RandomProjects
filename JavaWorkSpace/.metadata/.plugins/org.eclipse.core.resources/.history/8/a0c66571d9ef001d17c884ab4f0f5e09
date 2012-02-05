@@ -1,0 +1,47 @@
+import java.util.*;
+import java.io.*;
+public class HtmlWriter {
+	public HtmlWriter(){
+
+	}
+	public void writeFiles(Vector<User> users, Vector<Game> games){
+		try {
+			FileOutputStream fileStream = new FileOutputStream("index.html");
+			PrintStream mainStream = new PrintStream(fileStream);
+			mainStream.println("<html><body><h1>Results</h1><br/><b>Users</b></br>");
+			for(User u: users){
+				if(u.joined){
+					mainStream.println("<a href=\""+u.Name+".html\">"+u.Name+"</a><br/>");
+					FileOutputStream userFileStream = new FileOutputStream(u.Name+".html");
+					PrintStream userStream = new PrintStream(userFileStream);
+					userStream.println("<html><body><h1>"+u.Name+"</h1><br/>");
+
+					userStream.println("User Joined: "+u.Date_Joined+"<br/>");
+					userStream.println("Games Completed:</br> ");
+					int totalPoints = 0;
+					for(Game g:u.Games){
+						userStream.println(g.Name+"</br>");
+						totalPoints += g.Points;
+					}
+					userStream.println("For a total of "+totalPoints+" points");
+					userStream.println("</body></html>");
+				}
+				
+			}
+			mainStream.println("<b>Games</b></br>");
+			for(Game g: games){
+				mainStream.println("<a href=\""+g.Name+".html\">"+g.Name+"</a><br/>");
+				FileOutputStream gameFileStream = new FileOutputStream(g.Name+".html");
+				PrintStream gameStream = new PrintStream(gameFileStream);
+				gameStream.println("<html><body><h1>"+g.Name+"</h1><br/>");
+				gameStream.println("</body></html>");
+				
+			}
+
+			mainStream.println("</body></html>");	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+}

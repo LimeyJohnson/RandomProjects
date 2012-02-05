@@ -1,0 +1,37 @@
+package Where;
+import java.util.*;
+
+import DatabaseObjects.Tuple;
+import TupleObjects.TupleObject;
+public class WhereAll implements WhereClauseObject{
+	Vector<WhereClauseObject> clause;
+	public WhereAll(Vector<WhereClauseObject> inClause){
+		clause = inClause;
+	}
+	public int compare(TupleObject tupleOb) {
+		// TODO Auto-generated method stub
+		int result = -1;
+		for(WhereClauseObject temp: clause)
+			if(temp.compare(tupleOb)==0)
+				return 0;
+			else
+				if(temp.compare(tupleOb)==1)
+					result = 1;
+		return result;
+	}
+	public String toString(){
+		if(clause == null)
+			return "Error: not initialized";
+		String result = clause.get(0).toString();
+		for(int i = 1; i < clause.size(); ++i)
+			result += " AND " + clause.get(i).toString();
+		return result;
+	}
+	public int evaluate(Tuple tuple) {
+		
+		return 0;
+	}
+
+		
+
+}

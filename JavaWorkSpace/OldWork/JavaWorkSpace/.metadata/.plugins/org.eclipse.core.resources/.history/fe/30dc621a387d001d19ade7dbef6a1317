@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class TicTacToe {
+	public static void main(String[] args){
+
+
+		for(int a = 0; a<=9; a++){
+		 LinkedList aList = getList(a,0,0,0,0,0,0,0,0);
+		 while(!aList.isEmpty())System.out.println("List a: "+aList.remove());
+		}
+	}
+
+	public static LinkedList getList(int a, int b, int c, int d, int e, int f, int g, int h, int i){
+		LinkedList<Integer> temp = new LinkedList<Integer>();
+		for(int x= 0; x<=9; x++){
+			temp.add(x);
+		}
+		if(a!=0)temp.remove(a);
+		if(b!=0)temp.remove(b);
+		if(c!=0)temp.remove(c);
+		if(d!=0)temp.remove(d);
+		if(e!=0)temp.remove(e);
+		if(f!=0)temp.remove(f);
+		if(g!=0)temp.remove(g);
+		if(h!=0)temp.remove(h);
+		if(i!=0)temp.remove(i);
+		
+		
+		
+		
+		
+		return temp;
+		
+	}
+}

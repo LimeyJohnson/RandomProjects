@@ -1,0 +1,6 @@
+
++Find API
++Write Basic Search
+-Write Advaned Search w/ Categories
+-Parse Vars
+-Write to Database
