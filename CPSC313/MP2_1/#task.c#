@@ -1,0 +1,17 @@
+#include <Task.H>
+
+class FlutterController : public Task{
+ FlutterController(char _name[]): Task( _name) {}
+  virtual void Run() {
+  }
+};
+class AvionicTask: public Task{
+ AvionicsTask(char _name[]): Task(_name){}
+  virtual void Run(){
+  }
+};
+int main(int argc, char * argv[]){
+  FlutterController("flutter contol");
+  AvionicsTask task2("avionics task");
+  Task::GracefullyExitMainThread();
+}
