@@ -1,0 +1,111 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0009 
+header_name {.h} 
+code_name {.cxx} 
+gridx 5 
+gridy 5 
+snap 3
+Function {make_window()} {open
+} {
+  Fl_Window main_window {
+    label {462 Assignment 3} open
+    xywh {458 112 651 622} visible
+  } {
+    Fl_Group {} {open
+      xywh {10 485 615 140}
+    } {
+      Fl_Button save_button {
+        label Save
+        user_data 0 user_data_type {void *}
+        callback save_callback
+        xywh {535 495 75 40} labelsize 18
+      }
+      Fl_Button exit_button {
+        label Exit
+        user_data 0 user_data_type long
+        callback exit_callback
+        xywh {535 545 75 40} labelsize 18
+      }
+      Fl_Button pause_button {
+        label {@||}
+        callback play_callback
+        xywh {155 560 35 25} labeltype SYMBOL_LABEL labelsize 12
+      }
+      Fl_Button loadMotion_button {
+        label {Load Motion}
+        callback load_callback
+        xywh {315 495 90 40}
+      }
+      Fl_Button loadActor_button {
+        label {Load Actor}
+        callback load_callback
+        xywh {315 545 90 40}
+      }
+      Fl_Button saveAs_button {
+        label {Save As}
+        callback save_callback
+        xywh {425 545 75 40}
+      }
+      Fl_Button locate_button {
+        label Locate
+        callback locate_callback
+        xywh {320 590 65 30}
+      }
+      Fl_Button rewind_button {
+        label {@|<}
+        callback play_callback
+        xywh {115 560 35 25} labeltype SYMBOL_LABEL labelsize 12
+      }
+      Fl_Button play_button {
+        label {@>}
+        user_data 0 user_data_type {void *}
+        callback play_callback
+        xywh {195 560 35 25} labeltype SYMBOL_LABEL labelsize 12
+      }
+      Fl_Button repeat_button {
+        label {@<->}
+        callback play_callback
+        xywh {235 560 35 25} labeltype SYMBOL_LABEL labelsize 12 align 216
+      }
+      Fl_Light_Button record_button {
+        label R
+        user_data 0 user_data_type {void *}
+        callback record_callback
+        xywh {70 560 40 25}
+      }
+    }
+    Fl_Value_Slider frame_slider {
+      user_data 0 user_data_type long
+      callback fslider_callback
+      xywh {30 535 240 20} type {Horz Knob} labelsize 18 align 197 minimum 1 maximum 4000 step 1
+    }
+    Fl_Light_Button light_button {
+      label Light
+      user_data 0 user_data_type long
+      callback redisplay_proc
+      xywh {30 495 70 25}
+    }
+    Fl_Light_Button triad_button {
+      label Triads
+      user_data 0 user_data_type long
+      callback redisplay_proc selected
+      xywh {115 495 70 25}
+    }
+    Fl_Box glwindow {
+      label label
+      xywh {5 5 640 480} box DOWN_FRAME labeltype NO_LABEL
+      code0 {\#include "walk.h"}
+      class Anim_Gl_Window
+    }
+    Fl_Value_Input joint_idx {
+      label Joint
+      callback valueIn_callback
+      xywh {65 595 30 20} maximum 30 step 1
+    }
+    Fl_Value_Input fsteps {
+      label {Frame steps}
+      callback valueIn_callback
+      xywh {240 595 30 20} minimum 1 maximum 30 step 1 value 1
+    }
+  }
+} 

@@ -21,5 +21,11 @@ namespace RelationShipCalculator
             RelationshipCalculator calc = new RelationshipCalculator(txt_firstName.Text, txt_secondName.Text);
             lbl_result.Text = calc.RelationshipChance;
         }
+
+        private void txt_secondName_TextChanged(object sender, EventArgs e)
+        {
+            RelationshipCalculator calc = new RelationshipCalculator(txt_firstName.Text, txt_secondName.Text);
+            lbl_result.Text = calc.RelationshipChance;
+        }
     }
 }

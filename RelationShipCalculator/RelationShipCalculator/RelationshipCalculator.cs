@@ -49,12 +49,9 @@ namespace RelationShipCalculator
                 int firstNum = int.Parse(NumString[0].ToString());
                 if (NumString.Length > 1)
                 {
-
                     int lastNum = int.Parse(NumString[NumString.Length - 1].ToString());
-
                     //Remove Numbers
-                    NumString = NumString.Remove(0, 1);
-                    NumString = NumString.Remove(NumString.Length - 1, 1);
+                    NumString = NumString.Remove(NumString.Length - 1, 1).Remove(0, 1);
                     nextNumString += (firstNum + lastNum);
                 }
                 else
@@ -64,7 +61,6 @@ namespace RelationShipCalculator
                 }
             }
             NumString = nextNumString;
-
         }
     }
 }

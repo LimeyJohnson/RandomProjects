@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MP3_2", "MP3_2\MP3_2.vcproj", "{84CE1F3E-71FC-4853-8996-3CB4C8280173}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84CE1F3E-71FC-4853-8996-3CB4C8280173}.Debug|Win32.ActiveCfg = Debug|Win32
+		{84CE1F3E-71FC-4853-8996-3CB4C8280173}.Debug|Win32.Build.0 = Debug|Win32
+		{84CE1F3E-71FC-4853-8996-3CB4C8280173}.Release|Win32.ActiveCfg = Release|Win32
+		{84CE1F3E-71FC-4853-8996-3CB4C8280173}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

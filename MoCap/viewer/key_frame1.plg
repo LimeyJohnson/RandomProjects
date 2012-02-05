@@ -1,0 +1,432 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: fltk - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP31.tmp" with contents
+[
+/nologo /MDd /GX /Z7 /Od /I "." /I ".." /D "FL_STATIC" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /FR"Debug/" /Fp"Debug/fltk.lib.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c 
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_absolute.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_expand.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_ext.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_isdir.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_list.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_match.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\filename_setext.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_abort.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_add_idle.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Adjuster.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_arc.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_arci.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_arg.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_ask.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Bitmap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_boxtype.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Browser.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Browser_.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Browser_load.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_call_main.c"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Chart.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Check_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Choice.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Clock.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_color.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Color_Chooser.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_compose.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Counter.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_cursor.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_curve.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_cutpaste.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Dial.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_diamond_box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_display.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Double_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_draw.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_draw_image.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_draw_pixmap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_engraved_label.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_file_chooser.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_font.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_get_key.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_get_system_colors.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Gl_Choice.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Gl_Overlay.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Gl_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_grab.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Group.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Image.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Input.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Input_.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_labeltype.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Light_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_line_style.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_add.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_Bar.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_global.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Menu_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Multi_Label.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Output.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_oval_box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_overlay.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_overlay_visual.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Overlay_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_own_colormap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Pack.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Pixmap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Positioner.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_rect.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Repeat_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Return_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Roller.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_round_box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Round_Button.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_rounded_box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Scroll.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_scroll_area.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Scrollbar.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_set_font.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_set_fonts.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_shadow_box.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_shortcut.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_show_colormap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Single_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Slider.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_symbols.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Tabs.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Tile.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Valuator.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Value_Input.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Value_Output.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Value_Slider.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\fl_vertex.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_visual.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Widget.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Window.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Window_fullscreen.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Window_hotspot.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_Window_iconize.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\Fl_x.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_bitmap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_compatability.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_free.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_fselect.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_pixmap.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\forms_timer.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\gl_draw.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\gl_start.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\glut_compatability.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\glut_font.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\numericsort.c"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\scandir.c"
+"G:\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\src\vsnprintf.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP31.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP32.tmp" with contents
+[
+/nologo /out:"..\lib\fltkd.lib" 
+".\Debug\filename_absolute.obj"
+".\Debug\filename_expand.obj"
+".\Debug\filename_ext.obj"
+".\Debug\filename_isdir.obj"
+".\Debug\filename_list.obj"
+".\Debug\filename_match.obj"
+".\Debug\filename_setext.obj"
+".\Debug\Fl.obj"
+".\Debug\Fl_abort.obj"
+".\Debug\Fl_add_idle.obj"
+".\Debug\Fl_Adjuster.obj"
+".\Debug\fl_arc.obj"
+".\Debug\fl_arci.obj"
+".\Debug\Fl_arg.obj"
+".\Debug\fl_ask.obj"
+".\Debug\Fl_Bitmap.obj"
+".\Debug\Fl_Box.obj"
+".\Debug\fl_boxtype.obj"
+".\Debug\Fl_Browser.obj"
+".\Debug\Fl_Browser_.obj"
+".\Debug\Fl_Browser_load.obj"
+".\Debug\Fl_Button.obj"
+".\Debug\fl_call_main.obj"
+".\Debug\Fl_Chart.obj"
+".\Debug\Fl_Check_Button.obj"
+".\Debug\Fl_Choice.obj"
+".\Debug\Fl_Clock.obj"
+".\Debug\fl_color.obj"
+".\Debug\Fl_Color_Chooser.obj"
+".\Debug\Fl_compose.obj"
+".\Debug\Fl_Counter.obj"
+".\Debug\fl_cursor.obj"
+".\Debug\fl_curve.obj"
+".\Debug\Fl_cutpaste.obj"
+".\Debug\Fl_Dial.obj"
+".\Debug\fl_diamond_box.obj"
+".\Debug\Fl_display.obj"
+".\Debug\Fl_Double_Window.obj"
+".\Debug\fl_draw.obj"
+".\Debug\fl_draw_image.obj"
+".\Debug\fl_draw_pixmap.obj"
+".\Debug\fl_engraved_label.obj"
+".\Debug\fl_file_chooser.obj"
+".\Debug\fl_font.obj"
+".\Debug\Fl_get_key.obj"
+".\Debug\Fl_get_system_colors.obj"
+".\Debug\Fl_Gl_Choice.obj"
+".\Debug\Fl_Gl_Overlay.obj"
+".\Debug\Fl_Gl_Window.obj"
+".\Debug\Fl_grab.obj"
+".\Debug\Fl_Group.obj"
+".\Debug\Fl_Image.obj"
+".\Debug\Fl_Input.obj"
+".\Debug\Fl_Input_.obj"
+".\Debug\fl_labeltype.obj"
+".\Debug\Fl_Light_Button.obj"
+".\Debug\fl_line_style.obj"
+".\Debug\Fl_Menu.obj"
+".\Debug\Fl_Menu_.obj"
+".\Debug\Fl_Menu_add.obj"
+".\Debug\Fl_Menu_Bar.obj"
+".\Debug\Fl_Menu_Button.obj"
+".\Debug\Fl_Menu_global.obj"
+".\Debug\Fl_Menu_Window.obj"
+".\Debug\Fl_Multi_Label.obj"
+".\Debug\Fl_Output.obj"
+".\Debug\fl_oval_box.obj"
+".\Debug\fl_overlay.obj"
+".\Debug\fl_overlay_visual.obj"
+".\Debug\Fl_Overlay_Window.obj"
+".\Debug\Fl_own_colormap.obj"
+".\Debug\Fl_Pack.obj"
+".\Debug\Fl_Pixmap.obj"
+".\Debug\Fl_Positioner.obj"
+".\Debug\fl_rect.obj"
+".\Debug\Fl_Repeat_Button.obj"
+".\Debug\Fl_Return_Button.obj"
+".\Debug\Fl_Roller.obj"
+".\Debug\fl_round_box.obj"
+".\Debug\Fl_Round_Button.obj"
+".\Debug\fl_rounded_box.obj"
+".\Debug\Fl_Scroll.obj"
+".\Debug\fl_scroll_area.obj"
+".\Debug\Fl_Scrollbar.obj"
+".\Debug\fl_set_font.obj"
+".\Debug\fl_set_fonts.obj"
+".\Debug\fl_shadow_box.obj"
+".\Debug\fl_shortcut.obj"
+".\Debug\fl_show_colormap.obj"
+".\Debug\Fl_Single_Window.obj"
+".\Debug\Fl_Slider.obj"
+".\Debug\fl_symbols.obj"
+".\Debug\Fl_Tabs.obj"
+".\Debug\Fl_Tile.obj"
+".\Debug\Fl_Valuator.obj"
+".\Debug\Fl_Value_Input.obj"
+".\Debug\Fl_Value_Output.obj"
+".\Debug\Fl_Value_Slider.obj"
+".\Debug\fl_vertex.obj"
+".\Debug\Fl_visual.obj"
+".\Debug\Fl_Widget.obj"
+".\Debug\Fl_Window.obj"
+".\Debug\Fl_Window_fullscreen.obj"
+".\Debug\Fl_Window_hotspot.obj"
+".\Debug\Fl_Window_iconize.obj"
+".\Debug\Fl_x.obj"
+".\Debug\forms_bitmap.obj"
+".\Debug\forms_compatability.obj"
+".\Debug\forms_free.obj"
+".\Debug\forms_fselect.obj"
+".\Debug\forms_pixmap.obj"
+".\Debug\forms_timer.obj"
+".\Debug\gl_draw.obj"
+".\Debug\gl_start.obj"
+".\Debug\glut_compatability.obj"
+".\Debug\glut_font.obj"
+".\Debug\numericsort.obj"
+".\Debug\scandir.obj"
+".\Debug\vsnprintf.obj"
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP32.tmp"
+<h3>Output Window</h3>
+Compiling...
+filename_absolute.cxx
+filename_expand.cxx
+filename_ext.cxx
+filename_isdir.cxx
+filename_list.cxx
+filename_match.cxx
+filename_setext.cxx
+Fl.cxx
+Fl_abort.cxx
+Fl_add_idle.cxx
+Fl_Adjuster.cxx
+fl_arc.cxx
+fl_arci.cxx
+Fl_arg.cxx
+fl_ask.cxx
+Fl_Bitmap.cxx
+Fl_Box.cxx
+fl_boxtype.cxx
+Fl_Browser.cxx
+Fl_Browser_.cxx
+Fl_Browser_load.cxx
+Fl_Button.cxx
+fl_call_main.c
+Fl_Chart.cxx
+Fl_Check_Button.cxx
+Fl_Choice.cxx
+Fl_Clock.cxx
+fl_color.cxx
+Fl_Color_Chooser.cxx
+Fl_compose.cxx
+Fl_Counter.cxx
+fl_cursor.cxx
+fl_curve.cxx
+Fl_cutpaste.cxx
+Fl_Dial.cxx
+fl_diamond_box.cxx
+Fl_display.cxx
+Fl_Double_Window.cxx
+fl_draw.cxx
+fl_draw_image.cxx
+fl_draw_pixmap.cxx
+fl_engraved_label.cxx
+fl_file_chooser.cxx
+fl_font.cxx
+Fl_get_key.cxx
+Fl_get_system_colors.cxx
+Fl_Gl_Choice.cxx
+Fl_Gl_Overlay.cxx
+Fl_Gl_Window.cxx
+Fl_grab.cxx
+Fl_Group.cxx
+Fl_Image.cxx
+Fl_Input.cxx
+Fl_Input_.cxx
+fl_labeltype.cxx
+Fl_Light_Button.cxx
+fl_line_style.cxx
+Fl_Menu.cxx
+Fl_Menu_.cxx
+Fl_Menu_add.cxx
+Fl_Menu_Bar.cxx
+Fl_Menu_Button.cxx
+Fl_Menu_global.cxx
+Fl_Menu_Window.cxx
+Fl_Multi_Label.cxx
+Fl_Output.cxx
+fl_oval_box.cxx
+fl_overlay.cxx
+fl_overlay_visual.cxx
+Fl_Overlay_Window.cxx
+Fl_own_colormap.cxx
+Fl_Pack.cxx
+Fl_Pixmap.cxx
+Fl_Positioner.cxx
+fl_rect.cxx
+Fl_Repeat_Button.cxx
+Fl_Return_Button.cxx
+Fl_Roller.cxx
+fl_round_box.cxx
+Fl_Round_Button.cxx
+fl_rounded_box.cxx
+Fl_Scroll.cxx
+fl_scroll_area.cxx
+Fl_Scrollbar.cxx
+fl_set_font.cxx
+fl_set_fonts.cxx
+fl_shadow_box.cxx
+fl_shortcut.cxx
+fl_show_colormap.cxx
+Fl_Single_Window.cxx
+Fl_Slider.cxx
+fl_symbols.cxx
+Fl_Tabs.cxx
+Fl_Tile.cxx
+Fl_Valuator.cxx
+Fl_Value_Input.cxx
+Fl_Value_Output.cxx
+Fl_Value_Slider.cxx
+fl_vertex.cxx
+Fl_visual.cxx
+Fl_Widget.cxx
+Fl_Window.cxx
+Fl_Window_fullscreen.cxx
+Fl_Window_hotspot.cxx
+Fl_Window_iconize.cxx
+Fl_x.cxx
+forms_bitmap.cxx
+forms_compatability.cxx
+forms_free.cxx
+forms_fselect.cxx
+forms_pixmap.cxx
+forms_timer.cxx
+gl_draw.cxx
+gl_start.cxx
+glut_compatability.cxx
+glut_font.cxx
+numericsort.c
+scandir.c
+vsnprintf.c
+Creating library...
+<h3>
+--------------------Configuration: key_frame1 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP33.tmp" with contents
+[
+/nologo /MDd /Gm /GX /ZI /Od /I "..\fltk-1.0.11" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fp"Debug/key_frame1.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\display.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\interface.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\interpolator.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\motion.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\player.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\posture.cpp"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\skeleton.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\transform.cxx"
+"G:\mstevens\asf_amc_viewer 1-11-2005\viewer\vector.cxx"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP33.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP34.tmp" with contents
+[
+glu32.lib opengl32.lib comctl32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib libjpeg.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/key_frame1.pdb" /debug /machine:I386 /nodefaultlib:"libcd" /out:"Debug/key_frame1.exe" /pdbtype:sept /libpath:"../lib" 
+".\Debug\display.obj"
+".\Debug\interface.obj"
+".\Debug\interpolator.obj"
+".\Debug\motion.obj"
+".\Debug\player.obj"
+".\Debug\posture.obj"
+".\Debug\skeleton.obj"
+".\Debug\transform.obj"
+".\Debug\vector.obj"
+"\mstevens\asf_amc_viewer 1-11-2005\fltk-1.0.11\lib\fltkd.lib"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP34.tmp"
+<h3>Output Window</h3>
+Compiling...
+display.cxx
+interface.cxx
+interpolator.cxx
+motion.cxx
+player.cxx
+posture.cpp
+skeleton.cxx
+transform.cxx
+vector.cxx
+Linking...
+LINK : warning LNK4098: defaultlib "LIBC" conflicts with use of other libs; use /NODEFAULTLIB:library
+
+
+
+<h3>Results</h3>
+key_frame1.exe - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

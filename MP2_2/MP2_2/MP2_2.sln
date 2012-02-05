@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MP2_2", "MP2_2\MP2_2.vcproj", "{DAE54A0A-7705-4DB5-821E-71DAFAA7FF3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAE54A0A-7705-4DB5-821E-71DAFAA7FF3F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DAE54A0A-7705-4DB5-821E-71DAFAA7FF3F}.Debug|Win32.Build.0 = Debug|Win32
+		{DAE54A0A-7705-4DB5-821E-71DAFAA7FF3F}.Release|Win32.ActiveCfg = Release|Win32
+		{DAE54A0A-7705-4DB5-821E-71DAFAA7FF3F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

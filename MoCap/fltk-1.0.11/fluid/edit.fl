@@ -1,0 +1,48 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0011 
+header_name {.h} 
+code_name {.cxx} 
+gridx 5 
+gridy 5 
+snap 3
+Function {make_edit_window()} {open private C
+} {
+  Fl_Window {} {open
+    xywh {632 161 471 283} visible
+  } {
+    Fl_Tile {} {open
+      xywh {60 25 395 235}
+    } {
+      Fl_Input dt_button {
+        label dt
+        callback dt_callback
+        xywh {65 50 80 25}
+      }
+      Fl_Input tx_button {
+        label tx
+        callback tx_callback selected
+        xywh {65 80 80 25}
+      }
+      Fl_Input ty {
+        label ty
+        xywh {65 110 80 25}
+      }
+      Fl_Input tz {
+        label tz
+        xywh {65 140 80 25}
+      }
+      Fl_Input rx {
+        label rx
+        xywh {195 80 80 25}
+      }
+      Fl_Input ry {
+        label ry
+        xywh {195 110 80 25}
+      }
+      Fl_Input rz {
+        label rz
+        xywh {195 140 80 25}
+      }
+    }
+  }
+} 

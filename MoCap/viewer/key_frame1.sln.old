@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fltk", "..\fltk-1.0.11\visualc\fltk.lib.vcproj", "{8520B211-1136-4DFE-87EF-911CE283F61B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "key_frame1", "key_frame1.vcproj", "{C0ABE9ED-9126-4A1D-9CFA-F0E62E25DD60}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8520B211-1136-4DFE-87EF-911CE283F61B} = {8520B211-1136-4DFE-87EF-911CE283F61B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8520B211-1136-4DFE-87EF-911CE283F61B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8520B211-1136-4DFE-87EF-911CE283F61B}.Debug|Win32.Build.0 = Debug|Win32
+		{8520B211-1136-4DFE-87EF-911CE283F61B}.Release|Win32.ActiveCfg = Release|Win32
+		{8520B211-1136-4DFE-87EF-911CE283F61B}.Release|Win32.Build.0 = Release|Win32
+		{C0ABE9ED-9126-4A1D-9CFA-F0E62E25DD60}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0ABE9ED-9126-4A1D-9CFA-F0E62E25DD60}.Debug|Win32.Build.0 = Debug|Win32
+		{C0ABE9ED-9126-4A1D-9CFA-F0E62E25DD60}.Release|Win32.ActiveCfg = Release|Win32
+		{C0ABE9ED-9126-4A1D-9CFA-F0E62E25DD60}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

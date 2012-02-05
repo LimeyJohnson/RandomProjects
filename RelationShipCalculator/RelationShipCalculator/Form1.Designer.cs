@@ -68,6 +68,7 @@
             this.txt_secondName.Name = "txt_secondName";
             this.txt_secondName.Size = new System.Drawing.Size(282, 20);
             this.txt_secondName.TabIndex = 2;
+            this.txt_secondName.TextChanged += new System.EventHandler(this.txt_secondName_TextChanged);
             // 
             // label2
             // 

@@ -1,0 +1,78 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: fluid - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA87.tmp" with contents
+[
+/nologo /MDd /Gm /GX /ZI /Od /I "." /I ".." /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /Fp"fluid__0/fluid.pch" /YX /Fo"fluid__0/" /Fd"fluid__0/" /FD /c 
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\about_panel.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\alignment_panel.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\code.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\factory.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\file.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Function_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Group_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Menu_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Widget_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fl_Window_Type.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\fluid.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\Fluid_Image.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\function_panel.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\gif.cxx"
+"C:\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\fluid\widget_panel.cxx"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA87.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA88.tmp" with contents
+[
+fltkd.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /incremental:yes /pdb:"fluid__0/fluidd.pdb" /debug /machine:I386 /nodefaultlib:"libcd" /out:"../fluid/fluidd.exe" /pdbtype:sept /libpath:"..\lib" 
+".\fluid__0\about_panel.obj"
+".\fluid__0\alignment_panel.obj"
+".\fluid__0\code.obj"
+".\fluid__0\factory.obj"
+".\fluid__0\file.obj"
+".\fluid__0\Fl_Function_Type.obj"
+".\fluid__0\Fl_Group_Type.obj"
+".\fluid__0\Fl_Menu_Type.obj"
+".\fluid__0\Fl_Type.obj"
+".\fluid__0\Fl_Widget_Type.obj"
+".\fluid__0\Fl_Window_Type.obj"
+".\fluid__0\fluid.obj"
+".\fluid__0\Fluid_Image.obj"
+".\fluid__0\function_panel.obj"
+".\fluid__0\gif.obj"
+".\fluid__0\widget_panel.obj"
+"\Documents and Settings\Administrator\Desktop\asf_amc_viewer\fltk-1.0.11\lib\fltkd.lib"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA88.tmp"
+<h3>Output Window</h3>
+Compiling...
+about_panel.cxx
+alignment_panel.cxx
+code.cxx
+factory.cxx
+file.cxx
+Fl_Function_Type.cxx
+Fl_Group_Type.cxx
+Fl_Menu_Type.cxx
+Fl_Type.cxx
+Fl_Widget_Type.cxx
+Fl_Window_Type.cxx
+fluid.cxx
+Fluid_Image.cxx
+function_panel.cxx
+gif.cxx
+widget_panel.cxx
+Linking...
+
+
+
+<h3>Results</h3>
+fluidd.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

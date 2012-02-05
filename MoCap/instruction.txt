@@ -1,0 +1,6 @@
+
+1. Double click keyframe1.sln to open the projects in VS2005
+2. In the solution explorer, you can see two projects:fltk and keyframe1.  
+   Right click on the project "keyframe1" and "Set as Startup Project"
+3. Set the include path to fltk correctly:
+   Select key_frame1, then Project -> Properties -> Configuration Properties -> C/C++ -> General -> Additional Include Directories -> navigate to the fltk project.

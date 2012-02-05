@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="key_frame1">
+</Property><Property Name="Solution File" Value="H:\VisualStudioWorkspace\MoCap\viewer\key_frame1.sln">
+</Property><Property Name="User Options File" Value="H:\VisualStudioWorkspace\MoCap\viewer\key_frame1.suo">
+</Property><Property Name="Date" Value="Wednesday, May 06, 2009">
+</Property><Property Name="Time" Value="18:44 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="key_frame1.sln" Description="File successfully backed up as H:\VisualStudioWorkspace\MoCap\viewer\key_frame1.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="key_frame1.suo" Description="File successfully backed up as H:\VisualStudioWorkspace\MoCap\viewer\key_frame1.suo.old">
+</Event><Event ErrorLevel="1" Project="fltk.lib" Source="..\fltk-1.0.11\visualc\fltk.lib.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="fltk.lib" Source="..\fltk-1.0.11\visualc\fltk.lib.vcproj" Description="Project file successfully backed up as 'H:\VisualStudioWorkspace\MoCap\fltk-1.0.11\visualc\fltk.lib.vcproj.8.00.old'.">
+</Event><Event ErrorLevel="0" Project="fltk.lib" Source="..\fltk-1.0.11\visualc\fltk.lib.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="fltk.lib" Source="..\fltk-1.0.11\visualc\fltk.lib.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="key_frame1" Source="key_frame1.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="key_frame1" Source="key_frame1.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="key_frame1" Source="key_frame1.vcproj" Description="Project file successfully backed up as 'H:\VisualStudioWorkspace\MoCap\viewer\key_frame1.vcproj.8.00.old'.">
+</Event><Event ErrorLevel="0" Project="key_frame1" Source="key_frame1.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="key_frame1" Source="key_frame1.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="key_frame1.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="key_frame1.sln" Description="Converted">
+</Event></UpgradeLog>
