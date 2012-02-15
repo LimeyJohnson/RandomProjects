@@ -2,6 +2,7 @@ bin/
 obj/
 Release/
 Debug/
+ipch/
 
 *.opensdf
 *.sdf

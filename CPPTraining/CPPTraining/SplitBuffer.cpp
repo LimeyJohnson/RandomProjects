@@ -1,7 +1,6 @@
 #include <string.h>
 #include <iostream>
 #include "SplitBuffer.h"
-#define BUFFERSIZE = 20
 
 using namespace std;
 
@@ -24,6 +23,8 @@ SplitBuffer::SplitBuffer(int x)
 {
 	firstPoint = entryPoint = 0;
 	endPoint = 20;
+	size=x;
+	buffer = new char[x];
 	for(int x = 0; x < 20; x++)
 	{
 		buffer[x] = '0';
@@ -31,7 +32,7 @@ SplitBuffer::SplitBuffer(int x)
 }
 void SplitBuffer::AddChar(char c)
 {
-	if(entryPoint < 20)
+	if(entryPoint < endPoint)
 	{
 		buffer[entryPoint++] = c;
 	}
@@ -40,8 +41,22 @@ void SplitBuffer::AddChar(char c)
 		cerr<<"Buffer is overrun"<<endl;
 	}
 }
-string SplitBuffer::toString()
+char* SplitBuffer::toString()
 {
-	string str = buffer;
-	return str;
+	char * newBuffer;
+	newBuffer = new char[size];
+	int y =0;
+	for(int x = 0; x< size; x++)
+	{
+		if(buffer[x] !='0')
+		{
+			newBuffer[y++] = buffer[x];
+		}
+	}
+	newBuffer[y] = '\0';
+	return newBuffer;
+}
+SplitBuffer::~SplitBuffer()
+{
+	delete [] buffer;
 }

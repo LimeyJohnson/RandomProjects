@@ -3,12 +3,13 @@
 using namespace std;
 class SplitBuffer
 {
-	char buffer[20];
-	int firstPoint, entryPoint, endPoint;
+	char * buffer;
+	int firstPoint, entryPoint, endPoint, size;
 
 public:
 	SplitBuffer(int x);
 	void SetPoint(int setPoint);
 	void AddChar(char charIN);
-	string toString();
+	char* toString();
+	~SplitBuffer();
 };

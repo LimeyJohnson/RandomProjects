@@ -29,7 +29,7 @@ int main(){
 	sb->AddChar('i');
 	string str = sb->toString();
 	cout << str <<endl;
-	
+	delete sb;
 	return 1;
 
 }
