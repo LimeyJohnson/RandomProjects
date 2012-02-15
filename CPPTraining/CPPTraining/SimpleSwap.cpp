@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include "SplitBuffer.h"
 using namespace std;
 
 
@@ -12,6 +14,22 @@ int find(int x){
 
 }
 int main(){
-    cout<<find(13)<<endl;
-    return 1;
+    //cout<<find(13)<<endl;
+    
+	SplitBuffer* sb = new SplitBuffer(20);
+	sb->AddChar('a');
+	sb->AddChar('b');
+	sb->AddChar('c');
+	sb->AddChar('d');
+	sb->AddChar('e');
+	sb->AddChar('f');
+	sb->SetPoint(2);
+	sb->AddChar('g');
+	sb->AddChar('h');
+	sb->AddChar('i');
+	string str = sb->toString();
+	cout << str <<endl;
+	
+	return 1;
+
 }

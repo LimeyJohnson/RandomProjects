@@ -1,0 +1,15 @@
+bin/
+obj/
+Release/
+Debug/
+
+*.opensdf
+*.sdf
+*.tlog
+*.user
+*.suo
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.manifest

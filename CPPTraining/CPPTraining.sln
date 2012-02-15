@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPPTraining", "CPPTraining\CPPTraining.vcproj", "{27E753EF-9811-4F28-9A5B-32C0CDEC0956}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPPTraining", "CPPTraining\CPPTraining.vcxproj", "{27E753EF-9811-4F28-9A5B-32C0CDEC0956}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
