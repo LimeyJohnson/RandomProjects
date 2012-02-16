@@ -21,16 +21,16 @@ void SplitBuffer::SetPoint(int setPoint)
 		endPoint = endPoint - diff;
 		entryPoint = setPoint;
 		memcpy(&buffer[endPoint],&buffer[setPoint],sizeof(char) * diff);	
-		memset(&buffer[setPoint], (int)'0', sizeof(char) * diff);
+		memset(&buffer[setPoint], (int)'0', sizeof(char) * (endPoint - entryPoint));
 	}
 	
 }
 SplitBuffer::SplitBuffer(int x)
 {
 	entryPoint = 0;
-	endPoint = 20;
-	size=x;
+	endPoint = size = x;
 	buffer = new char[x+1];
+	newBuffer = NULL;
 	memset(&buffer[0],(int) '0', sizeof(char) * size);
 	buffer[x] = '\0';
 }
@@ -42,7 +42,8 @@ void SplitBuffer::Add(char c)
 	}
 	else
 	{
-		cerr<<"Buffer is overrun"<<endl;
+		doubleSize();
+		Add(c);
 	}
 }
 void SplitBuffer::Add(string s)
@@ -54,20 +55,30 @@ void SplitBuffer::Add(string s)
 }
 char* SplitBuffer::toString()
 {
+	if(newBuffer != NULL) delete [] newBuffer;
 	newBuffer = new char[size];
 	int y =0;
-	for(int x = 0; x< size; x++)
-	{
-		if(buffer[x] !='0')
-		{
-			newBuffer[y++] = buffer[x];
-		}
-	}
-	newBuffer[y] = '\0';
+	memcpy(newBuffer, buffer, sizeof(char) * entryPoint);
+	memcpy(&newBuffer[entryPoint], &buffer[endPoint], sizeof(char) * (size-endPoint));
+	newBuffer[entryPoint + (size - endPoint)] = '\0';
 	return newBuffer;
 }
 SplitBuffer::~SplitBuffer()
 {
 	delete [] buffer;
 	delete [] newBuffer;
+}
+void SplitBuffer::doubleSize()
+{
+	int newSize = size*2;
+	char * newBuffer = new char[newSize+1];
+	newBuffer[newSize] = '\0';
+	memset(newBuffer,'0',sizeof(char) * newSize);
+	int newOffSet = newSize - (size - endPoint);
+	memcpy(newBuffer, buffer, sizeof(char) * entryPoint);
+	memcpy(&newBuffer[newOffSet],&buffer[endPoint],sizeof(char) * (size-endPoint));
+	delete [] buffer;
+	buffer = newBuffer;
+	endPoint = newOffSet;
+	size=newSize;
 }

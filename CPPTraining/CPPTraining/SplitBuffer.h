@@ -14,4 +14,7 @@ public:
 	void Add(string stringIN);
 	char* toString();
 	~SplitBuffer();
+private:
+	void doubleSize();
+	
 };
