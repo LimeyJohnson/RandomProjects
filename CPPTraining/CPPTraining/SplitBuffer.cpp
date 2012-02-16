@@ -10,7 +10,7 @@ void SplitBuffer::SetPoint(int setPoint)
 	{
 		int diff = setPoint - entryPoint;
 		memcpy(&buffer[entryPoint], &buffer[endPoint], sizeof(char) * diff);
-		memset(&buffer[endPoint], (int) '0',sizeof(char) * diff);
+		//memset(&buffer[endPoint], (int) '0',sizeof(char) * diff);
 		entryPoint = setPoint;
 		endPoint = endPoint + diff;
 	}
@@ -21,7 +21,7 @@ void SplitBuffer::SetPoint(int setPoint)
 		endPoint = endPoint - diff;
 		entryPoint = setPoint;
 		memcpy(&buffer[endPoint],&buffer[setPoint],sizeof(char) * diff);	
-		memset(&buffer[setPoint], (int)'0', sizeof(char) * (endPoint - entryPoint));
+		//memset(&buffer[setPoint], (int)'0', sizeof(char) * (endPoint - entryPoint));
 	}
 	
 }
@@ -73,7 +73,7 @@ void SplitBuffer::doubleSize()
 	int newSize = size*2;
 	char * newBuffer = new char[newSize+1];
 	newBuffer[newSize] = '\0';
-	memset(newBuffer,'0',sizeof(char) * newSize);
+	//memset(newBuffer,'0',sizeof(char) * newSize);
 	int newOffSet = newSize - (size - endPoint);
 	memcpy(newBuffer, buffer, sizeof(char) * entryPoint);
 	memcpy(&newBuffer[newOffSet],&buffer[endPoint],sizeof(char) * (size-endPoint));
