@@ -8,29 +8,32 @@ void SplitBuffer::SetPoint(int setPoint)
 {
 	if(setPoint > entryPoint)
 	{
-
+		int diff = setPoint - entryPoint;
+		memcpy(&buffer[entryPoint], &buffer[endPoint], sizeof(char) * diff);
+		memset(&buffer[endPoint], (int) '0',sizeof(char) * diff);
+		entryPoint = setPoint;
+		endPoint = endPoint + diff;
 	}
 	if(setPoint < entryPoint)
 	{
 		int diff = entryPoint - setPoint;
+		spotAtEndPoint = setPoint;
 		endPoint = endPoint - diff;
+		entryPoint = setPoint;
 		memcpy(&buffer[endPoint],&buffer[setPoint],sizeof(char) * diff);	
-
+		memset(&buffer[setPoint], (int)'0', sizeof(char) * diff);
 	}
-	entryPoint = setPoint;
+	
 }
 SplitBuffer::SplitBuffer(int x)
 {
-	firstPoint = entryPoint = 0;
+	entryPoint = 0;
 	endPoint = 20;
 	size=x;
 	buffer = new char[x];
-	for(int x = 0; x < 20; x++)
-	{
-		buffer[x] = '0';
-	}
+	memset(&buffer[0],(int) '0', sizeof(char) * size);
 }
-void SplitBuffer::AddChar(char c)
+void SplitBuffer::Add(char c)
 {
 	if(entryPoint < endPoint)
 	{
@@ -41,9 +44,15 @@ void SplitBuffer::AddChar(char c)
 		cerr<<"Buffer is overrun"<<endl;
 	}
 }
+void SplitBuffer::Add(string s)
+{
+	for(int x = 0; x< s.size(); x++)
+	{
+		Add(s.at(x));
+	}
+}
 char* SplitBuffer::toString()
 {
-	char * newBuffer;
 	newBuffer = new char[size];
 	int y =0;
 	for(int x = 0; x< size; x++)
@@ -59,4 +68,5 @@ char* SplitBuffer::toString()
 SplitBuffer::~SplitBuffer()
 {
 	delete [] buffer;
+	delete [] newBuffer;
 }

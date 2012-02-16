@@ -4,12 +4,14 @@ using namespace std;
 class SplitBuffer
 {
 	char * buffer;
-	int firstPoint, entryPoint, endPoint, size;
+	char * newBuffer;
+	int entryPoint, endPoint, spotAtEndPoint, size;
 
 public:
 	SplitBuffer(int x);
 	void SetPoint(int setPoint);
-	void AddChar(char charIN);
+	void Add(char charIN);
+	void Add(string stringIN);
 	char* toString();
 	~SplitBuffer();
 };

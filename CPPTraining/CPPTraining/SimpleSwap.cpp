@@ -17,18 +17,19 @@ int main(){
     //cout<<find(13)<<endl;
     
 	SplitBuffer* sb = new SplitBuffer(20);
-	sb->AddChar('a');
-	sb->AddChar('b');
-	sb->AddChar('c');
-	sb->AddChar('d');
-	sb->AddChar('e');
-	sb->AddChar('f');
-	sb->SetPoint(2);
-	sb->AddChar('g');
-	sb->AddChar('h');
-	sb->AddChar('i');
-	string str = sb->toString();
-	cout << str <<endl;
+	sb->Add("abc");
+	puts(sb->toString());
+	sb->SetPoint(0);
+	sb->Add("xyz");
+	puts(sb->toString());
+	sb->SetPoint(5);
+	sb->Add("mmm");
+	puts(sb->toString());
+	/*sb->Add('y');
+	
+	sb->SetPoint(4);
+	sb->Add('X');
+	puts(sb->toString());*/
 	delete sb;
 	return 1;
 
