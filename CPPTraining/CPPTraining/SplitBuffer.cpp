@@ -30,8 +30,9 @@ SplitBuffer::SplitBuffer(int x)
 	entryPoint = 0;
 	endPoint = 20;
 	size=x;
-	buffer = new char[x];
+	buffer = new char[x+1];
 	memset(&buffer[0],(int) '0', sizeof(char) * size);
+	buffer[x] = '\0';
 }
 void SplitBuffer::Add(char c)
 {
