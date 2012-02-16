@@ -47,7 +47,7 @@ void SplitBuffer::Add(char c)
 }
 void SplitBuffer::Add(string s)
 {
-	for(int x = 0; x< s.size(); x++)
+	for(unsigned int x = 0; x< s.size(); x++)
 	{
 		Add(s.at(x));
 	}
