@@ -40,7 +40,7 @@ void testLinkedList()
 	ll.remove(3);
 	cout<<ll.size()<<endl;
 	cout<<ll.at(3)<<endl;
-	puts(ll.toString());
+	cout<<ll.toString()<<endl;
 }
 int main(){
     testLinkedList();

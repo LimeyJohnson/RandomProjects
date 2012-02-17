@@ -36,7 +36,7 @@ void LinkedList::remove(int x)
 	}
 	node * toDelete = n->next;
 	n->next = n->next->next;
-	free(toDelete);
+	delete toDelete;
 	 
 }
 int LinkedList::size()
@@ -69,8 +69,8 @@ LinkedList::~LinkedList()
 	{
 		node * toDelete = head;
 		head = head->next;
-		free(toDelete);
+		delete toDelete;
 
 	}
-	free(head);
+	delete head;
 }
