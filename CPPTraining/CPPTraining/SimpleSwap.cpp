@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "SplitBuffer.h"
+#include "LinkedList.h"
 using namespace std;
 
 
@@ -13,18 +14,9 @@ int find(int x){
     return count;
 
 }
-int main(){
-    //cout<<find(13)<<endl;
-    
+void testSplitBuffer()
+{
 	SplitBuffer* sb = new SplitBuffer(20);
-	/*sb->Add("abc");
-	puts(sb->toString());
-	sb->SetPoint(0);
-	sb->Add("xyz");
-	puts(sb->toString());
-	sb->SetPoint(5);
-	sb->Add("mmm");
-	puts(sb->toString());*/
 	sb->Add("I want to add a lot of text here to show that even the new buffer should be overrun creating the need to double the buffer more than once. ");
 	sb->SetPoint(0);
 	cout<< sb->toString()<<endl ;
@@ -34,12 +26,26 @@ int main(){
 	sb->SetPoint(41);
 	sb->Add("This setence needs to come right after to be or not to be sentence. ");
 	cout<< sb->toString()<<endl ;
-	/*sb->Add('y');
-	
-	sb->SetPoint(4);
-	sb->Add('X');
-	puts(sb->toString());*/
 	delete sb;
+}
+void testLinkedList()
+{
+	LinkedList ll('A');
+	ll.add('n');
+	ll.add('d');
+	ll.add('z');
+	ll.add('r');
+	ll.add('e');
+	ll.add('w');
+	ll.remove(3);
+	cout<<ll.size()<<endl;
+	cout<<ll.at(3)<<endl;
+	puts(ll.toString());
+}
+int main(){
+    testLinkedList();
+    
+	
 	return 1;
 
 }

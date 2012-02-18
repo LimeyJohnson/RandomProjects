@@ -23,7 +23,6 @@ void SplitBuffer::SetPoint(int setPoint)
 		memcpy(&buffer[endPoint],&buffer[setPoint],sizeof(char) * diff);	
 		//memset(&buffer[setPoint], (int)'0', sizeof(char) * (endPoint - entryPoint));
 	}
-	
 }
 SplitBuffer::SplitBuffer(int x)
 {
