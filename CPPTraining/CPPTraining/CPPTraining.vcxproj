@@ -89,7 +89,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="SimpleSwap.cpp" />
     <ClCompile Include="SplitBuffer.cpp" />
   </ItemGroup>
