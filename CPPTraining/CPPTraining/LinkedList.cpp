@@ -2,23 +2,26 @@
 #include "LinkedList.h"
 using namespace std;
 
-LinkedList::LinkedList(char firstChar)
+template <class T>
+LinkedList<T>::LinkedList(T dataIN)
 {
 	node * firstNode = new node;
-	firstNode->data = firstChar;
+	firstNode->data = dataIN;
 	firstNode->next = NULL;
 	head = firstNode;
 	tail = firstNode;
 }
-void LinkedList::add(char charIN)
+template <class T>
+void LinkedList<T>::add(T dataIN)
 {
 	node* newNode = new node;
-	newNode->data = charIN;
+	newNode->data = dataIN;
 	newNode->next = NULL;
 	tail->next = newNode;
 	tail = newNode;
 }
-char LinkedList::at(int x)
+template <class T> 
+T LinkedList<T>::at(int x)
 {
 	node* n = head;
 	for(int i = 0; i< x && (n != tail); i++)
@@ -27,7 +30,8 @@ char LinkedList::at(int x)
 	}
 	return n->data;
 }
-void LinkedList::remove(int x)
+template <class T>
+void LinkedList<T>::remove(int x)
 {
 	node * n = head;
 	for(int i = 0; i < x-1; i++)
@@ -39,7 +43,8 @@ void LinkedList::remove(int x)
 	delete toDelete;
 	 
 }
-int LinkedList::size()
+template <class T>
+int LinkedList<T>::size()
 {
 	int i;
 	node* n = head;
@@ -49,10 +54,11 @@ int LinkedList::size()
 	}
 	return i;
 }
-char* LinkedList::toString()
+template <class T>
+T* LinkedList<T>::toString()
 {
 	int arraySize = size();
-	char * returnChar = new char[arraySize+1];
+	T * returnChar = new T[arraySize+1];
 	returnChar[arraySize] = '\0';
 	node * n = head;
 	int x = 0;
@@ -63,7 +69,8 @@ char* LinkedList::toString()
 	}
 	return returnChar;
 }
-LinkedList::~LinkedList()
+template <class T>
+LinkedList<T>::~LinkedList()
 {
 	while(head != tail)
 	{

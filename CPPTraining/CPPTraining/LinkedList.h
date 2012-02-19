@@ -1,23 +1,25 @@
 #include <iostream>
 #include <string>
 using namespace std;
-typedef struct node
-	{
-		char data;
-		node * next;
-	} node;
+
+template <class T>
 class LinkedList
 {
+	typedef struct node
+	{
+		T data;
+		node * next;
+	} node;
 	node * head;
 	node * tail;
 
 public:
-	LinkedList(char firstChar);
-	void add(char charIN);
-	char at(int x);
+	LinkedList(T data);
+	void add(T data);
+	T at(int x);
 	void remove(int x);
 	int size();
-	char* toString();
+	T* toString();
 	~LinkedList();
 
 	

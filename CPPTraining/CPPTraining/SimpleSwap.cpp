@@ -30,7 +30,7 @@ void testSplitBuffer()
 }
 void testLinkedList()
 {
-	LinkedList ll('A');
+	LinkedList<char> ll('A');
 	ll.add('n');
 	ll.add('d');
 	ll.add('z');
