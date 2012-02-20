@@ -2,6 +2,7 @@
 #include <string>
 #include "SplitBuffer.h"
 #include "LinkedList.h"
+#include "Lookup.h"
 using namespace std;
 
 
@@ -19,7 +20,7 @@ void testSplitBuffer()
 	SplitBuffer* sb = new SplitBuffer(20);
 	sb->Add("I want to add a lot of text here to show that even the new buffer should be overrun creating the need to double the buffer more than once. ");
 	sb->SetPoint(0);
-	cout<< sb->toString()<<endl ;
+	cout<< sb->toString()<<endl;
 	sb->Add("To test this part of the code I am going to add this sentence before the other sentence so that the buffer really has to work hard to figure out what is going on. ");
 	sb->SetPoint(0);
 	sb->Add("To be or not to be that is the question. I never understood why that was the question, it seemed a bit like a tautology to me. The thing we need to be sure of is that we still manage to overrun the buffer one more time, or this string trying to overrun the other string just isn't going to work.");
@@ -30,17 +31,21 @@ void testSplitBuffer()
 }
 void testLinkedList()
 {
-	LinkedList<char> ll('A');
-	ll.add('n');
-	ll.add('d');
-	ll.add('z');
-	ll.add('r');
-	ll.add('e');
-	ll.add('w');
-	ll.remove(3);
-	cout<<ll.size()<<endl;
-	cout<<ll.at(3)<<endl;
-	cout<<ll.toString()<<endl;
+//	LinkedList<char> ll('A');
+//	ll.add('n');
+//	ll.add('d');
+//	ll.add('z');
+//	ll.add('r');
+//	ll.add('e');
+//	ll.add('w');
+//	ll.remove(3);
+//	cout<<ll.size()<<endl;
+//	cout<<ll.at(3)<<endl;
+//	cout<<ll.toString()<<endl;
+Lookup LU;
+string address = "google.com";
+cout<<LU.printAddress(address)<< "is the address for " << address <<endl;
+
 }
 int main(){
     testLinkedList();
