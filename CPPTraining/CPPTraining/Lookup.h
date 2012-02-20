@@ -1,11 +1,8 @@
 #include <iostream>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <arpa/inet.h>
 #include <stdio.h>
-
+#include <WinSock2.h>
+#include <WS2tcpip.h>
 using namespace std;
 class Lookup
 {
@@ -13,9 +10,13 @@ public:
 	string printAddress(string address);
 };
 string Lookup::printAddress(string address) {
+	WSADATA wsaData;
 	struct addrinfo hints, *res, *p;
 	int status;
 	char ipstr[INET6_ADDRSTRLEN];
+	
+	WSAStartup(MAKEWORD(2,0), &wsaData);
+
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
@@ -32,6 +33,6 @@ string Lookup::printAddress(string address) {
 		inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
 		cout<<ipver<<ipstr<<endl;
 	}
-	freeaddrinfo(res);
+	WSACleanup();
 	return ipstr;
 }
