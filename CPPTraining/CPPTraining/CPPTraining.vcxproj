@@ -90,13 +90,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SimpleSwap.cpp" />
-    <ClCompile Include="SplitBuffer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="netmethods.cpp" />
+    <ClCompile Include="splitbuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="Lookup.h" />
-    <ClInclude Include="SplitBuffer.h" />
+    <ClInclude Include="linkedlist.h" />
+    <ClInclude Include="netmethod.h" />
+    <ClInclude Include="splitbuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

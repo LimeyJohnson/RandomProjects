@@ -15,21 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SimpleSwap.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SplitBuffer.cpp">
+    <ClCompile Include="splitbuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netmethods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SplitBuffer.h">
+    <ClInclude Include="splitbuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="linkedlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lookup.h">
+    <ClInclude Include="netmethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
