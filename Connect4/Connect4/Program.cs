@@ -9,43 +9,94 @@ namespace Connect4
 {
     class Program
     {
-        static int LENGTH = 7, HEIGHT = 6, CONNECTLEGTH = 4;
-        static int IterationCount = 0, SolutionCount = 0;
-     
-        static List<bool?[,]> Solutions = new List<bool?[,]>();
-        static void Main(string[] args)
+        /// <summary>
+        /// True when it breaks
+        /// </summary>
+        /// <param name="x">x co-ord</param>
+        /// <param name="y">y-co-ord</param>
+        /// <returns>if it should break</returns>
+        public delegate bool RunLoop(int x, int y);
+        public static void RunAll(RunLoop loop)
         {
-            bool?[,] board = new bool?[LENGTH, HEIGHT];
-            PlayRound(board, true);
-            Console.WriteLine("Solution Count = " + Solutions.Count);
-        }
-
-        static void PlayRound(bool?[,] board, bool turn,int deep = 0)
-        {
-            IterationCount++;
-            Console.WriteLine("Iteration: " + IterationCount + " Solutin Count: " + Solutions.Count+ " deep : "+deep);
             for (int x = 0; x < LENGTH; x++)
             {
+                for(int y = 0; y<HEIGHT; y++)
+                {
+                    if(loop(x,y)) return;
+                }
+            }
+        }
+
+        static int LENGTH = 7, HEIGHT = 6, CONNECTLENGTH = 4;
+        static int IterationCount = 0, SolutionCount = 0;
+        static GameBoardCollection Solutions, Visited;
+        static GameBoard Board;
+        static void Main(string[] args)
+        {
+            Board = GameBoard.InitialBoard (LENGTH, HEIGHT, CONNECTLENGTH);
+            Solutions = new GameBoardCollection();
+            Visited = new GameBoardCollection();
+           
+            Console.WriteLine("Solution Count = " + Solutions.Count);
+        }
+        //Set up Board, then move through locking down positions
+
+        static void PlayRound(bool turn, int deep = 0)
+        {
+            for (int curX = 0; curX < LENGTH; curX++)
+            {
+                for (int curY = 0; curY < HEIGHT; curY++)
+                {
+                    for(int x = curX; x < LENGTH; x++)
+                    {
+                        for(int y = curY; y< HEIGHT; y++)
+                        {
+                            Board[x,y] = !Board[x,y];
+                            if(!Board.HasWinner)
+                            {
+                                Board.WriteOutGame(Board.HashCode.ToString());
+                                Solutions.Add((GameBoard)Board.Clone());
+                                Console.WriteLine("Solution Found");
+                            }
+                        }
+                    }
+                    Console.WriteLine("Set new piece moving on");
+                    Board[curY,curX] = !Board[curY, curX];
+                }
+
+            }
+
+            IterationCount++;
+            Console.WriteLine("Iteration: " + IterationCount + " Solutin Count: " + Solutions.Count + " deep : " + deep);
                 if (board[x, HEIGHT - 1] == null)
                 {
                     // We can play this column
-                    int availiblerow = getNextAvailibleRow(board, x);
-                    board[x, availiblerow] = turn;
+                    int? availibleRow;
+                    if((availibleRow = board.getNextAvailibleRow(x)) == null) break;
+                    GameBoard playBoard = (GameBoard)board.Clone();
+                    playBoard[x, availibleRow.Value] = turn;
                     //run the next ones
-
-                    if (!HasWinner(board))
+                    if (Visited.MyContains(playBoard))
                     {
-                        if (!IsFull(board))
+                        return;
+                    }
+                    else
+                    {
+                        Visited.Add(playBoard);
+                       
+                    }
+                    if (!playBoard.HasWinner)
+                    {
+                        if (!playBoard.IsFull)
                         {//Board is not full go again
-                            PlayRound((bool?[,])board.Clone(), !turn, ++deep);
+                            PlayRound(playBoard, !turn, ++deep);
                         }
                         else
                         {// We have filled the board and have no winners
                             SolutionCount++;
-                            Solutions.Add(board);
-                          //  if (SolutionCount % 100 == 0) WriteOutGame(board);
-                            
-                            
+                            Solutions.Add(playBoard);
+                            //  if (SolutionCount % 100 == 0) WriteOutGame(board);
+
                         }
                     }
 
@@ -61,13 +112,13 @@ namespace Connect4
         {
             for (int x = 0; x < LENGTH; x++)
             {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                for (int y = 0; y <= (HEIGHT - CONNECTLENGTH); y++)
                 {
                     bool? matchType;
                     bool keepLooking = true;
                     if ((matchType = board[x, y]) != null)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        for (int i = 0; i < CONNECTLENGTH && keepLooking; i++)
                         {
                             if (board[x, y + i] != matchType) keepLooking = false;
                         }
@@ -81,13 +132,13 @@ namespace Connect4
         {
             for (int y = 0; y < HEIGHT; y++)
             {
-                for (int x = 0; x <= (LENGTH - CONNECTLEGTH); x++)
+                for (int x = 0; x <= (LENGTH - CONNECTLENGTH); x++)
                 {
                     bool? matchType;
                     bool keepLooking = true;
                     if ((matchType = board[x, y]) != null)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        for (int i = 0; i < CONNECTLENGTH && keepLooking; i++)
                         {
                             if (board[x + i, y] != matchType) keepLooking = false;
                         }
@@ -104,15 +155,15 @@ namespace Connect4
                 IterationCount = IterationCount + 1;
             }
             //Starting Lower left Winner
-            for (int x = 0; x <= (LENGTH - CONNECTLEGTH); x++)
+            for (int x = 0; x <= (LENGTH - CONNECTLENGTH); x++)
             {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                for (int y = 0; y <= (HEIGHT - CONNECTLENGTH); y++)
                 {
                     bool? matchType;
                     bool keepLooking = true;
                     if ((matchType = board[x, y]) != null)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        for (int i = 0; i < CONNECTLENGTH && keepLooking; i++)
                         {
                             if (board[x + i, y + i] != matchType) keepLooking = false;
                         }
@@ -121,15 +172,15 @@ namespace Connect4
                 }
             }
             //Starting Lower Right Winner
-            for (int x = LENGTH - 1; x >= (CONNECTLEGTH - 1); x--)
+            for (int x = LENGTH - 1; x >= (CONNECTLENGTH - 1); x--)
             {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                for (int y = 0; y <= (HEIGHT - CONNECTLENGTH); y++)
                 {
                     bool? matchType;
                     bool keepLooking = true;
                     if ((matchType = board[x, y]) != null)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        for (int i = 0; i < CONNECTLENGTH && keepLooking; i++)
                         {
                             if (board[x - i, y + i] != matchType) keepLooking = false;
                         }

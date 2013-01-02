@@ -7,188 +7,214 @@ using System.Threading.Tasks;
 
 namespace Connect4
 {
-    class GameBoard : ICloneable, IComparable<GameBoard>
+    public class GameBoard : ICloneable, IEquatable<GameBoard>
     {
-        static int LENGTH = 7, HEIGHT = 6, CONNECTLEGTH = 4;
-        static int IterationCount = 0, SolutionCount = 0;
-     
-        static List<bool?[,]> Solutions = new List<bool?[,]>();
-        static void Main(string[] args)
+        int Length, Height, ConnectLength;
+        bool?[,] Board;
+        public GameBoard(int length, int height, int connectLength)
+            : this(new bool?[length, height], length, height, connectLength)
         {
-            bool?[,] board = new bool?[LENGTH, HEIGHT];
-            PlayRound(board, true);
-            Console.WriteLine("Solution Count = " + Solutions.Count);
+
         }
-
-        static void PlayRound(bool?[,] board, bool turn,int deep = 0)
+        public GameBoard(bool?[,] board, int length, int height, int connectLength)
         {
-            IterationCount++;
-            Console.WriteLine("Iteration: " + IterationCount + " Solutin Count: " + Solutions.Count+ " deep : "+deep);
-            for (int x = 0; x < LENGTH; x++)
+            this.Board = board;
+            this.Length = length;
+            this.Height = height;
+            this.ConnectLength = connectLength;
+        }
+        public bool? this[int length, int height]
+        {
+            get
             {
-                if (board[x, HEIGHT - 1] == null)
-                {
-                    // We can play this column
-                    int availiblerow = getNextAvailibleRow(board, x);
-                    board[x, availiblerow] = turn;
-                    //run the next ones
-
-                    if (!HasWinner(board))
-                    {
-                        if (!IsFull(board))
-                        {//Board is not full go again
-                            PlayRound((bool?[,])board.Clone(), !turn, ++deep);
-                        }
-                        else
-                        {// We have filled the board and have no winners
-                            SolutionCount++;
-                            Solutions.Add(board);
-                          //  if (SolutionCount % 100 == 0) WriteOutGame(board);
-                            
-                            
-                        }
-                    }
-
-                }
+                return Board[length, height];
+            }
+            set
+            {
+                this.Board[length, height] = value;
             }
         }
-
-        static bool HasWinner(bool?[,] board)
+        public bool HasWinner
         {
-            return HasVerticalWinner(board) || HasHorizontalWinner(board) || HasDiagonalWinner(board);
-        }
-        static bool HasVerticalWinner(bool?[,] board)
-        {
-            for (int x = 0; x < LENGTH; x++)
+            get
             {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                return this.HasVerticalWinner || this.HasHorizontalWinner || this.HasDiagonalWinner;
+            }
+        }
+        private bool HasVerticalWinner
+        {
+            get
+            {
+                for (int x = 0; x < Length; x++)
                 {
-                    bool? matchType;
-                    bool keepLooking = true;
-                    if ((matchType = board[x, y]) != null)
+                    for (int y = 0; y <= (Height - ConnectLength); y++)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        bool? matchType;
+                        bool keepLooking = true;
+                        if ((matchType = Board[x, y]) != null)
                         {
-                            if (board[x, y + i] != matchType) keepLooking = false;
+                            for (int i = 0; i < ConnectLength && keepLooking; i++)
+                            {
+                                if (Board[x, y + i] != matchType) keepLooking = false;
+                            }
+                            if (keepLooking) return true;//We have found a match
                         }
-                        if (keepLooking) return true;//We have found a match
                     }
                 }
+                return false;
             }
-            return false;
         }
-        static bool HasHorizontalWinner(bool?[,] board)
+        public bool HasHorizontalWinner
         {
-            for (int y = 0; y < HEIGHT; y++)
+            get
             {
-                for (int x = 0; x <= (LENGTH - CONNECTLEGTH); x++)
+                for (int y = 0; y < Height; y++)
                 {
-                    bool? matchType;
-                    bool keepLooking = true;
-                    if ((matchType = board[x, y]) != null)
+                    for (int x = 0; x <= (Length - ConnectLength); x++)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        bool? matchType;
+                        bool keepLooking = true;
+                        if ((matchType = Board[x, y]) != null)
                         {
-                            if (board[x + i, y] != matchType) keepLooking = false;
+                            for (int i = 0; i < ConnectLength && keepLooking; i++)
+                            {
+                                if (Board[x + i, y] != matchType) keepLooking = false;
+                            }
+                            if (keepLooking) return true;
                         }
-                        if (keepLooking) return true;
                     }
                 }
+                return false;
             }
-            return false;
         }
-        static bool HasDiagonalWinner(bool?[,] board)
+        public bool HasDiagonalWinner
         {
-            if (IterationCount == 25781)
+            get
             {
-                IterationCount = IterationCount + 1;
-            }
-            //Starting Lower left Winner
-            for (int x = 0; x <= (LENGTH - CONNECTLEGTH); x++)
-            {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                //Starting Lower left Winner
+                for (int x = 0; x <= (Length - ConnectLength); x++)
                 {
-                    bool? matchType;
-                    bool keepLooking = true;
-                    if ((matchType = board[x, y]) != null)
+                    for (int y = 0; y <= (Height - ConnectLength); y++)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        bool? matchType;
+                        bool keepLooking = true;
+                        if ((matchType = Board[x, y]) != null)
                         {
-                            if (board[x + i, y + i] != matchType) keepLooking = false;
+                            for (int i = 0; i < ConnectLength && keepLooking; i++)
+                            {
+                                if (Board[x + i, y + i] != matchType) keepLooking = false;
+                            }
+                            if (keepLooking) return true;
                         }
-                        if (keepLooking) return true;
                     }
                 }
-            }
-            //Starting Lower Right Winner
-            for (int x = LENGTH - 1; x >= (CONNECTLEGTH - 1); x--)
-            {
-                for (int y = 0; y <= (HEIGHT - CONNECTLEGTH); y++)
+                //Starting Lower Right Winner
+                for (int x = Length - 1; x >= (ConnectLength - 1); x--)
                 {
-                    bool? matchType;
-                    bool keepLooking = true;
-                    if ((matchType = board[x, y]) != null)
+                    for (int y = 0; y <= (Height - ConnectLength); y++)
                     {
-                        for (int i = 0; i < CONNECTLEGTH && keepLooking; i++)
+                        bool? matchType;
+                        bool keepLooking = true;
+                        if ((matchType = Board[x, y]) != null)
                         {
-                            if (board[x - i, y + i] != matchType) keepLooking = false;
+                            for (int i = 0; i < ConnectLength && keepLooking; i++)
+                            {
+                                if (Board[x - i, y + i] != matchType) keepLooking = false;
+                            }
+                            if (keepLooking) return true;
                         }
-                        if (keepLooking) return true;
                     }
                 }
+                return false;
             }
-            return false;
         }
-        static bool IsFull(bool?[,] board)
+        public bool IsFull
         {
-            for (int x = 0; x < LENGTH; x++)
+            get
             {
-                for (int y = 0; y < HEIGHT; y++)
+                for (int x = 0; x < Length; x++)
                 {
-                    if (board[x, y] == null) return false;
-                }
+                    for (int y = 0; y < Height; y++)
+                    {
+                        if (Board[x, y] == null) return false;
+                    }
 
+                }
+                return true;
             }
-            return true;
         }
-        static int getNextAvailibleRow(bool?[,] board, int column)
+        public int? getNextAvailibleRow(int column)
         {
-            for (int y = 0; y < HEIGHT; y++)
+            for (int y = 0; y < Height; y++)
             {
-                if (board[column, y] == null) return y;
+                if (Board[column, y] == null) return y;
             }
-            return -1;
+            return null;
         }
-        static void WriteOutGame(bool?[,] board)
+        public void WriteOutGame(string fileName)
         {
-            using (StreamWriter stream = new StreamWriter(Path.Combine(@"C:\Development\RandomProjects\Connect4\Results", IterationCount.ToString() + ".txt")))
+            using (StreamWriter stream = new StreamWriter(Path.Combine(@"C:\Development\RandomProjects\Connect4\Results", fileName + ".txt")))
             {
 
-                for (int y = 0; y < HEIGHT; y++)
+                for (int y = 0; y < Height; y++)
                 {
-                    for (int x = 0; x < LENGTH; x++)
+                    for (int x = 0; x < Length; x++)
                     {
-                        if (board[x, y] == null) { stream.Write('n'); }
+                        if (Board[x, y] == null) { stream.Write('n'); }
                         else
                         {
-                            stream.Write(board[x, y] == true ? 'r' : 'y');
+                            stream.Write(Board[x, y] == true ? 'r' : 'y');
                         }
                     }
                     stream.WriteLine(" ");
                 }
             }
         }
-
-
-
         public object Clone()
         {
-            throw new NotImplementedException();
+            return new GameBoard((bool?[,])this.Board.Clone(), this.Length, this.Height, this.ConnectLength);
         }
-
-        public int CompareTo(object obj)
+        private int? m_HashCode;
+        public int? HashCode
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (m_HashCode == null)
+                {
+                    m_HashCode = 0;
+                    for (int x = 0; x < Length; x++)
+                    {
+                        for (int y = 0; y < Height; y++)
+                        {
+                            m_HashCode += (Height + Length) * (Board[x, y] == null ? 1 : 3);
+                        }
+                    }
+                }
+                return m_HashCode;
+            }
+        }
+        public bool Equals(GameBoard other)
+        {
+            for (int x = 0; x < Length; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    if (other.Board[x, y] != this.Board[x, y]) return false;
+                }
+            }
+            return true;
+        }
+        public static GameBoard InitialBoard(int length, int height, int connectLength)
+        {
+            bool current = false;
+            GameBoard b = new GameBoard(length, height, connectLength);
+            Program.RunAll((x, y) =>
+            {
+                b[x, y] = current;
+                current = !current;
+                return false;
+            });
+            return b;
         }
     }
 }
