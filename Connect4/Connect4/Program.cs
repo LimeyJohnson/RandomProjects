@@ -32,7 +32,7 @@ namespace Connect4
         static GameBoardCollection Solutions, Visited;
         static GameBoard Board;
         static void Main(string[] args)
-        {
+        {   
             Board = GameBoard.InitialBoard (LENGTH, HEIGHT, CONNECTLENGTH);
             Solutions = new GameBoardCollection();
             Visited = new GameBoardCollection();
