@@ -36,22 +36,24 @@ namespace Connect4
             Board = GameBoard.InitialBoard (LENGTH, HEIGHT, CONNECTLENGTH);
             Solutions = new GameBoardCollection();
             Visited = new GameBoardCollection();
-           
+            PlayRound();
             Console.WriteLine("Solution Count = " + Solutions.Count);
         }
         //Set up Board, then move through locking down positions
 
-        static void PlayRound(bool turn, int deep = 0)
+        static void PlayRound()
         {
-            for (int curX = 0; curX < LENGTH; curX++)
+            for (int lockX = 0; lockX < LENGTH; lockX++)
             {
-                for (int curY = 0; curY < HEIGHT; curY++)
+                for (int lockY = 0; lockY < HEIGHT; lockY++)
                 {
-                    for(int x = curX; x < LENGTH; x++)
+                    for(int curX = lockX; curX < LENGTH; curX++)
                     {
-                        for(int y = curY; y< HEIGHT; y++)
+                        for(int curY = lockX == curX ? lockY: 0; curY< HEIGHT; curY++)
                         {
-                            Board[x,y] = !Board[x,y];
+                           
+                            Console.WriteLine("curX = {0}, curY = {1}, x = {2}, y = {3}", lockX, lockY, curX, curY); 
+                            Board[curX,curY] = !Board[curX,curY];
                             if(!Board.HasWinner)
                             {
                                 Board.WriteOutGame(Board.HashCode.ToString());
@@ -61,46 +63,9 @@ namespace Connect4
                         }
                     }
                     Console.WriteLine("Set new piece moving on");
-                    Board[curY,curX] = !Board[curY, curX];
+                    Board[lockX,lockY] = !Board[lockX, lockY];
                 }
 
-            }
-
-            IterationCount++;
-            Console.WriteLine("Iteration: " + IterationCount + " Solutin Count: " + Solutions.Count + " deep : " + deep);
-                if (board[x, HEIGHT - 1] == null)
-                {
-                    // We can play this column
-                    int? availibleRow;
-                    if((availibleRow = board.getNextAvailibleRow(x)) == null) break;
-                    GameBoard playBoard = (GameBoard)board.Clone();
-                    playBoard[x, availibleRow.Value] = turn;
-                    //run the next ones
-                    if (Visited.MyContains(playBoard))
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        Visited.Add(playBoard);
-                       
-                    }
-                    if (!playBoard.HasWinner)
-                    {
-                        if (!playBoard.IsFull)
-                        {//Board is not full go again
-                            PlayRound(playBoard, !turn, ++deep);
-                        }
-                        else
-                        {// We have filled the board and have no winners
-                            SolutionCount++;
-                            Solutions.Add(playBoard);
-                            //  if (SolutionCount % 100 == 0) WriteOutGame(board);
-
-                        }
-                    }
-
-                }
             }
         }
 
