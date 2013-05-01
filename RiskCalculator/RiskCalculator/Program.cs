@@ -16,8 +16,9 @@ namespace RiskCalculator
         }
         public static void RunBattle(int AArmy, int DArmy, int ADice = 3, int DDice =2)
         {
+
             RiskCalc calc = new RiskCalc();
-            int aWins = 0, dWins = 0;
+            int aWins = 0, dWins = 0, a;
             for(int x = 0; x< RunCount; x++)
             {
                 if (calc.Battle(AArmy, DArmy, ADice, DDice))
