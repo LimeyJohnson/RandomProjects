@@ -20,10 +20,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -92,12 +94,16 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="netmethods.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="splitbuffer.cpp" />
+    <ClCompile Include="StringNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linkedlist.h" />
     <ClInclude Include="netmethod.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="splitbuffer.h" />
+    <ClInclude Include="StringNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

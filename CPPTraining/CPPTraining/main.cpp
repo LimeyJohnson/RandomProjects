@@ -3,6 +3,8 @@
 #include "splitbuffer.h"
 #include "linkedlist.h"
 #include "netmethod.h"
+#include "Node.h"
+#include "StringNode.h"
 using namespace std;
 
 
@@ -42,10 +44,10 @@ void testLinkedList()
 //	cout<<ll.size()<<endl;
 //	cout<<ll.at(3)<<endl;
 //	cout<<ll.toString()<<endl;
-//Lookup LU;
+//Lookup LU
 //cout<<LU.printAddress("nwrpca.org")<< " is the address for " << "nwrpca.org" <<endl;
 //cout<<LU.printAddress("learn.nwrpca.org")<< " is the address for "<< "learn.nwrpca.org" <<endl;
-	
+	LinkedList<Node> list(StringNode("batman"));
 }
 int testNetMethods()
 {
@@ -55,7 +57,7 @@ int testNetMethods()
 }
 int main(){
     //find(20);
-    testNetMethods();
+    testLinkedList();
 	
 	return 1;
 
