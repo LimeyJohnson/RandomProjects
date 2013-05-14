@@ -14,7 +14,7 @@ namespace ProjectEuler
             int foundCount = 1, x = 3;
             while (foundCount != 10001)
             {
-                if (Helpers.isPrime(x))
+                if (Helpers.IsPrime(x))
                 {
                     result = x;
                     foundCount++;

@@ -16,7 +16,7 @@ namespace ProjectEuler
 
             while (startNum > 1)
             {
-                if (Helpers.isPrime(x) && startNum % x == 0)
+                if (Helpers.IsPrime(x) && startNum % x == 0)
                 {
                     startNum /= x;
                     result = Math.Max(x, result);
