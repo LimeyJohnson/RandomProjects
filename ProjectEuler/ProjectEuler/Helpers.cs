@@ -10,11 +10,10 @@ namespace ProjectEuler
     {
         public static bool IsPrime(long num)
         {
-            int x = 2;
-            while (x <= (num / x))
+            long limit = (long)Math.Sqrt(num);
+            for(int x = 2; x<= limit; x++)
             {
                 if (num % x == 0) return false;
-                x++;
             }
             return true;
         }
@@ -26,7 +25,7 @@ namespace ProjectEuler
             {
                 if (num % x == 0)
                 {
-                    sum++;
+                    sum+=2;
                 }
             }
             return sum;

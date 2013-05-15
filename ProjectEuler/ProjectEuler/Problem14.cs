@@ -8,37 +8,40 @@ namespace ProjectEuler
 {
     public class Problem14
     {
-        Dictionary<int, int> KnownValues = new Dictionary<int, int>();
+        //SortedDictionary<int, int> KnownValues = new SortedDictionary<int, int>();
         string result;
-        int max = 0, maxNum;
+        KeyValuePair<int, int> max = new KeyValuePair<int,int>(0,0);
+        long maxNum, maxIndex;
         public Problem14()
         {
-            for (int x = 1; x < 1000000; x++)
+            for (long x = 1; x < 1000001; x++)
             {
                 int y = Collatz(x);
-                if (y > max)
+                if (y > maxNum)
                 {
-                    max = y;
-                    maxNum = x;
+                    maxIndex = x;
+                    maxNum = y;
                 }
-
-               
             }
-            result = string.Format("{0} has a sequence of {1}", maxNum, max);
+            //foreach (KeyValuePair<int, int> pair in KnownValues)
+            //{
+            //    if (pair.Value > max.Value) max = pair;
+            //}
+            result = string.Format("{0} has a length of {1}", maxIndex, maxNum);
         }
         public override string ToString()
         {
             return result;
         }
-        public int Collatz(int num)
+        public int Collatz(long num)
         {
-            if (KnownValues.Keys.Contains(num))
-            {
-                return KnownValues[num];
-            }
+            //if (KnownValues.Keys.Contains(num))
+            //{
+            //    return KnownValues[num];
+            //}
             if (num > 1)
             {
-                int value;
+                long value;
                 if (num % 2 == 0)
                 {
                     // num is even
@@ -50,7 +53,7 @@ namespace ProjectEuler
                 }
                 
                 int result = Collatz(value) + 1;
-                KnownValues.Add(num, result);
+                //KnownValues.Add(num, result);
                 return result;
 
             }

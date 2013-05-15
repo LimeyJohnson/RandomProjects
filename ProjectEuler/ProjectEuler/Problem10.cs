@@ -10,8 +10,8 @@ namespace ProjectEuler
     {
         public override string ToString()
         {
-            int sum = 0;
-            for (int x = 0; x < 2000000; x++)
+            long sum = 2;
+            for (int x = 3; x < 2000000; x+=2)
             {
                 if (Helpers.IsPrime(x))
                 {

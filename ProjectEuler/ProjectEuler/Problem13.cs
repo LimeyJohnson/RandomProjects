@@ -15,9 +15,10 @@ namespace ProjectEuler
             double sum = 0;
             foreach (string s in strings)
             {
-                sum += double.Parse(s.Substring(0, 25));
+                double d = double.Parse(s);
+                sum += d;
             }
-            return sum.ToString().Substring(0, 10).Replace(".","");
+            return sum.ToString().Replace(".","").Substring(0, 10);
         }
     }
 }
