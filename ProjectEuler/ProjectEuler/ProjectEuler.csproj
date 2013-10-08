@@ -41,11 +41,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Problem10.cs" />
+    <Compile Include="Problem11.cs" />
+    <Compile Include="Problem12.cs" />
+    <Compile Include="Problem13.cs" />
+    <Compile Include="Problem14.cs" />
     <Compile Include="Problem3.cs" />
     <Compile Include="Problem2.cs" />
     <Compile Include="Problem1.cs" />
+    <Compile Include="Problem4.cs" />
+    <Compile Include="Problem5.cs" />
+    <Compile Include="Problem6.cs" />
+    <Compile Include="Problem7.cs" />
+    <Compile Include="Problem8.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Problem9.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

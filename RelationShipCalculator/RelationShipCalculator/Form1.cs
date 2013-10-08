@@ -16,16 +16,18 @@ namespace RelationShipCalculator
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            RelationshipCalculator calc = new RelationshipCalculator(txt_firstName.Text, txt_secondName.Text);
-            lbl_result.Text = calc.RelationshipChance;
-        }
-
         private void txt_secondName_TextChanged(object sender, EventArgs e)
         {
-            RelationshipCalculator calc = new RelationshipCalculator(txt_firstName.Text, txt_secondName.Text);
-            lbl_result.Text = calc.RelationshipChance;
+            txt_firstName_TextChanged(sender, e);
+        }
+
+        private void txt_firstName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txt_firstName.Text) && !string.IsNullOrEmpty(txt_secondName.Text))
+            {
+                RelationshipCalculator calc = new RelationshipCalculator(txt_firstName.Text, txt_secondName.Text);
+                lbl_result.Text = calc.RelationshipChance;
+            }
         }
     }
 }

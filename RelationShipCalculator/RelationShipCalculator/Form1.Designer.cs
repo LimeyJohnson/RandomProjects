@@ -33,7 +33,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt_secondName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.lbl_result = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -43,6 +42,7 @@
             this.txt_firstName.Name = "txt_firstName";
             this.txt_firstName.Size = new System.Drawing.Size(282, 20);
             this.txt_firstName.TabIndex = 0;
+            this.txt_firstName.TextChanged += new System.EventHandler(this.txt_firstName_TextChanged);
             // 
             // label1
             // 
@@ -79,16 +79,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Result";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(9, 73);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Calculate";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lbl_result
             // 
             this.lbl_result.AutoSize = true;
@@ -101,16 +91,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 300);
+            this.ClientSize = new System.Drawing.Size(400, 155);
             this.Controls.Add(this.lbl_result);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txt_secondName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_firstName);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Relationship Calculator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,7 +112,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_secondName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbl_result;
     }
 }

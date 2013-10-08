@@ -9,9 +9,9 @@ namespace RelationShipCalculator
     {
         string FullName;
         string NumString;
-        public RelationshipCalculator(string firstName, string lastName)
+        public RelationshipCalculator(string firstName, string secondName)
         {
-            this.FullName = (firstName + lastName).Replace(" ", "").ToLower();
+            this.FullName = (firstName + secondName).Replace(" ", "").ToLower();
         }
         public string RelationshipChance
         {
