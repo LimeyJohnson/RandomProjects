@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SudokuLib;
+using System.Collections.Generic;
 
 namespace SodukiLibUnitTest
 {
@@ -82,7 +83,24 @@ namespace SodukiLibUnitTest
                         Assert.AreEqual(s.possibiltiesLeft.Length, 9);
                     }
                 });
-            
+        }
+        [TestMethod]
+        public void TestValueSetRemovesPossibities()
+        {
+            Board b = new Board();
+            b[0, 0].Value = 1;
+            List<string> affectedSquares = new List<string>() { "0,0", "0,1", "0,2", "0,3", "0,4" , "0,5", "0,6", "0,7", "0,8", "1,0", "2,0", "3,0", "4,0", "5,0", "6,0", "7,0", "8,0", "1,1", "1,2",  "2,1", "2,2" };
+            b.EachSquare(s =>
+                {
+                    if (affectedSquares.Contains(s.Row+","+ s.Column))
+                    {
+                        Assert.AreEqual(s.possibiltiesLeft.Length, s == b[0,0]? 1 : 8);
+                    }
+                    else
+                    {
+                        Assert.AreEqual(s.possibiltiesLeft.Length, 9);
+                    }
+                });
         }
 
     }

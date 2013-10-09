@@ -18,6 +18,13 @@ namespace SudokuLib
             });
             this.Complete = false;
         }
+        public Square this[int x, int y]
+        {
+            get
+            {
+                return m_squares[x, y];
+            }
+        }
 
         
         #region EventHandlers
@@ -30,7 +37,7 @@ namespace SudokuLib
                 });
             this.Complete = complete;
 
-            Action<Square> action = new Action<Square>(s => s.RemovePossiblity(square.Value.Value));
+            Action<Square> action = new Action<Square>(s => { if (s != square) s.RemovePossiblity(square.Value.Value); });
             EachRow(square.Row, action);
             EachColumn(square.Column, action);
             EachGroup(square.Row, square.Column, action);

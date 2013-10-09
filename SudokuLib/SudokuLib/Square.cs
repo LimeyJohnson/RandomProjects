@@ -26,6 +26,7 @@ namespace SudokuLib
             {
 
                 this.m_value = value;
+                for (int x = 0; x < 9; x++) m_possiblities[x] = x == (value - 1) ? true : false;
                 if (ValueSetEvent != null)
                 {
                     ValueSetEvent(this, this);
