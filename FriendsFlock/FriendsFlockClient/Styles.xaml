@@ -1,0 +1,324 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    x:Uid="Styles"
+    >
+	<Color x:Key="colorAccent">#FF64FF14</Color>
+    <Color x:Key="colorBase0">#FF080808</Color>
+    <Color x:Key="colorBase1">#FF151515</Color>
+    <Color x:Key="colorBase2">#FF1C1C1C</Color>
+    <Color x:Key="colorBase3">#FF989898</Color>
+    <Color x:Key="colorPink">#FFFF0042</Color>
+	<Color x:Key="colorGreen">#FFB5E61D</Color>
+<Color x:Key="colorLime">Lime</Color>
+    <Color x:Key="colorTitleBar">Blue</Color>
+    <Color x:Key="colorGlassBackground">Black</Color>
+    <Color x:Key="colorLevel1">#FF333333</Color>
+    <Color x:Key="colorLevel2">#FF595959</Color>
+    <Color x:Key="colorLevel3">#FF393939</Color>
+    <Color x:Key="colorMenuTextColor">White</Color>
+
+    <Style x:Key="TitleBar" TargetType="Rectangle">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorTitleBar}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorTitleBar}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="0.55"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Key="GlassBackgroundBar" TargetType="Rectangle">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="0.2"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Key="SolidBackgroundBar" TargetType="Rectangle">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <ControlTemplate x:Key="ScrollViewerControlTemplateBase" TargetType="ScrollViewer">
+        
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="HyperlinkButtonControlTemplateBase" TargetType="HyperlinkButton">
+        <Grid Cursor="{TemplateBinding Cursor}" Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UnderlineTextBlock" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UnderlineTextBlock" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <TextBlock
+				x:Name="UnderlineTextBlock"
+				Text="{TemplateBinding Content}"
+				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+				VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+				Margin="{TemplateBinding Padding}"
+				TextDecorations="Underline"
+				Visibility="Collapsed"/>
+            <TextBlock Canvas.ZIndex="1"
+				x:Name="DisabledOverlay"
+				Text="{TemplateBinding Content}"
+				Foreground="#FFAAAAAA"
+				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+				VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+				Margin="{TemplateBinding Padding}"
+				Visibility="Collapsed"/>
+            <ContentPresenter 
+				x:Name="contentPresenter"
+				Content="{TemplateBinding Content}"
+				ContentTemplate="{TemplateBinding ContentTemplate}"
+				VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+				Margin="{TemplateBinding Padding}"/>
+            <Rectangle x:Name="FocusVisualElement" StrokeThickness="1" Opacity="0" IsHitTestVisible="false" />
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="HyperlinkButtonBase" TargetType="HyperlinkButton">
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template" Value="{StaticResource HyperlinkButtonControlTemplateBase}"/>
+    </Style>
+
+    <Style x:Key="TitleButton" TargetType="HyperlinkButton" BasedOn="{StaticResource HyperlinkButtonBase}">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Arial Black"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Key="TitleLabel" TargetType="sdk:Label" >
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Arial Black"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Key="NavigationButton" TargetType="HyperlinkButton" BasedOn="{StaticResource HyperlinkButtonBase}">
+        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="2,0"/>
+    </Style>
+
+    <Style x:Key="SidebarButton" TargetType="HyperlinkButton" BasedOn="{StaticResource HyperlinkButtonBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <!--<Setter Property="Padding" Value="4,0"/>-->
+        <Setter Property="FontSize" Value="18.667"/>
+        <Setter Property="FontFamily" Value="Georgia"/>
+        <Setter Property="MinWidth" Value="75"/>
+        <Setter Property="MinHeight" Value="30"/>
+    </Style>
+
+    <Style x:Key="MenuHeaderLabel" TargetType="sdk:Label">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="FontSize" Value="18.667"/>
+        <Setter Property="FontFamily" Value="Georgia"/>
+        <Setter Property="MinWidth" Value="90"/>
+        <Setter Property="MinHeight" Value="60"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorBase1}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorMenuTextColor}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="MenuItemButton" TargetType="HyperlinkButton" BasedOn="{StaticResource SidebarButton}">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="MinHeight" Value="36" />
+    </Style>
+
+    <DataTemplate x:Key="MenuDataTemplate">
+        <Border Margin="5" BorderThickness="1" BorderBrush="Black" Background="Black" CornerRadius="4">
+            <Grid Margin="3" d:IsLocked="True">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="60"/>
+					<ColumnDefinition Width="100"/>
+					<ColumnDefinition Width="24"/>
+				</Grid.ColumnDefinitions>
+				
+				<Rectangle Width="60" Height="60" Fill="Pink"/>
+				<StackPanel Orientation="Vertical" Grid.Column="1">
+					<TextBlock FontWeight="Bold" Text="Bold" Foreground="White"/>
+					<TextBlock Text="Blah, Blah, Blach, Blach" TextWrapping="Wrap" Foreground="White"  />
+				</StackPanel>
+				<Rectangle Width="24" Grid.Column="2" Fill="Lime"/>                
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+
+    <Style x:Key="GlassBorderStyle" TargetType="Border">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.75,1" StartPoint="0.25,0">
+                    <GradientStop Color="#33FFFFFF" Offset="0"/>
+                    <GradientStop Color="#C0FFFFFF" Offset="0.287"/>
+                    <GradientStop Color="#4011322D" Offset="0.683"/>
+                    <GradientStop Color="#33FFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#5811322D" Offset="0"/>
+                    <GradientStop Color="#3EFFFFFF" Offset="0.25"/>
+                    <GradientStop Color="#FFFFFFFF" Offset="0.5"/>
+                    <GradientStop Color="#3EFFFFFF" Offset="0.75"/>
+                    <GradientStop Color="#BFFFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="3" ShadowDepth="3" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ScrollViewerStyle1" TargetType="ScrollViewer">
+    	<Setter Property="HorizontalContentAlignment" Value="Left"/>
+    	<Setter Property="VerticalContentAlignment" Value="Top"/>
+    	<Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+    	<Setter Property="Padding" Value="4"/>
+    	<Setter Property="BorderThickness" Value="1"/>
+    	<Setter Property="BorderBrush">
+    		<Setter.Value>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FFA3AEB9" Offset="0"/>
+    				<GradientStop Color="#FF8399A9" Offset="0.375"/>
+    				<GradientStop Color="#FF718597" Offset="0.375"/>
+    				<GradientStop Color="#FF617584" Offset="1"/>
+    			</LinearGradientBrush>
+    		</Setter.Value>
+    	</Setter>
+    	<Setter Property="Template">
+    		<Setter.Value>
+    			<ControlTemplate TargetType="ScrollViewer">
+    				<Border BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+    					<Grid Background="{TemplateBinding Background}">
+    						<Grid.ColumnDefinitions>
+    							<ColumnDefinition Width="*"/>
+    							<ColumnDefinition Width="Auto"/>
+    						</Grid.ColumnDefinitions>
+    						<Grid.RowDefinitions>
+    							<RowDefinition Height="*"/>
+    							<RowDefinition Height="Auto"/>
+    						</Grid.RowDefinitions>
+    						<ScrollContentPresenter x:Name="ScrollContentPresenter" Cursor="{TemplateBinding Cursor}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
+    						<Rectangle Grid.Column="1" Fill="#FFE9EEF4" Grid.Row="1"/>
+    						<ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Margin="0,-1,-1,-1" Minimum="0" Orientation="Vertical" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" Width="18"/>
+    						<ScrollBar x:Name="HorizontalScrollBar" Grid.Column="0" Height="18" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Margin="-1,0,-1,-1" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" Style="{StaticResource ScrollBarStyle1}"/>
+    					</Grid>
+    				</Border>
+    			</ControlTemplate>
+    		</Setter.Value>
+    	</Setter>
+    </Style>
+
+</ResourceDictionary>

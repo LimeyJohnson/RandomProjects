@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Andrew's Page</title>
+</head>
+<body>
+<input id="Box1" type="text" onkeyup='runLoop();'/>
+<table><tr><td><div id="results">Loading ... </div></td><td><div id="results2">Loading ... </div></td></tr></table>
+<script type="text/javascript">
+    var xmlHttp = null;
+    var xmlLike = null;
+    window.onload = function () {
+        runLoop();
+    }
+    function runLoop() {
+        var req = document.getElementById('Box1').value;
+        loadXmlHttp();
+        sendRequest('Name.aspx?sub=' + req+'?type=Distinct');
+        sendRequest2('Name.aspx?sub=' + req+'?type=Total');
+    }
+    function loadXmlHttp() {
+        xmlHttp = new XMLHttpRequest();
+        xmlLike = new XMLHttpRequest();
+    }
+    function sendRequest(url) {
+        if (xmlHttp) {
+            xmlHttp.open("GET", url, true);
+            xmlHttp.onreadystatechange = onCallback;
+            xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlHttp.send(null);
+        }
+    }
+    function sendRequest2(url) {
+        if (xmlLike) {
+            xmlLike.open("GET", url, true);
+            xmlLike.onreadystatechange = onCallback2;
+            xmlLike.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlLike.send(null);
+        }
+    }
+    function onCallback() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var r = document.getElementById('results');
+                r.innerHTML = xmlHttp.responseText;
+
+            }
+            else {
+                alert('Error: ' + xmlHttp.status);
+            }
+        }
+    }
+    function onCallback2() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var r = document.getElementById('results2');
+                r.innerHTML = xmlHttp.responseText;
+
+            }
+            else {
+                alert('Error: ' + xmlHttp.status);
+            }
+        }
+    }
+</script>
+</body>
+</html>

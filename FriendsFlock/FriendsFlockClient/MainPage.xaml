@@ -1,0 +1,264 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" 
+    xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" 
+             
+    xmlns:ff="clr-namespace:FriendsFlockClient"
+    xmlns:ffi="clr-namespace:FriendsFlockInterface;assembly=FriendsFlockInterface"
+    xmlns:ffc="clr-namespace:FriendsFlockInterface.Controls;assembly=FriendsFlockInterface"
+    xmlns:ffConverters="clr-namespace:FriendsFlockInterface.Converters;assembly=FriendsFlockInterface"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
+    x:Class="FriendsFlockClient.MainPage" 
+    mc:Ignorable="d" d:DesignHeight="700" d:DesignWidth="900" 
+    DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="Styles" Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ffConverters:DoubleToLog10Converter x:Key="DoubleToLog10Converter1" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="8" />
+        </Grid.ColumnDefinitions>
+
+        <!--ZOOM CONTROL-->
+        <Button x:Name="btnStartTheMachine"  Width="0" Height="0" Visibility="Collapsed" Command="{Binding cmdStartTheMachine}"/>
+        
+        <ffc:ZoomControl x:Name="ZoomPanControl" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="Transparent" >
+            <Canvas x:Name="ZoomPanCanvas">
+                <Image x:Name="EdgeMapImage"/>
+            </Canvas>
+        </ffc:ZoomControl>
+        
+        <!--RECTANGLES-->
+        <Rectangle x:Name="barMenuBarControl" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Opacity="100">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{StaticResource colorBase1}"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{StaticResource colorBase1}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="barSidebarContent" Grid.Row="2" Grid.Column="2" Opacity=".2">
+        	<Rectangle.Stroke>
+        		<SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+        	</Rectangle.Stroke>
+        	<Rectangle.Fill>
+                <SolidColorBrush Color="{StaticResource colorGlassBackground}"/>
+        	</Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="barSidebarFooter" Stroke="Black" Grid.Row="3" Grid.Column="2">
+        	<Rectangle.Fill>
+        		<SolidColorBrush Color="{StaticResource colorBase1}"/>
+        	</Rectangle.Fill>
+        </Rectangle>
+
+        <!--MAIN MENU: Zoom, Layout, Friends-->
+        <Border x:Name="brdMainMenu" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" Width="Auto">
+                <!--LEFT Lime-->
+                <Rectangle Width="12" Height="60" VerticalAlignment="Top">
+                	<Rectangle.Fill>
+                		<SolidColorBrush Color="{StaticResource colorAccent}"/>
+                	</Rectangle.Fill>
+                </Rectangle>
+                <!--ZOOM-->
+                <ffc:MenuControl Tag="mcZoom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ffc:MenuControl.HeaderContent>
+                        <Border x:Name="brdZoom" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <sdk:Label Content="Zoom"  Style="{StaticResource MenuHeaderLabel}"/>
+                        </Border>
+                    </ffc:MenuControl.HeaderContent>
+
+                    <ffc:MenuControl.PanelContent>
+                        <Grid Visibility="Collapsed" Margin="0,0,0,0">
+                            <Rectangle Style="{StaticResource GlassBackgroundBar}"/>
+                            <StackPanel Orientation="Vertical">
+                                <Slider x:Name="ZoomSlider" Orientation="Vertical" Height="160" Width="20" Margin="0,16,0,0"
+                                    DataContext="{Binding ElementName=ZoomPanControl}" 
+                                    Minimum="{Binding MinZoom, Converter={StaticResource DoubleToLog10Converter1}, Mode=TwoWay}" 
+                                    Maximum="{Binding MaxZoom, Converter={StaticResource DoubleToLog10Converter1}, Mode=TwoWay}" 
+                                    Value="{Binding Zoom, Converter={StaticResource DoubleToLog10Converter1}, Mode=TwoWay}" />
+                                <HyperlinkButton x:Name="btnReset" Content="Reset" Click="btnReset_Click" Style="{StaticResource MenuItemButton}" HorizontalContentAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+                    </ffc:MenuControl.PanelContent>
+                </ffc:MenuControl>
+
+                <!--LAYOUT-->
+                <ffc:MenuControl Tag="mcLayout" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ffc:MenuControl.HeaderContent>
+                        <Border x:Name="brdLayout"  BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <sdk:Label Content="Layout"  Style="{StaticResource MenuHeaderLabel}"/>
+                        </Border>
+                    </ffc:MenuControl.HeaderContent>
+
+                    <ffc:MenuControl.PanelContent>
+                        <Grid Visibility="Collapsed">
+                            <Rectangle Style="{StaticResource GlassBackgroundBar}"/>
+                            <StackPanel Orientation="Vertical" >
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdLayoutGrid}" >
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.LayoutGridMenuItem, BindsDirectlyToSource=True, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Width="200"/>
+                                </HyperlinkButton>
+
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdLayoutFlock}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.LayoutFlockMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                        </Grid>
+                    </ffc:MenuControl.PanelContent>
+                </ffc:MenuControl>
+
+                <!--FRIENDS-->
+                <ffc:MenuControl Tag="mcFriends" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ffc:MenuControl.HeaderContent>
+                        <Border x:Name="brdFriends" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <sdk:Label Content="Friends"  Style="{StaticResource MenuHeaderLabel}"/>
+                        </Border>
+                    </ffc:MenuControl.HeaderContent>
+
+                    <ffc:MenuControl.PanelContent>
+                        <Grid Visibility="Collapsed">
+                            <Rectangle Style="{StaticResource GlassBackgroundBar}"/>
+                            <StackPanel Orientation="Vertical">
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightProfile}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.FriendsProfileMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightStatus}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.FriendsStatusMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightBirthday}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.FriendsBirthdayMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightRelationship}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.FriendsRelationshipMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightClear}">
+                                    <ff:MenuItem  DataContext="{Binding serviceModel.appModel.contentModel.FriendsClearMenuItem}" Width="200"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                        </Grid>
+                    </ffc:MenuControl.PanelContent>
+                </ffc:MenuControl>
+            </StackPanel>
+        </Border>
+        
+        <!--CENTER-->
+        <Border x:Name="brdLoadingProgress" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <sdk:Label Content="{Binding serviceModel.appModel.LoadProgress, StringFormat=Loading Flocks... \{0\}%}"  Style="{StaticResource TitleLabel}" Height="60" />
+        </Border>
+        
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center">
+            <!--APP-->
+            <ffc:MenuControl Tag="mcFriendsFlock">
+                <ffc:MenuControl.HeaderContent>
+                    <Border x:Name="brdTitle" Background="Transparent" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0">
+                        <sdk:Label Content="friends flock" Style="{StaticResource TitleLabel}" Height="60" FontWeight="ExtraBlack"/>
+                    </Border>
+                </ffc:MenuControl.HeaderContent>
+
+                <ffc:MenuControl.PanelContent>
+                    <Grid Visibility="Collapsed" Width="380">
+                        <Rectangle Style="{StaticResource GlassBackgroundBar}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <HyperlinkButton Content="About" Command="{Binding cmdAppAbout}" Style="{StaticResource MenuItemButton}" />
+                            <HyperlinkButton Content="Support" Command="{Binding cmdAppSupport}" Style="{StaticResource MenuItemButton}" />
+                            <HyperlinkButton Content="Share" Command="{Binding cmdAppShare}" Style="{StaticResource MenuItemButton}" />
+                            <HyperlinkButton Content="Like" Command="{Binding cmdAppLike}" Style="{StaticResource MenuItemButton}" />
+                            <HyperlinkButton Content="Log Off" Command="{Binding cmdAppLogOff}" Style="{StaticResource MenuItemButton}" />
+                        </StackPanel>
+                    </Grid>
+                </ffc:MenuControl.PanelContent>
+            </ffc:MenuControl>
+        </Border>
+        
+        <!--SIDEBAR HEADER-->
+        <Rectangle Width="12" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
+        	<Rectangle.Fill>
+        		<SolidColorBrush Color="{StaticResource colorAccent}"/>
+        	</Rectangle.Fill>
+        </Rectangle>
+        
+        <Border x:Name="borderSidebarName" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <HyperlinkButton x:Name="lblSideName" 
+                             Style="{StaticResource SidebarButton}" 
+                             Content="{Binding serviceModel.appModel.CurrentSelectedFriend.Info.Name}"
+                             Command="{Binding cmdAppFriendProfile}" FontWeight="Bold"
+                             Margin="0,0,0,0"/>
+        </Border>
+        
+        <!--SIDEBAR FOOTER-->
+        <Rectangle Width="12" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">
+        	<Rectangle.Fill>
+        		<SolidColorBrush Color="{StaticResource colorAccent}"/>
+        	</Rectangle.Fill>
+        </Rectangle>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center">
+            <HyperlinkButton x:Name="hbFooterLike" Content="Like" Command="{Binding cmdAppLike}" Style="{StaticResource MenuItemButton}" MinWidth="0" Margin="10"/>
+            <HyperlinkButton x:Name="hbFooterHelp" Content="Help" Command="{Binding cmdAppSupport}" Style="{StaticResource MenuItemButton}" MinWidth="0" Margin="10"/>
+            <HyperlinkButton x:Name="hbFooterWall" Content="Wall" Command="{Binding cmdAppWallPost}" Style="{StaticResource MenuItemButton}" MinWidth="0" Margin="10"/>
+            <HyperlinkButton x:Name="hbFooterShare" Content="Share" Command="{Binding cmdAppShare}" Style="{StaticResource MenuItemButton}" MinWidth="0" Margin="10"/>
+        </StackPanel>
+
+        <!--SIDEBAR CONTENT-->
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="240"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--PICTURE-->
+            <Border x:Name="brdSidebarPicture" HorizontalAlignment="Center" VerticalAlignment="Center" SizeChanged="brdSidebarPicture_SizeChanged"
+                Background="Black" BorderBrush="Black" Margin="8" Padding="2,4,2,4" MouseEnter="brdSidebarPicture_MouseEnter" MouseLeave="brdSidebarPicture_MouseLeave">
+                <HyperlinkButton  Command="{Binding cmdAppFriendProfile}" Style="{StaticResource HyperlinkButtonBase}">
+                    <Image Stretch="Uniform" ToolTipService.ToolTip="Click for Friend's Profile." VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding serviceModel.appModel.CurrentSelectedFriend.Info.Pic_Big_Url}" />
+                </HyperlinkButton>
+            </Border>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Style="{StaticResource ScrollViewerStyle1}">
+            	<StackPanel Orientation="Vertical" >
+                    <HyperlinkButton x:Name="hbSidebarShare" Content="{Binding serviceModel.appModel.ShareString}" Command="{Binding cmdAppShare}" Style="{StaticResource MenuItemButton}"/>
+
+                    <HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightProfile}">
+            			<ff:MenuItem  DataContext="{Binding serviceModel.appModel.sidebarModel.FriendsProfileMenuItem}" Width="275"/>
+            		</HyperlinkButton>
+            		<HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightStatus}" >
+                        <ff:MenuItem  DataContext="{Binding serviceModel.appModel.sidebarModel.FriendsStatusMenuItem}" Width="275"/>
+            		</HyperlinkButton>
+            		<HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightBirthday}" >
+                        <ff:MenuItem  DataContext="{Binding serviceModel.appModel.sidebarModel.FriendsBirthdayMenuItem}" MinWidth="275"/>
+            		</HyperlinkButton>
+            		<HyperlinkButton Style="{StaticResource MenuItemButton}" Command="{Binding cmdHighlightRelationship}" >
+            			<ff:MenuItem  DataContext="{Binding serviceModel.appModel.sidebarModel.FriendsRelationshipMenuItem}" MinWidth="280"/>
+            		</HyperlinkButton>
+            		<HyperlinkButton Style="{StaticResource MenuItemButton}">
+                        <ff:MenuItem  DataContext="{Binding serviceModel.appModel.sidebarModel.ShorestPathMenuItem}" MinWidth="275"/>
+            		</HyperlinkButton>
+            	</StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/FriendsFlockClient;component/Images/Wood%20Background.jpg" />
+        </Grid.Background>
+    </Grid>
+</UserControl>

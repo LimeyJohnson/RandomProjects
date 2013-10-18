@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="silverlight.master.cs" Inherits="FriendsFlock.Web.Silverlight.silverlight" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Friends Flock - Silverlight</title>
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../css/layout.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.4.2.min.js" ></script>
+    <script type="text/javascript" src="../js/jquery.faded.js"></script>
+    <script type="text/javascript" src="../js/custom.js"></script>
+    <script type="text/javascript" src="../js/maxheight.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="main">
+		<!-- header -->
+			<div class="wrapper">
+				<h1><a href="../default.aspx">
+				<strong>friends flock<em>beta</em></strong></a></h1>
+			</div>
+		
+        <!-- content -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"/>
+
+        
+        <!-- footer -->
+		    <footer>
+			    <div style="text-align:center; position:relative; padding-top:18px;">
+					    Created by John Morrison &copy; 2011
+			    </div>
+		    </footer>
+	    </div>
+    <div>
+    </form>
+</body>
+</html>

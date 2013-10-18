@@ -1,0 +1,17 @@
+
+Tenant: CSLMS.onmicrosoft.com
+Website: CSLMS.azurewebsites.net
+APP ID URI: http://cslms.azurewebsites.net
+Federtion Metadata Document URL: 
+	https://login.windows.net/b93f6a27-be38-4a22-bd6f-6017937fbd26/FederationMetadata/2007-06/FederationMetadata.xml
+
+
+Client ID: ec4e6a14-0c65-4c5a-9cb7-470cdb41287f
+Key: Ww/w5IT7nE51QGQIZR5TTPEpe7H7gil2cku9LzKuJ/0=
+
+
+Windows Azure AD Graph API Endpoint
+	https://graph.windows.net/b93f6a27-be38-4a22-bd6f-6017937fbd26
+OAUTH 2.0 Token Enpoint
+	https://login.windows.net/b93f6a27-be38-4a22-bd6f-6017937fbd26/oauth2/token?api-version=1.0
+

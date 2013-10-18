@@ -1,0 +1,7 @@
+FriendsFlockClient (visual layout)
+FriendsFlockInterface (interface logic)
+FriendsFlock Core (not much there)
+FriendsService (FB commands)
+GraphService (wraps the graph library)
+GraphSharp.Silverlight (library)
+FriendsFlock.Web (hosts the SL app)

@@ -1,0 +1,6 @@
+Remote -> Fetch From -> Origin
+Do Work.
+Commit -> Stage Changed Files to Commit
+Commit -> Commit
+Remote push ... (branch john)
+

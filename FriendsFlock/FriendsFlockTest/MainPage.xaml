@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="FriendsFlockTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="900">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Token"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Name="tboxToken" VerticalAlignment="Top"  
+                     Text=""/>
+            
+            <TextBlock Text="User Uid"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Name="tboxUserUid" VerticalAlignment="Top" Width="400" 
+                     Text=""/>
+            
+            <TextBlock Text="Input"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Name="tboxInput" VerticalAlignment="Top" Width="400" />
+            
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Button x:Name="btnGetUserInfo" Content="User Info" Click="btnGetUserInfo_Click"/>
+                <Button x:Name="btnGetFriendsInfo" Content="Friends Info" Click="btnGetFriendsInfo_Click"/>
+                <Button x:Name="btnGetMutualFriends" Content="Mutual Friends" Click="btnGetMutualFriends_Click"/>
+                <Button x:Name="btnGetFriendsList"  Content="Friends List"  Click="btnGetFriendsList_Click"/>
+                <Button x:Name="btnGetMutualFriendsFQL"  Content="Mutual Friends FQL"  Click="btnGetMutualFriendsFQL_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

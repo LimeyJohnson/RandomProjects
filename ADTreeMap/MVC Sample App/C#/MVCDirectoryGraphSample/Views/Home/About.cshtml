@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "About this sample";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<article>    
+    <p>
+        The sample shows how to access Windows Azure Active Directory Graph which is a RESTful Service
+        built using OData. This sample uses WCF Data Services.Net client library to work with the AAD Graph Service.        
+    </p>
+    <p> This is Version 2.0 of the sample application. </p>
+    <p> Changes in 1.1: 
+        <br /> Changed the sample to use 0.9 version of the Service.
+        <br /> Moved the Graph access code to a Helper library
+        <br /> Fixed the code so that token is cached and only refetched when needed.
+    </p>
+</article>
+
+<aside>
+    <h3>Browse the web site</h3>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+    </ul>
+</aside>

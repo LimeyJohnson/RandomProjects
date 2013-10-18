@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="FriendsFlockClient.DebugInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="30" d:DesignWidth="300" DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent" Width="300">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding Path=serviceModel.appModel.LoadProgress, Mode=OneWay, StringFormat=Progress: \{0\}%}" FontSize="14" Foreground="White" Margin="4"/>
+            <TextBlock Text="{Binding Path=serviceModel.appModel.CurrentSelectedFriend.Uid, Mode=OneWay, StringFormat=Selected: \{0\}}" FontSize="14" Foreground="White"  Margin="4"/>
+            <TextBlock Text="{Binding Path=serviceModel.appModel.CurrentShorestPathTarget.Uid, Mode=TwoWay, StringFormat=Target: \{0\}}" FontSize="14" Foreground="White"  Margin="4"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

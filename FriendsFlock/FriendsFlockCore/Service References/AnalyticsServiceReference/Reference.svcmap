@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cd4d43dc-a319-4ea3-86d9-1c5d7c40fc75" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+<<<<<<< HEAD
+    <MetadataSource Address="http://www.friendsflock.com/Services/Analytics.asmx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Analytics.disco" MetadataType="Disco" ID="13378286-707c-4d6c-99e4-3fe1ce88ed7b" SourceId="1" SourceUrl="http://www.friendsflock.com/Services/Analytics.asmx?disco" />
+    <MetadataFile FileName="Analytics.wsdl" MetadataType="Wsdl" ID="786f29ab-961b-47cd-a890-c97f5d4cd5af" SourceId="1" SourceUrl="http://www.friendsflock.com/Services/Analytics.asmx?wsdl" />
+=======
+    <MetadataSource Address="http://FriendsFlock.com/Services/Analytics.asmx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Analytics.disco" MetadataType="Disco" ID="f5172a97-6535-437c-82da-5c95a24d254e" SourceId="1" SourceUrl="http://friendsflock.com/Services/Analytics.asmx?disco" />
+    <MetadataFile FileName="Analytics.wsdl" MetadataType="Wsdl" ID="67ce61bc-78c0-4445-af7f-372b2396ef71" SourceId="1" SourceUrl="http://friendsflock.com/Services/Analytics.asmx?wsdl" />
+>>>>>>> b683612cd90949f7ce3ebe4e82c999fc88eea85c
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

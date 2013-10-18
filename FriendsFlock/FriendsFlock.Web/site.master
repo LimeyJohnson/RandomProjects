@@ -1,0 +1,112 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="site.master.cs" Inherits="FriendsFlock.Web.site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:fb="https://www.facebook.com/2008/fbml"
+    xmlns:og="http://ogp.me/ns#">
+<head runat="server">
+    <title>Friends Flock</title>
+    <meta charset="utf-8">
+    <meta property="og:title" content="Friends Flock" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.friendsflock.com/" />
+    <meta property="og:image" content="http://www.friendsflock.com/images/friendsflock_demo.jpg" />
+    <meta property="og:site_name" content="Friends Flock" />
+    <meta property="fb:admins" content="8342676"/>
+    <meta property="og:description" content="This website builds a map of your friends and clusters them into flocks. See how your friends inter-connect!" />
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="js/html5.js"></script>
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.faded.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/maxheight.js"></script>
+
+    <!--[if lt IE 7]>
+	    <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+    <![endif]-->
+
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25437372-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="main">
+		<!-- header -->
+		<header>
+			<div class="wrapper">
+				<div style="float:left; position:absolute; top:50px; left:355px;">
+                    <fb:like href="http://www.friendsflock.com/" send="false" layout="button_count" width="150" show_faces="false" colorscheme="dark" font="verdana"></fb:like>
+
+                    <%--<fb:like href="http://www.friendsflock.com/" send="false" layout="button_count" width="150" show_faces="false" colorscheme="dark" font="verdana"></fb:like>--%>
+                </div>
+                
+                <h1><a href="default.aspx">
+				<strong>friends flock<em>beta</em></strong></a></h1>
+				<nav>
+					<ul>
+						<li <asp:Literal ID="menuHome" runat="server"></asp:Literal> > <a href="default.aspx">Home</a></li>
+						<li <asp:Literal ID="menuAbout" runat="server"></asp:Literal> > <a href="about.aspx">About</a></li>
+						<li <asp:Literal ID="menuPrivacy" runat="server"></asp:Literal> > <a href="privacy.aspx">Privacy</a></li>
+						<li <asp:Literal ID="menuSupport" runat="server"></asp:Literal> > <a href="support.aspx">Support</a></li>
+					</ul>
+				</nav>
+
+                <!--LOGIN BUTTON-->
+                <div style="float:right; position:relative; top:-22px; left:-22px;">
+                    <img src="images/login.png" alt="login" onclick="login()" style="cursor: pointer" />
+                </div>
+                 
+			</div>
+			<div id="faded">
+				<div class="rap">
+					<img src="images/screenshot1.jpg" width="980" height="447" alt="friends flock: flock layout"/>
+					<img src="images/screenshot2.jpg" width="980" height="447" alt="frineds flock: grid layout"/>
+					<img src="images/screenshot3.jpg" width="980" height="447" alt="friends flock: shorest path"/>
+				</div>
+				<a href="#" class="prev">&nbsp;</a>
+				<a href="#" class="next">&nbsp;</a>	
+				<ul class="pagination">
+					<li><a href="#" rel="0">001/</a></li>
+					<li><a href="#" rel="1">002/</a></li>
+					<li><a href="#" rel="2">003/</a></li>
+					<li class="last"><a href="#" rel="2">003</a></li>
+				</ul>		
+			</div>
+		</header>
+		<!-- content -->
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+		<!-- footer -->
+		<footer>
+			<div style="text-align:center; position:relative; padding-top:18px;">
+					Created by John Morrison &copy; 2011
+			</div>
+		</footer>
+	</div>
+    <div>
+    </div>
+
+    <!--FB JavaScript1  ,offline_access  -->
+    <div id="fb-root" style="font-size: small; text-align: center"></div>
+    <script src="http://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
+    <asp:Literal ID="fbScriptLiteral" runat="server"></asp:Literal>
+    </form>
+    </body>
+</html>

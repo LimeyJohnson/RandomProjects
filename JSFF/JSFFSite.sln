@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSFFSite", "JSFFSite\JSFFSite.csproj", "{49CC4D2E-AAF3-4F17-ACDE-EBBB56152FF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Script", "Script\Script.csproj", "{46EC336C-F3B2-4FF2-BF68-AEC1EFC3EB94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook", "Facebook\Facebook.csproj", "{5827F6AB-594D-42CC-83A3-15504BBA61E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49CC4D2E-AAF3-4F17-ACDE-EBBB56152FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CC4D2E-AAF3-4F17-ACDE-EBBB56152FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CC4D2E-AAF3-4F17-ACDE-EBBB56152FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CC4D2E-AAF3-4F17-ACDE-EBBB56152FF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EC336C-F3B2-4FF2-BF68-AEC1EFC3EB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EC336C-F3B2-4FF2-BF68-AEC1EFC3EB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EC336C-F3B2-4FF2-BF68-AEC1EFC3EB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EC336C-F3B2-4FF2-BF68-AEC1EFC3EB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5827F6AB-594D-42CC-83A3-15504BBA61E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5827F6AB-594D-42CC-83A3-15504BBA61E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5827F6AB-594D-42CC-83A3-15504BBA61E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5827F6AB-594D-42CC-83A3-15504BBA61E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

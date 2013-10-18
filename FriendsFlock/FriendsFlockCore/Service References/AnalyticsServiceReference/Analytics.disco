@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+<<<<<<< HEAD
+  <contractRef ref="http://www.friendsflock.com/Services/Analytics.asmx?wsdl" docRef="http://www.friendsflock.com/Services/Analytics.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.friendsflock.com/Services/Analytics.asmx" xmlns:q1="http://friendsflock.org/" binding="q1:AnalyticsSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.friendsflock.com/Services/Analytics.asmx" xmlns:q2="http://friendsflock.org/" binding="q2:AnalyticsSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+=======
+  <contractRef ref="http://friendsflock.com/Services/Analytics.asmx?wsdl" docRef="http://friendsflock.com/Services/Analytics.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://friendsflock.com/Services/Analytics.asmx" xmlns:q1="http://friendsflock.org/" binding="q1:AnalyticsSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://friendsflock.com/Services/Analytics.asmx" xmlns:q2="http://friendsflock.org/" binding="q2:AnalyticsSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+>>>>>>> b683612cd90949f7ce3ebe4e82c999fc88eea85c
+</discovery>

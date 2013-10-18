@@ -1,0 +1,16 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="AnalyticsSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://www.friendsflock.com/Services/Analytics.asmx"
+                binding="basicHttpBinding" bindingConfiguration="AnalyticsSoap"
+                contract="AnalyticsServiceReference.AnalyticsSoap" name="AnalyticsSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

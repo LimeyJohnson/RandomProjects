@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Andrew's Page</title>
+</head>
+<body>
+<input id="Box1" type="text" onchange='runLoop();'/>
+<button id="Button1" title="Click to add Text" type ="button" onclick='AddText();' >click to add text</button>
+<script type="text/javascript">
+    function runLoop() {
+        alert('Text Has Changed');
+    }
+    function AddText() {
+        document.getElementById('Box1').value = "Text has now changed";
+    }
+    
+</script>
+</body>
+</html>
