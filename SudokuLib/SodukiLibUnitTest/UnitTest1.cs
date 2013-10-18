@@ -60,7 +60,7 @@ namespace SodukiLibUnitTest
                 eventSquare = square;
             };
 
-            for (int x = 0; x < 8; x++) s.RemovePossiblity(x);
+            for (int x = 1; x < 9; x++) s.RemovePossiblity(x);
             Assert.IsNotNull(eventSquare);
             Assert.AreEqual(eventSquare.Value, 9);
         }
@@ -76,11 +76,11 @@ namespace SodukiLibUnitTest
                 {
                     if (Array.IndexOf(possiblexy, s.Row) >= 0 && Array.IndexOf(possiblexy, s.Column) >= 0)
                     {
-                        Assert.AreEqual(s.possibiltiesLeft.Length, 8);
+                        Assert.AreEqual(s.possibiltiesLeft.Count, 8);
                     }
                     else
                     {
-                        Assert.AreEqual(s.possibiltiesLeft.Length, 9);
+                        Assert.AreEqual(s.possibiltiesLeft.Count, 9);
                     }
                 });
         }
@@ -94,14 +94,34 @@ namespace SodukiLibUnitTest
                 {
                     if (affectedSquares.Contains(s.Row+","+ s.Column))
                     {
-                        Assert.AreEqual(s.possibiltiesLeft.Length, s == b[0,0]? 1 : 8);
+                        Assert.AreEqual(s.possibiltiesLeft.Count, s == b[0,0]? 0 : 8);
                     }
                     else
                     {
-                        Assert.AreEqual(s.possibiltiesLeft.Length, 9);
+                        Assert.AreEqual(s.possibiltiesLeft.Count, 9);
                     }
                 });
         }
+        [TestMethod]
+        public void TestSingleGrid()
+        {
+            Board b = new Board();
+            b.EachGroup(0, s=>
+            {
+                if (s.Row == 1 && s.Column == 1)
+                {
+                }
+                else
+                {
+                    s.RemovePossiblity(5);
+                }
+                
+            });
+            b.TestGridForSingleAvailible();
+            Assert.IsNotNull(b[1, 1].Value);
+            Assert.AreEqual(5, b[1,1].Value);
+        }
+
 
     }
 }

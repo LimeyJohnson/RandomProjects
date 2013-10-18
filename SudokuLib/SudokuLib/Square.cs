@@ -8,16 +8,16 @@ namespace SudokuLib
 {
     public class Square
     {
-        private bool[] m_possiblities = new bool[9];
+        private List<int> m_possiblities;
         private int? m_value;
         public int Row { get; set; }
         public int Column { get; set; }
         public event EventHandler<Square> ValueSetEvent;
-        public Square(int column, int row)
+        public Square(int row, int column)
         {
             this.Row = row;
             this.Column = column;
-            for (int x = 0; x < 9; x++) m_possiblities[x] = true;
+            this.m_possiblities = CreateAvailibilityInt();
         }
 
         public int? Value
@@ -26,7 +26,7 @@ namespace SudokuLib
             {
 
                 this.m_value = value;
-                for (int x = 0; x < 9; x++) m_possiblities[x] = x == (value - 1) ? true : false;
+                this.m_possiblities.Clear();
                 if (ValueSetEvent != null)
                 {
                     ValueSetEvent(this, this);
@@ -40,21 +40,40 @@ namespace SudokuLib
         }
         public void RemovePossiblity(int num)
         {
-            m_possiblities[num] = false;
-            if (possibiltiesLeft.Length == 1)
+            if (Row == 1 && Column == 2)
             {
-                this.Value = Array.FindIndex(m_possiblities, b => b == true) + 1;
+                int b = 0;
+                b += 1;
             }
-
+            if (this.Value == null && this.m_possiblities.Contains(num))
+            {
+                this.m_possiblities.Remove(num);
+                if (possibiltiesLeft.Count == 1)
+                {
+                    this.Value = this.m_possiblities[0];
+                }
+            }
         }
-        public bool[] possibiltiesLeft
+        public List<int> possibiltiesLeft
         {
             get
             {
-                return Array.FindAll(m_possiblities, b =>  b );
+                return this.m_possiblities;
             }
         }
-        
+        public override string ToString()
+        {
+            if(this.Value != null) return Value.ToString();
+            return string.Join<int>(",", this.possibiltiesLeft);
+        }
+        #region Private Helpers
+        public static List<int> CreateAvailibilityInt()
+        {
+            return new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        }
+
+        #endregion
+
 
     }
 }
