@@ -28,7 +28,7 @@ namespace SudokuLib
         }
 
         #region GroupTesters
-        
+
         public bool TestRowsForSingleAvailible()
         {
             return TestForSingleAvailible(this.EachRow);
@@ -89,7 +89,7 @@ namespace SudokuLib
         }
         public void EachGroup(int sectionNum, Action<Square> action)
         {
-            this.EachGroup((sectionNum % 3) * 3, (sectionNum / 3)*3, action);
+            this.EachGroup((sectionNum % 3) * 3, (sectionNum / 3) * 3, action);
         }
         public void EachGroup(int row, int column, Action<Square> action)
         {
@@ -109,28 +109,17 @@ namespace SudokuLib
             }
         }
         #endregion
-        #region Private Helpers 
+        #region Private Helpers
         private Dictionary<int, int> CreateAvailibityDictionary()
         {
-            Dictionary<int, int> dict = new Dictionary<int,int>();
-            dict[1] = 0;
-            dict[2] = 0;
-            dict[3] = 0;
-            dict[4] = 0;
-            dict[5] = 0;
-            dict[6] = 0;
-            dict[7] = 0;
-            dict[8] = 0;
-            dict[9] = 0;
-            return dict;
-             
+            return new Dictionary<int, int>() { { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 }, { 7, 0 }, { 8, 0 }, { 9, 0 } };
         }
         private bool TestForSingleAvailible(Action<int, Action<Square>> action)
         {
             bool found = false;
             for (int x = 0; x < 9; x++)
             {
-                
+
                 Dictionary<int, int> nums = this.CreateAvailibityDictionary();
                 action(x, s =>
                 {

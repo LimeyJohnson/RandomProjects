@@ -121,7 +121,16 @@ namespace SodukiLibUnitTest
             Assert.IsNotNull(b[1, 1].Value);
             Assert.AreEqual(5, b[1,1].Value);
         }
-
+        [TestMethod]
+        public void TestSquareToString()
+        {
+            Square s = new Square(1, 1);
+            Assert.AreEqual("1,2,3,4,5,6,7,8,9", s.ToString());
+            s.RemovePossiblity(5);
+            Assert.AreEqual("1,2,3,4,6,7,8,9", s.ToString());
+            s.Value = 4;
+            Assert.AreEqual("4", s.ToString());
+        }
 
     }
 }
