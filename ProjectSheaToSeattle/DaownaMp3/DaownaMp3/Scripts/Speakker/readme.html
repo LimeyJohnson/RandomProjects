@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- useless -->
+	<title>Speakker | The new way of audio</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="description" content="Audioplayer from a new generation">
+	<link rel="Shortcut Icon" type="image/ico" href="img/speakker.ico">
+	<link rel="stylesheet" href="junk/readme.css" type="text/css" media="screen">
+	<!-- end: useless -->
+
+
+	<!-- speakker relevant stuff starts here -->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="speakker-big-1.2.32r284.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		projekktor('.projekktor');
+	});
+	</script>
+	<!-- that´s it -->
+
+</head>
+<body>
+	<div id="wrap">
+
+		<div class="inside-plus">
+			<div id="logo">
+				<img src="junk/speakker-dark.png" alt="Speakker - A ProjekktorXL Projekkt">
+			</div>
+		</div>
+
+		<div class="inside">
+			<h1>Thanks for downloading Speakker</h1>
+			<p>
+				This is just a small demo for instant testing. Please see the commented source of this file in order to learn how the big boy is set up.
+				Check the <a href="playlist.json">playlist.json</a> file to get an idea how playlists must look like.
+				More information about playlists can be found <a href="http://www.projekktor.com/docs/playlists">here</a>.
+				If you want to hack a little check out the API docs over <a href="http://www.projekktor.com/docs/api">there</a>.
+			</p>
+			<p>
+				If you like what you see, please consider a donation: <a href="http://www.projekktor.com/donate.php">donate</a>.
+			</p>
+			<p>
+				Music taken from the album Beyond Good and Evil by <a href="http://www.paniq.org/">Paniq</a> released under Creative Commons
+			</p>
+
+			<div class="separator">&nbsp;</div>
+
+			<!-- this is where Speakker will sit on. Note that all classes are obligatory. -->
+			<!-- "dark" can be replaced by "light" to change the color scheme -->
+			<audio class="projekktor speakker dark">
+				<source src="playlist.json" type="application/json"/>
+			</audio>
+			<!-- that´s it -->
+
+
+			<div id="about">
+				<p class="left">speakker is a last.fm-resque audio player built upon the famous <a href="http://www.projekktor.com" title="projekktor website">projekktor video player</a>.
+				<p class="separator">&copy; 2011-2012 <a href="http://www.porkhead.org">Porkhead.org</a> &amp; <a href="http://www.spinningairwhale.com">Spinning Airwhale</a></p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="junk/noise.js"></script>
+</body>
+</html>

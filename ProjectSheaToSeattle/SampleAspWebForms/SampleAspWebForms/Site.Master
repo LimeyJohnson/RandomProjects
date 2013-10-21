@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SampleAspWebForms.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>       
+         a:hover {background-color: black;}
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div  style="background-color:maroon">
+        <h3>Master Page Body-Header</h3>
+        <h2>Site Navigation</h2>
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/default.aspx" ForeColor="White">Default</asp:HyperLink> &nbsp;
+        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/page2.aspx" ForeColor="White">Page2</asp:HyperLink> &nbsp;
+        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/folder1/page3.aspx" ForeColor="White">Page3</asp:HyperLink> <br /><br />
+    </div>
+    <table><tr><td>
+        <audio controls="controls">
+            <source src="../Drunk In Plane Crash.mp3" type="audio/mp3" />
+            <source src="Drunk In Plane Crash.mp3" type="audio/mp3" />
+        </audio>
+    </td></tr></table>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div style="background-color:lightsteelblue">
+        <h4>Master Page Body-Footer</h4>
+    </div>
+    </form>
+</body>
+</html>

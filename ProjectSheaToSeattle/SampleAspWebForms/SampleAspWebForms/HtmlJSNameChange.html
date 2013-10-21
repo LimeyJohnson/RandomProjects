@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script src="script/jquery-1.10.1.js"></script>
+<head runat="server">
+    <title></title>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            $('#submit').click(function () {
+                $('#results').val($('#input').val() + ' sucks donkey balls');
+            });
+        }, false)
+    </script>
+    <style type="text/css">
+        #input {
+            width: 304px;
+        }
+        #results {
+            width: 458px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div>
+            Please Enter your name:
+            <br />
+            <input type="text" id="input"/>
+            <br />
+            <input type="button" id="submit" value="Change Name" />
+            <br />
+            <input type="text" id="results" />
+        </div>
+    </form>
+</body>
+</html>
