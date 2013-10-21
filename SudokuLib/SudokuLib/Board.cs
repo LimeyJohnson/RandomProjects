@@ -89,7 +89,7 @@ namespace SudokuLib
         }
         public void EachGroup(int sectionNum, Action<Square> action)
         {
-            this.EachGroup(sectionNum / 3, (sectionNum % 3) * 3, action);
+            this.EachGroup((sectionNum % 3) * 3, (sectionNum / 3)*3, action);
         }
         public void EachGroup(int row, int column, Action<Square> action)
         {
