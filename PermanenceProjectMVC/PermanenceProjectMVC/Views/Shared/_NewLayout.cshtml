@@ -1,0 +1,39 @@
+﻿<html>
+<head>
+    <link href="~/Content/New.css" rel="stylesheet" />
+    <title>The Permanence Project</title>
+</head>
+<body class="color1">
+    <div id="pagediv">
+        <div id="wrapper">
+            <div class="contentblock" id="top-wrapper">
+                <div id="banner">
+                    <img src="~/Images/Banner2.jpg" />
+                </div>
+                <div id="nav-box"> 
+                    <div id="nav">
+
+                        <p>
+                            <a class="@(ViewBag.Title == "NewView" ? "here" : ""  )"  href="~/Home/NewView">HOME</a>
+                            <a class="@(ViewBag.Title == "Donate" ? "here" : "" )" href="~/Home/Donate">DONATE</a>
+                            <a class="@(ViewBag.Title == "Contact" ? "here": "" )" href="~/Home/Contact">CONTACT US</a>
+                            <a class="@(ViewBag.Title == "Children" ? "here": "" )" href="~/Home/Children">CHILDREN</a>
+
+                        </p>
+                    </div>
+
+                </div>
+                This is the Top Div
+               
+            </div>
+            <div class="contentblock" id="content">
+                 @RenderBody()
+            </div>
+            <div class="contentblock" id="footer">
+                This is the footer
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

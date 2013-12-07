@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermanenceProjectMVC", "PermanenceProjectMVC\PermanenceProjectMVC.csproj", "{F092781E-8640-4D0E-8A3F-371B9FEF2D66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermanenceProjectMVC.Tests", "PermanenceProjectMVC.Tests\PermanenceProjectMVC.Tests.csproj", "{94792B8D-14CE-45A4-9C80-D93CF47AC733}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F092781E-8640-4D0E-8A3F-371B9FEF2D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F092781E-8640-4D0E-8A3F-371B9FEF2D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F092781E-8640-4D0E-8A3F-371B9FEF2D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F092781E-8640-4D0E-8A3F-371B9FEF2D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94792B8D-14CE-45A4-9C80-D93CF47AC733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94792B8D-14CE-45A4-9C80-D93CF47AC733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94792B8D-14CE-45A4-9C80-D93CF47AC733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94792B8D-14CE-45A4-9C80-D93CF47AC733}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "NewView";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=157431201112518";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="latestnewswrapper" class="icon-bullhorn">
+    <span id="headline" >Latest News</span>
+</div>
+<div id="widget">
+    <div id="twitter-widget">
+        <a class="twitter-timeline" href="https://twitter.com/ima_defender" data-widget-id="392483159343767552">Tweets by ima_defender</a>
+        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+    </div>
+    <div id="facebook-widget">
+        <div class="fb-like-box" data-href="https://www.facebook.com/ChildrensLawCenterOfWashington" data-width="600" data-height="The pixel height of the plugin" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true"></div>
+    </div>
+</div>

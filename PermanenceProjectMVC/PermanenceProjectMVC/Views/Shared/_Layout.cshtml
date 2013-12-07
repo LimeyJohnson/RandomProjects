@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    @RenderSection("head", required:false)
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+    <div id="pagediv">
+        <div id="wrapper">
+            <div id="top-wrapper">
+                <div id="header">
+                    <div id="logo">
+                        <a href="~/Home/Index"></a>
+                    </div>
+                </div>
+                <div id="nav-box">
+                    <div id="nav-bar"></div>
+                    <div id="nav">
+                        <p>
+                            <a class="@(ViewBag.Title == "Home" ? "here" : ""  )"  href="~/Home/Index">HOME</a>
+                            <a class="@(ViewBag.Title == "Donate" ? "here" : "" )" href="~/Home/Donate">DONATE</a>
+                            <a class="@(ViewBag.Title == "Contact" ? "here": "" )" href="~/Home/Contact">CONTACT US</a>
+                            <a class="@(ViewBag.Title == "Children" ? "here": "" )" href="~/Home/Children">CHILDREN</a>
+                            <a href="~/Home/NewView">NEW VIEW</a>
+                        </p>
+                    </div>
+                </div>
+                <div id="content-box">
+                    <div id="content-wrapper">
+                        <div id="content">
+                            @RenderSection("featured", required: false)
+
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="footer-box">
+                <!--This is the footerbox-->
+            </div>
+            <div id="subfooter-box">
+                <!--This is the subfooterbox-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
