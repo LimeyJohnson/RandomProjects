@@ -47,7 +47,7 @@ void testLinkedList()
 //Lookup LU
 //cout<<LU.printAddress("nwrpca.org")<< " is the address for " << "nwrpca.org" <<endl;
 //cout<<LU.printAddress("learn.nwrpca.org")<< " is the address for "<< "learn.nwrpca.org" <<endl;
-	LinkedList<Node> list(StringNode("batman"));
+LinkedList<string> list("Batman");
 }
 int testNetMethods()
 {
