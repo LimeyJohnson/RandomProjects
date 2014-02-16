@@ -1,6 +1,6 @@
 #include <string.h>
 using namespace std;
-
+#pragma once
 template <class T>
 class Node
 {
@@ -10,8 +10,12 @@ public:
 	string toString();
 	T GetValue();
 	unsigned int GetID();
-	Node(T);
-	Node(int ID, T);
+	Node(T valueIn);
+	Node(unsigned int ID, T valueIn);
+	Node<T>* Next = NULL;
+	Node<T>* Left = NULL;
+	Node<T>* Right = NULL;
+	Node<T>* Parent = NULL;
 
 };
 template <class T>
@@ -21,9 +25,9 @@ Node<T>::Node(T valueIn)
 }
 
 template <class T>
-Node<T>::Node(int ID, T valueIn) :Node<T>(valueIn)
+Node<T>::Node(unsigned int id, T valueIn) :Node(valueIn)
 {
-	m_id = ID;
+	m_id = id;
 }
 
 template <class T>

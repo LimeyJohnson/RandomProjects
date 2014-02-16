@@ -1,20 +1,14 @@
 #include <iostream>
 #include <string>
+#include "Node.h"
 using namespace std;
-
-template <class T>
- struct node
-	{
-		T data;
-		node * next;
-	} ;
 
 template <class T>
 class LinkedList
 {
 	
-	node<T> * head;
-	node<T> * tail;
+	Node<T> * head;
+	Node<T> * tail;
 
 public:
 	LinkedList(T data);
@@ -30,41 +24,39 @@ public:
 template <class T>
 LinkedList<T>::LinkedList(T dataIN)
 {
-	node<T> * firstNode = new node<T>;
-	firstNode->data = dataIN;
-	firstNode->next = NULL;
+	Node<T> * firstNode = new Node<T>(dataIN);
+	firstNode->Next = NULL;
 	head = firstNode;
 	tail = firstNode;
 }
 template <class T>
 void LinkedList<T>::add(T dataIN)
 {
-	node<T>* newNode = new node<T>;
-	newNode->data = dataIN;
-	newNode->next = NULL;
-	tail->next = newNode;
+	Node<T>* newNode = new Node<T>(dataIN);
+	newNode->Next = NULL;
+	tail->Next = newNode;
 	tail = newNode;
 }
 template <class T> 
 T LinkedList<T>::at(int x)
 {
-	node<T>* n = head;
+	Node<T>* n = head;
 	for(int i = 0; i< x && (n != tail); i++)
 	{
-		n = n->next;
+		n = n->Next;
 	}
-	return n->data;
+	return n->GetValue();
 }
 template <class T>
 void LinkedList<T>::remove(int x)
 {
-	node<T> * n = head;
+	Node<T> * n = head;
 	for(int i = 0; i < x-1; i++)
 	{
-		n = n->next;
+		n = n->Next;
 	}
-	node<T> * toDelete = n->next;
-	n->next = n->next->next;
+	Node<T> * toDelete = n->Next;
+	n->Next = n->Next->Next;
 	delete toDelete;
 	 
 }
@@ -72,10 +64,10 @@ template <class T>
 int LinkedList<T>::size()
 {
 	int i;
-	node<T>* n = head;
+	Node<T>* n = head;
 	for( i = 1; (n != tail); i++)
 	{
-		n = n->next;
+		n = n->Next;
 	}
 	return i;
 }
@@ -85,12 +77,12 @@ T* LinkedList<T>::toString()
 	int arraySize = size();
 	T * returnChar = new T[arraySize+1];
 	returnChar[arraySize] = '\0';
-	node<T> * n = head;
+	Node<T> * n = head;
 	int x = 0;
 	while(x< arraySize)
 	{
 		returnChar[x++] = n->data;
-		n = n->next;
+		n = n->Next;
 	}
 	return returnChar;
 }
@@ -99,8 +91,8 @@ LinkedList<T>::~LinkedList()
 {
 	while(head != tail)
 	{
-		node<T> * toDelete = head;
-		head = head->next;
+		Node<T> * toDelete = head;
+		head = head->Next;
 		delete toDelete;
 
 	}
