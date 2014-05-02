@@ -4,6 +4,7 @@
 #include "linkedlist.h"
 #include "netmethod.h"
 #include "Node.h"
+#include "BinaryTree.h"
 #include "StringNode.h"
 using namespace std;
 
@@ -47,7 +48,7 @@ void testLinkedList()
 //Lookup LU
 //cout<<LU.printAddress("nwrpca.org")<< " is the address for " << "nwrpca.org" <<endl;
 //cout<<LU.printAddress("learn.nwrpca.org")<< " is the address for "<< "learn.nwrpca.org" <<endl;
-	LinkedList<Node> list(StringNode("batman"));
+LinkedList<string> list("Batman");
 }
 int testNetMethods()
 {
@@ -55,10 +56,25 @@ int testNetMethods()
 	nm.a_accept("2000");
 	return 1;
 }
+void TestBinaryTree()
+{
+	BinaryTree tree;
+	tree.Add(5, "A");
+	tree.Add(4, "B");
+	tree.Add(6, "C");
+	tree.Add(3, "D");
+	tree.Add(7, "E");
+	tree.Add(2, "F");
+	tree.Add(8, "G");
+	tree.Add(9, "H");
+	tree.Add(1, "I");
+	cout << tree.Search(7) << " , " << tree.Search(9)<< endl;
+	
+}
 int main(){
     //find(20);
-    testLinkedList();
-	
+    //testLinkedList();
+	TestBinaryTree();
 	return 1;
 
 }
