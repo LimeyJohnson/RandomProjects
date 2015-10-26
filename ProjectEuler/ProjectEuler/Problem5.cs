@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem5
+    public class Problem5 : IEulerProblem
     {
         static int[] divisibles = { 20, 19, 18, 17, 16, 15, 14, 13, 12, 11 };
         int result = 0;
@@ -22,7 +22,7 @@ namespace ProjectEuler
 
         }
 
-        public override string ToString()
+        public string Answer()
         {
             return result.ToString();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem14
+    public class Problem14 : IEulerProblem
     {
         //SortedDictionary<int, int> KnownValues = new SortedDictionary<int, int>();
         string result;
@@ -29,7 +29,7 @@ namespace ProjectEuler
             //}
             result = string.Format("{0} has a length of {1}", maxIndex, maxNum);
         }
-        public override string ToString()
+        public string Answer()
         {
             return result;
         }

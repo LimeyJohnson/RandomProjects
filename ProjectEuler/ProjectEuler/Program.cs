@@ -10,8 +10,9 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine(new Problem3().ToString());
+            IEulerProblem problem = new Problem15();
+            Console.WriteLine(problem.Answer());
+            Console.Read();
 
 
 

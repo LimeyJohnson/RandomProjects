@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem3
+    public class Problem3 : IEulerProblem
     {
         long result = 0;
         long startNum = 600851475143;
@@ -28,7 +28,7 @@ namespace ProjectEuler
             }
 
         }
-        public override string ToString()
+        public string Answer()
         {
             return result.ToString();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem6
+    public class Problem6 : IEulerProblem
     {
         double result;
         public Problem6()
@@ -20,7 +20,7 @@ namespace ProjectEuler
             result = Math.Pow(sum, 2) - sumOfSquare;    
 
         }
-        public override string ToString()
+        public string Answer()
         {
             return result.ToString();
         }

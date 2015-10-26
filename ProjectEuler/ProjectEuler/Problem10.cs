@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem10
+    public class Problem10 : IEulerProblem
     {
-        public override string ToString()
+        public string Answer()
         {
             long sum = 2;
-            for (int x = 3; x < 2000000; x+=2)
+            for (int x = 3; x < 2000000; x += 2)
             {
                 if (Helpers.IsPrime(x))
                 {

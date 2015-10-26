@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem4
+    public class Problem4 : IEulerProblem
     {
         int result = 0;
-        public override string ToString()
+        public string Answer()
         {
             for (int a = 999; a > 0; a--)
             {

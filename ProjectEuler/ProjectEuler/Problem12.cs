@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    public class Problem12
+    public class Problem12 : IEulerProblem
     {
-        public override string ToString()
+        public string Answer()
         {
             long num = 0;
             int divisorCount = 0;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler  
 {
-    public class Problem9
+    public class Problem9 : IEulerProblem
     {
-        public override string ToString()
+        public string Answer()
         {
             for (int a = 1; a < 1000; a++)
             {
